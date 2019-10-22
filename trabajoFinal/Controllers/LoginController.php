@@ -23,6 +23,8 @@ class LoginController{
         $registro = $this->userDAO->traerUsuario($_POST['user_mail']);
         if($registro!=null){
             if($_POST['user_mail']==$registro->getEmail() && $_POST['user_password']==$registro->getPassword()){
+                $_SESSION["logged"]=true;
+                $_SESSION["name"]=$registro->getNombre();
                 if($registro->getRol()=="1"){ //Rol==1 administrador
                     require_once(VIEWS_PATH."admin.php");// View administrador
                 }else{
@@ -30,12 +32,12 @@ class LoginController{
                     $this->pelisList = new PelisDAO();
                     $pageNumber = 1;
                     $lista = $this->pelisList->getPeliculas($pageNumber);
-                    include_once(VIEWS_PATH.'listaPeliculas.php');//View usuario
+                    include_once(VIEWS_PATH.'home.php');//View usuario
                 }        
             }elseif($_POST["user_password"]!=$registro->getPassword()){
-                require_once(VIEWS_PATH.'login.php');
+                require_once(VIEWS_PATH.'home.php');
             }else{
-            require_once(VIEWS_PATH.'login.php');
+            require_once(VIEWS_PATH.'home.php');
             }
         }     
     }
@@ -46,6 +48,10 @@ class LoginController{
 
     public function homeAdmin(){
         require_once(VIEWS_PATH."admin.php");
+    }
+
+    public function home(){
+        require_once(VIEWS_PATH."home.php");
     }
 
     public function createUser($nombre, $apellido, $email, $password, $dni)

@@ -1,5 +1,5 @@
 <?php
-foreach($lista as $item){
+foreach($_SESSION["listaPeliculas"] as $item){
     echo '<div class="intento">'.
          '<p class="tituloPelicula">'.$item->getTitulo().'</p>'.
          '<img src="https://image.tmdb.org/t/p/w500'.$item->getPoster().'">'.
