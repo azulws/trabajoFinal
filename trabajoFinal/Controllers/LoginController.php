@@ -47,4 +47,18 @@ class LoginController{
     public function homeAdmin(){
         require_once(VIEWS_PATH."admin.php");
     }
+
+    public function createUser($nombre, $apellido, $email, $password, $dni)
+    {
+        $usuario = new Usuario();
+        $usuario->setEmail($email);
+        $usuario->setPassword($password);
+        $usuario->setNombre($nombre);
+        $usuario->setApellido($apellido);
+        $usuario->setDni($dni);
+        $usuario->setRol(0);
+
+        $this->userDAO->Add($usuario);
+        include_once(VIEWS_PATH.'home.php');
+    }
 }
