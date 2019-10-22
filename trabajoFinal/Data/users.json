@@ -1,1 +1,34 @@
-[{"email":"user@user.com","password":"user","nombre":"asd","apellido":"original","dni":"123","rol":"2"},{"email":"admin@admin.com","password":"admin","nombre":"admin","apellido":"admin","dni":"1234","rol":"1"}]
+[
+    {
+        "email": "user@user.com",
+        "password": "user",
+        "nombre": "asd",
+        "apellido": "original",
+        "dni": "123",
+        "rol": "2"
+    },
+    {
+        "email": "admin@admin.com",
+        "password": "admin",
+        "nombre": "admin",
+        "apellido": "admin",
+        "dni": "1234",
+        "rol": "1"
+    },
+    {
+        "email": "matiemanuel@gmail.com",
+        "password": "1234",
+        "nombre": "Matias",
+        "apellido": "Cer",
+        "dni": "12345678",
+        "rol": 0
+    },
+    {
+        "email": "azul@hotmail.com",
+        "password": "azul",
+        "nombre": "azul",
+        "apellido": "gottero",
+        "dni": "41231231",
+        "rol": 0
+    }
+]

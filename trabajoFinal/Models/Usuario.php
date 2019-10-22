@@ -10,15 +10,7 @@
         public function __contruct(){
             
         }
-/*
-        public function __construct($email,$password,$nombre,$apellido,$dni){
-            $this->email=$email;
-            $this->password=$password;
-            $this->nombre=$nombre;
-            $this->apellido=$apellido;
-            $this->dni=$dni;
-        }
-*/
+        
         public function getEmail(){
             return $this->email;
         }
