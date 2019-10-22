@@ -12,5 +12,9 @@
 			<br>
      			<button type="submit">Cargar</button>
     </form>
-<?php include(VIEWS_PATH."listaCine.php");?>
+
 </div>
+<?php
+echo '<form action="'.FRONT_ROOT.'Login/homeAdmin">
+<button>Volver</button></form>';
+?>

@@ -1,9 +1,11 @@
-<?php include_once(VIEWS_PATH."login.php");?>
-<form action=<?php echo FRONT_ROOT."Pelis/listarPelis";?>>
-	<button type="submit">Mostrar repuesta API</button>
-</form>
-<!--
-<form action=<?php echo FRONT_ROOT."Pelis/turnPage";?>>
-	<button type="submit">Pasar Pagina</button>
-</form>
--->
+<?php
+foreach($lista as $item){
+    echo '<div class="intento">'.
+         '<p class="tituloPelicula">'.$item->getTitulo().'</p>'.
+         '<img src="https://image.tmdb.org/t/p/w500'.$item->getPoster().'">'.
+         '<p> Estreno: '.$item->getFechaEstreno().'</p>'.
+         '<p> Puntuacion: '.$item->getPuntuacion().'</p>'.
+         '<p> Descripcion: '.$item->getDescripcion().'</p>'.
+         '</div>';
+}
+?>
