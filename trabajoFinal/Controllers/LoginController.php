@@ -1,8 +1,8 @@
 <?php
 namespace Controllers;
-use Models\Usuario; 
+use Models\User; 
 use DAO\UserDAO as UserDAO;
-use DAO\PelisDAO as PelisDAO;
+use DAO\MovieDAO as MovieDAO;
 
 class LoginController{
     private $userDAO;
@@ -20,21 +20,21 @@ class LoginController{
     }
 
     public function log(){
-        $registro = $this->userDAO->traerUsuario($_POST['user_mail']);
-        if($registro!=null){
-            if($_POST['user_mail']==$registro->getEmail() && $_POST['user_password']==$registro->getPassword()){
+        $register = $this->userDAO->traerUser($_POST['user_mail']);
+        if($register!=null){
+            if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
                 $_SESSION["logged"]=true;
-                $_SESSION["name"]=$registro->getNombre();
-                if($registro->getRol()=="1"){ //Rol==1 administrador
+                $_SESSION["name"]=$register->getName();
+                if($register->getRol()=="1"){ //Rol==1 administrador
                     require_once(VIEWS_PATH."admin.php");// View administrador
                 }else{
-                    $pelisList;
-                    $this->pelisList = new PelisDAO();
+                    $movieList;
+                    $this->movieList = new MovieDAO();
                     $pageNumber = 1;
-                    $lista = $this->pelisList->getPeliculas($pageNumber);
+                    $lista = $this->movieList->getMovies($pageNumber);
                     include_once(VIEWS_PATH.'home.php');//View usuario
                 }        
-            }elseif($_POST["user_password"]!=$registro->getPassword()){
+            }elseif($_POST["user_password"]!=$register->getPassword()){
                 require_once(VIEWS_PATH.'home.php');
             }else{
             require_once(VIEWS_PATH.'home.php');
@@ -54,13 +54,13 @@ class LoginController{
         require_once(VIEWS_PATH."home.php");
     }
 
-    public function createUser($nombre, $apellido, $email, $password, $dni)
+    public function createUser($name, $lastname, $email, $password, $dni)
     {
-        $usuario = new Usuario();
+        $usuario = new User();
         $usuario->setEmail($email);
         $usuario->setPassword($password);
-        $usuario->setNombre($nombre);
-        $usuario->setApellido($apellido);
+        $usuario->setName($name);
+        $usuario->setLastname($lastname);
         $usuario->setDni($dni);
         $usuario->setRol(0);
 

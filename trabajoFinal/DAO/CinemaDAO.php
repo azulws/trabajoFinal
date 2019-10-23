@@ -22,10 +22,10 @@
                  foreach($contentArray as $content)
                  {
                      $cinema = new Cinema();
-                     $cinema->setNombre($content["nombre"]);
-                     $cinema->setDireccion($content["direccion"]);
-                     $cinema->setCapacidad($content["capacidad"]);
-                     $cinema->setValorEntrada($content["valorEntrada"]);
+                     $cinema->setName($content["name"]);
+                     $cinema->setAdress($content["adress"]);
+                     $cinema->setCapacity($content["capacity"]);
+                     $cinema->setTicketValue($content["ticketValue"]);
                      array_push($this->cinemaList, $cinema);
                  }
              }
@@ -37,7 +37,7 @@
 
             $existe = false;
             foreach($this->cinemaList as $aux){
-                if($aux->getNombre()===$cinema->getNombre()){
+                if($aux->getName()===$cinema->getName()){
                     $existe = true;
                     break;
                 }
@@ -51,10 +51,10 @@
             $this->SaveData();
         }
 
-        public function traercinema($nombre){
+        public function traercinema($name){
             $this->RetrieveData();
             foreach($this->cinemaList as $cinema){
-                if($nombre===$cinema->getNombre()){
+                if($name===$cinema->getName()){
                     return $cinema;
                 }
             }
@@ -69,13 +69,13 @@
             return $this->cinemaList;
         }
 
-        public function Remove($nombre)
+        public function Remove($name)
         {            
             $this->RetrieveData();
             
 
-            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use($nombre){                
-                return $cinema->getNombre() != $nombre;
+            $this->cinemaList = array_filter($this->cinemaList, function($cinema) use($name){                
+                return $cinema->getName() != $name;
             });
             
             $this->SaveData();
@@ -88,10 +88,10 @@
             foreach($this->cinemaList as $cinema)
             {
                 $valuesArray = array();
-                $valuesArray["nombre"] = $cinema->getNombre();
-                $valuesArray["direccion"] = $cinema->getDireccion();
-                $valuesArray["capacidad"] = $cinema->getCapacidad();
-                $valuesArray["valorEntrada"] = $cinema->getValorEntrada();
+                $valuesArray["name"] = $cinema->getName();
+                $valuesArray["adress"] = $cinema->getAdress();
+                $valuesArray["capacity"] = $cinema->getCapacity();
+                $valuesArray["ticketValue"] = $cinema->getTicketValue();
                 array_push($arrayToEncode, $valuesArray);
             }
 

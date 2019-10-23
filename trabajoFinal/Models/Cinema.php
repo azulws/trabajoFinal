@@ -1,51 +1,51 @@
 <?php
     namespace Models;
     class Cinema{
-        private $nombre;
-        private $direccion;
-        private $capacidad;      
-        private $valorEntrada;
+        private $name;
+        private $adress;
+        private $capacity;      
+        private $ticketValue;
 /*
         public function __construct(){
 
         }
 
-        public function __construct($nombre,$direccion,$capacidad,$valorEntrada){
-            $this->nombre=$nombre;
-            $this->direccion=$direccion;
-            $this->capacidad=$capacidad;
-            $this->valorEntrada=$valorEntrada;
+        public function __construct($name,$adress,$capacity,$ticketValue){
+            $this->name=$name;
+            $this->adress=$adress;
+            $this->capacity=$capacity;
+            $this->ticketValue=$ticketValue;
         }
 */  
-        public function setNombre($nombre){
-            $this->nombre=$nombre;
+        public function setName($name){
+            $this->name=$name;
         }
 
-        public function getNombre(){
-            return $this->nombre;
+        public function getName(){
+            return $this->name;
         }
 
-        public function setDireccion($direccion){
-            $this->direccion=$direccion;
+        public function setAdress($adress){
+            $this->adress=$adress;
         }
 
-        public function getDireccion(){
-            return $this->direccion;
+        public function getAdress(){
+            return $this->adress;
         }
 
-        public function setCapacidad($capacidad){
-            $this->capacidad=$capacidad;
+        public function setCapacity($capacity){
+            $this->capacity=$capacity;
         }
         
-        public function getCapacidad(){
-            return $this->capacidad;
+        public function getCapacity(){
+            return $this->capacity;
         }
-        public function setValorEntrada($valorEntrada){
-            $this->valorEntrada=$valorEntrada;
+        public function setTicketValue($ticketValue){
+            $this->ticketValue=$ticketValue;
         }
 
-        public function getValorEntrada(){
-            return $this->valorEntrada;
+        public function getTicketValue(){
+            return $this->ticketValue;
         }
 
 

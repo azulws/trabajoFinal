@@ -1,7 +1,7 @@
 <?php namespace DAO;
-use Models\Pelicula as Pelicula;
-class PelisDAO{
-  private $peliculaList = array();
+use Models\Movie as Movie;
+class MovieDAO{
+  private $movieList = array();
 
   private function getNowPlayingPage($pageNumber){
     $curl = curl_init();
@@ -30,28 +30,28 @@ class PelisDAO{
   }
 
 
-  public function getPeliculas($pageNumber){
+  public function getMovies($pageNumber){
     $responseArray= $this->getNowPlayingPage($pageNumber);
     foreach($responseArray as $key=>$value){ //entro al array, las key son los campos del json, incluyendo el array
       if($key=="page"){
       echo 'Pagina: '.$value;
     }
-    if($key=="results"){ //actuo si el valor de la key es el campo del json llamado results(el arreglo de pelis)
-      foreach($value as $k=>$v){ //value es el array de pelicula
-        //k es la posicion dentro del arreglo, cada posicion contiene una pelicula
-        //v es la informacion de la pelicula
-        $pelicula=new Pelicula();
-        $pelicula->setTitulo($v->title);
-        $pelicula->setFechaEstreno($v->release_date);
-        $pelicula->setPuntuacion($v->vote_average);
-        $pelicula->setDescripcion($v->overview);
-        $pelicula->setPoster($v->poster_path);
-        array_push($this->peliculaList, $pelicula);
-        //var_dump($pelicula);//veo los datos que hay guardados dentro de cada pelicula
+    if($key=="results"){ //actuo si el valor de la key es el campo del json llamado results(el arreglo de movie)
+      foreach($value as $k=>$v){ //value es el array de movie
+        //k es la posicion dentro del arreglo, cada posicion contiene una movie
+        //v es la informacion de la movie
+        $movie=new Movie();
+        $movie->setTitulo($v->title);
+        $movie->setFechaEstreno($v->release_date);
+        $movie->setPuntuacion($v->vote_average);
+        $movie->setDescripcion($v->overview);
+        $movie->setPoster($v->poster_path);
+        array_push($this->movieList, $movie);
+        //var_dump($movie);//veo los datos que hay guardados dentro de cada movie
       }
     }
   }
-    return $this->peliculaList;
+    return $this->movieList;
   }
 
 }

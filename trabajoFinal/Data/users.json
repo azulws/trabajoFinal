@@ -2,32 +2,32 @@
     {
         "email": "user@user.com",
         "password": "user",
-        "nombre": "asd",
-        "apellido": "original",
+        "name": "asd",
+        "lastname": "original",
         "dni": "123",
         "rol": "2"
     },
     {
         "email": "admin@admin.com",
         "password": "admin",
-        "nombre": "admin",
-        "apellido": "admin",
+        "name": "admin",
+        "lastname": "admin",
         "dni": "1234",
         "rol": "1"
     },
     {
         "email": "matiemanuel@gmail.com",
         "password": "1234",
-        "nombre": "Matias",
-        "apellido": "Cer",
+        "name": "Matias",
+        "lastname": "Cer",
         "dni": "12345678",
         "rol": 0
     },
     {
         "email": "azul@hotmail.com",
         "password": "azul",
-        "nombre": "azul",
-        "apellido": "gottero",
+        "name": "azul",
+        "lastname": "gottero",
         "dni": "41231231",
         "rol": 0
     }

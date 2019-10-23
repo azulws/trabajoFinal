@@ -4,7 +4,7 @@
     interface ICinema
     {
         function Add($cinema);
-        function Remove($nombre);
+        function Remove($name);
         function GetAll();
     }
 ?>

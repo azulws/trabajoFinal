@@ -1,14 +1,14 @@
 [
     {
-        "nombre": "Amb",
-        "direccion": "Cordoba",
-        "capacidad": "500",
-        "valorEntrada": "200"
+        "name": "Amb",
+        "adress": "Cordoba",
+        "capacity": "500",
+        "ticketValue": "200"
     },
     {
-        "nombre": "cinemacenter",
-        "direccion": "Diagonal",
-        "capacidad": "300",
-        "valorEntrada": "100"
+        "name": "cinemacenter",
+        "adress": "Diagonal",
+        "capacity": "300",
+        "ticketValue": "100"
     }
 ]

@@ -1,9 +1,9 @@
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."Login/createUser";?>>
 		<div align="center">
      		<h2>Registro de usuario</h2>
-             <input type="text" name="nombre" placeholder="Nombre">
+             <input type="text" name="name" placeholder="Name">
 			<br>
-            <input type="text" name="apellido" placeholder="Apellido">
+            <input type="text" name="lastname" placeholder="Lastname">
             <br>
              <input type="email" name="email" placeholder="Email">
      		<br>

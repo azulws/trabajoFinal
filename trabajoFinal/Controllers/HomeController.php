@@ -1,6 +1,6 @@
 <?php
     namespace Controllers;
-    use DAO\PelisDAO as PelisDAO;
+    use DAO\MovieDAO as MovieDAO;
 
     class HomeController
     {
@@ -8,11 +8,11 @@
         {
             $_SESSION["logged"]=false;
             $_SESSION["name"]=null;
-            $pelisList;
-            $this->pelisList = new PelisDAO();
+            $movieList;
+            $this->movieList = new MovieDAO();
             $pageNumber = 1;
-            $lista = $this->pelisList->getPeliculas($pageNumber);
-            $_SESSION["listaPeliculas"]=$lista;
+            $lista = $this->movieList->getMovies($pageNumber);
+            $_SESSION["listaMovies"]=$lista;
             include_once(VIEWS_PATH.'home.php');
         }        
     }

@@ -40,10 +40,10 @@
         $cinemaList = array();
         foreach($value as $v){
             $cinema = new Cinema();
-            $cinema->setNombre($v['namecinema']);
-            $cinema->setValorEntrada($v['ticketValue']);
-            $cinema->setDireccion($v['adress']);
-            $cinema->setCapacidad($v['capacity']);
+            $cinema->setName($v['namecinema']);
+            $cinema->setTicketValue($v['ticketValue']);
+            $cinema->setAdress($v['adress']);
+            $cinema->setCapacity($v['capacity']);
             array_push($cinemaList,$cinema);
         }
         echo count($cinemaList);
@@ -68,14 +68,14 @@
 
        public function create($cinema)
       {
-            // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
+            // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
             $sql = "INSERT INTO cinemas (namecinema,ticketValue,adress,capacity) VALUES (:namecinema, :ticket_value, :adress, :capacity)";
 
-            $parameters['namecinema'] = $cinema->getNombre();
-            $parameters['ticketValue'] = $cinema->getValorEntrada();
-            $parameters['adress'] = $cinema->getDireccion();
-            $parameters['capacity'] = $cinema->getCapacidad();
+            $parameters['namecinema'] = $cinema->getName();
+            $parameters['ticketValue'] = $cinema->getTicketValue();
+            $parameters['adress'] = $cinema->getAdress();
+            $parameters['capacity'] = $cinema->getCapacity();
 
             try
             {
@@ -302,7 +302,7 @@
 
     * Transforma el listado de usuario en
 
-    * objetos de la clase Usuario
+    * objetos de la clase User
 
     *
 

@@ -2,11 +2,11 @@
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."Cinema/Add";?>>
 		<div align="center">
      		<h2>Alta de cinema </h2>
-     			<input type="text" name="nombre" placeholder="Nombre" required class="form-control">
+     			<input type="text" name="name" placeholder="Name" required class="form-control">
 			<br>
-     			<input type="text" name="direccion" placeholder="Direccion" required class="form-control" >
+     			<input type="text" name="adress" placeholder="Adress" required class="form-control" >
 			<br>
-     			<input type="number" name="captotal" value="captotal"placeholder="capacidad total" required class="form-control">
+     			<input type="number" name="captotal" value="captotal"placeholder="capacity total" required class="form-control">
 			<br>
      			<input type="number" name="ticket" value="ticket" placeholder=" precio ticket" required class="form-control">
 			<br>

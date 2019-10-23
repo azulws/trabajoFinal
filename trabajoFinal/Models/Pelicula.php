@@ -1,5 +1,5 @@
 <?php namespace Models;
-class Pelicula {
+class Movie {
     
     private $titulo;
     private $fechaEstreno;

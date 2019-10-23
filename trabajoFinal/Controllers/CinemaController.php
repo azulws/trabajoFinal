@@ -21,22 +21,22 @@
             require_once(VIEWS_PATH."cinemaAdd.php");
         }
 
-        public function Add($nombre, $direccion, $capacidad, $valorEntrada)
+        public function Add($name, $adress, $capacity, $ticketValue)
         {
             $cinema = new cinema();
-            $cinema->setNombre($nombre);
-            $cinema->setDireccion($direccion);
-            $cinema->setCapacidad($capacidad);
-            $cinema->setValorEntrada($valorEntrada);
+            $cinema->setName($name);
+            $cinema->setAdress($adress);
+            $cinema->setCapacity($capacity);
+            $cinema->setTicketValue($ticketValue);
 
             $this->cinemaDAO->Add($cinema);
 
             $this->ShowAddView();
         }
 
-        public function Remove($nombre)
+        public function Remove($name)
         {
-            $this->cinemaDAO->Remove($nombre);
+            $this->cinemaDAO->Remove($name);
 
             $this->showcinemaList();
         }
