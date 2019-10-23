@@ -41,10 +41,10 @@ class MovieDAO{
         //k es la posicion dentro del arreglo, cada posicion contiene una movie
         //v es la informacion de la movie
         $movie=new Movie();
-        $movie->setTitulo($v->title);
-        $movie->setFechaEstreno($v->release_date);
-        $movie->setPuntuacion($v->vote_average);
-        $movie->setDescripcion($v->overview);
+        $movie->setTitle($v->title);
+        $movie->setReleaseDate($v->release_date);
+        $movie->setPoints($v->vote_average);
+        $movie->setDescription($v->overview);
         $movie->setPoster($v->poster_path);
         array_push($this->movieList, $movie);
         //var_dump($movie);//veo los datos que hay guardados dentro de cada movie

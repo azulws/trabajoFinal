@@ -1,44 +1,44 @@
 <?php namespace Models;
 class Movie {
     
-    private $titulo;
-    private $fechaEstreno;
-    private $puntuacion;
-    private $descripcion;
+    private $title;
+    private $releaseDate;
+    private $points;
+    private $description;
     private $poster;
 
     public function __construct(){
 
     }
 
-    public function setTitulo($titulo){
-        $this->titulo = $titulo ;
+    public function setTitle($title){
+        $this->title = $title ;
     }
 
-    public function getTitulo(){
-        return $this->titulo;
+    public function getTitle(){
+        return $this->title;
     }
 
-    public function setFechaEstreno($fechaEstreno){
-        $this->fechaEstreno = $fechaEstreno ;
+    public function setReleaseDate($releaseDate){
+        $this->releaseDate = $releaseDate ;
     }
 
-    public function getFechaEstreno(){
-        return $this->fechaEstreno ;
+    public function getReleaseDate(){
+        return $this->releaseDate ;
     }
-    public function setPuntuacion($puntuacion){
-        $this->puntuacion = $puntuacion ;
-    }
-
-    public function getPuntuacion (){
-        return $this->puntuacion ;
-    }
-    public function setDescripcion($descripcion){
-        $this->descripcion = $descripcion ;
+    public function setPoints($points){
+        $this->points = $points ;
     }
 
-    public function getDescripcion(){
-        return $this->descripcion ;
+    public function getPoints (){
+        return $this->points ;
+    }
+    public function setDescription($description){
+        $this->description = $description ;
+    }
+
+    public function getDescription(){
+        return $this->description ;
     }
     public function setPoster($poster){
         $this->poster = $poster ;
@@ -49,10 +49,10 @@ class Movie {
     }
 
     public function echoToString(){
-        return "Titulo: ".$this->getTitulo()
-        ." - Estreno: ".$this->getFechaEstreno()
-        ."\nPuntuacion: ".$this->getPuntuacion()
-        ."\nDescripcion: ".$this->getDescripcion();
+        return "Title: ".$this->getTitle()
+        ." - Estreno: ".$this->getReleaseDate()
+        ."\nPoints: ".$this->getPoints()
+        ."\nDescription: ".$this->getDescription();
     
     }
 }
