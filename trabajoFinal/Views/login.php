@@ -7,6 +7,8 @@ if($_SESSION['logged']==false){
         <input type='password' class='password' placeholder='password' name='user_password' required>
     </fieldset>
     <button type='submit' name='action' value='Ingresar'>Ingresar</button>
+    </form>
+    <form class='login' action='".FRONT_ROOT."Login/receiveAction' method='POST'> 
     <button type='submit' name='action' value='Registrar'>Registrar</button>
 </form>";
 }else{

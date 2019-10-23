@@ -47,7 +47,10 @@
             array_push($cinemaList,$cinema);
         }
         echo count($cinemaList);
-        print_r($cinemaList);
+        if(count($cinemaList)>0)
+            return $cinemaList;
+        else
+            return false;
 
 
         /*
@@ -66,14 +69,14 @@
         //    return count($resp) > 0 ? $resp : null;
      }
 
-       public function create($cinema)
+       public function Add($cinema)
       {
             // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-            $sql = "INSERT INTO cinemas (namecinema,ticketValue,address,capacity) VALUES (:namecinema, :ticket_value, :address, :capacity)";
+            $sql = "INSERT INTO cinemas (cinema_name,ticket_value,address,capacity) VALUES (:cinema_name, :ticket_value, :address, :capacity)";
 
-            $parameters['namecinema'] = $cinema->getName();
-            $parameters['ticketValue'] = $cinema->getTicketValue();
+            $parameters['cinema_name'] = $cinema->getName();
+            $parameters['ticket_value'] = $cinema->getTicketValue();
             $parameters['address'] = $cinema->getAddress();
             $parameters['capacity'] = $cinema->getCapacity();
 
@@ -81,7 +84,7 @@
             {
 
                     $this->connection = Connection::getInstance();
-                    return $this->connection->ExecuteQuery($sql, $parameters);
+                    return $this->connection->ExecuteNonQuery($sql, $parameters);
             }
             catch(PDOException $e)
             {

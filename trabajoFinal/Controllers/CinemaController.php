@@ -23,7 +23,7 @@
 
         public function Add($name, $address, $capacity, $ticketValue)
         {
-            $cinema = new cinema();
+            $cinema = new Cinema();
             $cinema->setName($name);
             $cinema->setAddress($address);
             $cinema->setCapacity($capacity);
@@ -34,11 +34,31 @@
             $this->ShowAddView();
         }
 
-        public function Remove($name)
+        public function AddDB($name, $address, $capacity, $ticketValue)
+        {
+            $cinema = new Cinema();
+            $cinema->setName($name);
+            $cinema->setAddress($address);
+            $cinema->setCapacity($capacity);
+            $cinema->setTicketValue($ticketValue);
+
+            $this->cinemaDBDAO->Add($cinema);
+
+            $this->ShowAddView();
+        }
+
+        public function Remove($name) //TODO cambiar a $cinema
         {
             $this->cinemaDAO->Remove($name);
 
             $this->showcinemaList();
+        }
+
+        public function RemoveDB($cinema) //TODO configurar dbdao
+        {
+            $this->cinemaDBDAO->Remove($cinema);
+
+            $this->showcinemaListDB();
         }
 
         public function showcinemaList(){
@@ -47,7 +67,9 @@
         }
 
         public function showcinemaListDB(){
-            $this->cinemaDBDAO->readAll();
+            $lista = $this->cinemaDBDAO->readAll();
+            include_once(VIEWS_PATH."cinemalist.php");
+
         }
     } 
 ?>

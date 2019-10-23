@@ -30,5 +30,13 @@
         "lastname": "gottero",
         "dni": "41231231",
         "rol": 0
+    },
+    {
+        "email": "test@test.com",
+        "password": "test",
+        "name": "test",
+        "lastname": "test",
+        "dni": "12309123409",
+        "rol": 0
     }
 ]

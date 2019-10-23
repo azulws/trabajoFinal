@@ -11,7 +11,11 @@
             <br>
             <input type="number" name="dni">
             <br>
-            <button type="submit" name="register">Registrarse</button>
+            !--<button type="submit" name="register">Registrarse</button>
+         </div>
     </form>
-
-</div>
+<?php
+echo "<form class='login' action='".FRONT_ROOT."Home/Index' method='POST'>
+        <button type='submit' name='action'>Volver</button>
+    </form>";
+?>
