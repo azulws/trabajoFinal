@@ -1,8 +1,8 @@
-<form action="<?php echo FRONT_ROOT."Cine/listarCines";?>">
-	<button type="submit">Listar Cines</button>
+<form action="<?php echo FRONT_ROOT."cinema/showcinemaListDB";?>">
+	<button type="submit">Listar cinemas</button>
 </form>
-<form action="<?php echo FRONT_ROOT."Cine/ShowAddView";?>">
-	<button type="submit">AltaCine</button>
+<form action="<?php echo FRONT_ROOT."cinema/ShowAddView";?>">
+	<button type="submit">cinemaAdd</button>
 </form>
 <form action="<?php echo FRONT_ROOT."Login/home";?>">
     <button>Volver</button>
