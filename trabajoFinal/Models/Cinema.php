@@ -2,7 +2,7 @@
     namespace Models;
     class Cinema{
         private $name;
-        private $adress;
+        private $address;
         private $capacity;      
         private $ticketValue;
 /*
@@ -10,9 +10,9 @@
 
         }
 
-        public function __construct($name,$adress,$capacity,$ticketValue){
+        public function __construct($name,$address,$capacity,$ticketValue){
             $this->name=$name;
-            $this->adress=$adress;
+            $this->address=$address;
             $this->capacity=$capacity;
             $this->ticketValue=$ticketValue;
         }
@@ -25,12 +25,12 @@
             return $this->name;
         }
 
-        public function setAdress($adress){
-            $this->adress=$adress;
+        public function setAddress($address){
+            $this->address=$address;
         }
 
-        public function getAdress(){
-            return $this->adress;
+        public function getAddress(){
+            return $this->address;
         }
 
         public function setCapacity($capacity){

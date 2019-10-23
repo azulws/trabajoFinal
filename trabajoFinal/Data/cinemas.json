@@ -1,13 +1,13 @@
 [
     {
         "name": "Amb",
-        "adress": "Cordoba",
+        "address": "Cordoba",
         "capacity": "500",
         "ticketValue": "200"
     },
     {
         "name": "Cine paseo",
-        "adress": "Diagonal",
+        "address": "Diagonal",
         "capacity": "500",
         "ticketValue": "200"
     }

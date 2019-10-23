@@ -21,11 +21,11 @@
             require_once(VIEWS_PATH."cinemaAdd.php");
         }
 
-        public function Add($name, $adress, $capacity, $ticketValue)
+        public function Add($name, $address, $capacity, $ticketValue)
         {
             $cinema = new cinema();
             $cinema->setName($name);
-            $cinema->setAdress($adress);
+            $cinema->setAddress($address);
             $cinema->setCapacity($capacity);
             $cinema->setTicketValue($ticketValue);
 

@@ -40,9 +40,9 @@
         $cinemaList = array();
         foreach($value as $v){
             $cinema = new Cinema();
-            $cinema->setName($v['namecinema']);
-            $cinema->setTicketValue($v['ticketValue']);
-            $cinema->setAdress($v['adress']);
+            $cinema->setName($v['cinema_name']);
+            $cinema->setTicketValue($v['ticket_value']);
+            $cinema->setAddress($v['address']);
             $cinema->setCapacity($v['capacity']);
             array_push($cinemaList,$cinema);
         }
@@ -58,7 +58,7 @@
 
             $category = $this->createCategory($p['id_category']);
 
-            return new cinema( $p['name'], $ad['adress'] ,$p['capacity'], $p['ticket_value']);
+            return new cinema( $p['name'], $ad['address'] ,$p['capacity'], $p['ticket_value']);
 
         }, $value);
        */
@@ -70,11 +70,11 @@
       {
             // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-            $sql = "INSERT INTO cinemas (namecinema,ticketValue,adress,capacity) VALUES (:namecinema, :ticket_value, :adress, :capacity)";
+            $sql = "INSERT INTO cinemas (namecinema,ticketValue,address,capacity) VALUES (:namecinema, :ticket_value, :address, :capacity)";
 
             $parameters['namecinema'] = $cinema->getName();
             $parameters['ticketValue'] = $cinema->getTicketValue();
-            $parameters['adress'] = $cinema->getAdress();
+            $parameters['address'] = $cinema->getAddress();
             $parameters['capacity'] = $cinema->getCapacity();
 
             try

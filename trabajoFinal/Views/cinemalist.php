@@ -3,7 +3,7 @@
 foreach($lista as $item){
 	echo '<dl>'.
 			'<dt> cinema: '.$item->getName().'<dt>'.
-			'<dd> Adress: '.$item->getAdress().'</dd>'.
+			'<dd> Address: '.$item->getAddress().'</dd>'.
 			'<dd> Capacity: '.$item->getCapacity().'</dd>'.
 			'<dd> Valor de la entrada $'.$item->getTicketValue().'</dd>'.
 			'<form action="'.FRONT_ROOT.'cinema/Remove">

@@ -4,7 +4,7 @@
      		<h2>Alta de cinema </h2>
      			<input type="text" name="name" placeholder="Name" required class="form-control">
 			<br>
-     			<input type="text" name="adress" placeholder="Adress" required class="form-control" >
+     			<input type="text" name="address" placeholder="Address" required class="form-control" >
 			<br>
      			<input type="number" name="captotal" value="captotal"placeholder="capacity total" required class="form-control">
 			<br>

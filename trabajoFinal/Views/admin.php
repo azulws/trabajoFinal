@@ -1,4 +1,4 @@
-<form action="<?php echo FRONT_ROOT."cinema/showcinemaList";?>">
+<form action="<?php echo FRONT_ROOT."cinema/showcinemaListDB";?>">
 	<button type="submit">Listar cinemas</button>
 </form>
 <form action="<?php echo FRONT_ROOT."cinema/ShowAddView";?>">

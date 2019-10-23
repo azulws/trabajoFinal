@@ -23,7 +23,7 @@
                  {
                      $cinema = new Cinema();
                      $cinema->setName($content["name"]);
-                     $cinema->setAdress($content["adress"]);
+                     $cinema->setAddress($content["address"]);
                      $cinema->setCapacity($content["capacity"]);
                      $cinema->setTicketValue($content["ticketValue"]);
                      array_push($this->cinemaList, $cinema);
@@ -89,7 +89,7 @@
             {
                 $valuesArray = array();
                 $valuesArray["name"] = $cinema->getName();
-                $valuesArray["adress"] = $cinema->getAdress();
+                $valuesArray["address"] = $cinema->getAddress();
                 $valuesArray["capacity"] = $cinema->getCapacity();
                 $valuesArray["ticketValue"] = $cinema->getTicketValue();
                 array_push($arrayToEncode, $valuesArray);
