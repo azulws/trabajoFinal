@@ -12,7 +12,7 @@
             $this->movieList = new MovieDAO();
             $pageNumber = 1;
             $lista = $this->movieList->getMovies($pageNumber);
-            $_SESSION["listaMovies"]=$lista;
+            $_SESSION["movieList"]=$lista;
             include_once(VIEWS_PATH.'home.php');
         }        
     }

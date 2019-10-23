@@ -6,9 +6,9 @@
         "ticketValue": "200"
     },
     {
-        "name": "cinemacenter",
+        "name": "Cine paseo",
         "adress": "Diagonal",
-        "capacity": "300",
-        "ticketValue": "100"
+        "capacity": "500",
+        "ticketValue": "200"
     }
 ]
