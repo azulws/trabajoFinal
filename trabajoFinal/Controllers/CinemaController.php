@@ -61,6 +61,12 @@
             $this->showcinemaListDB();
         }
 
+        public function Update($name,$ticket_value,$capacity)
+        {
+            $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
+
+            $this->showcinemaListDB();
+        }
         public function showcinemaList(){
             $lista = $this->cinemaDAO->GetAll();
             include_once(VIEWS_PATH."cinemalist.php");
@@ -69,6 +75,10 @@
         public function showcinemaListDB(){
             $lista = $this->cinemaDBDAO->readAll();
             include_once(VIEWS_PATH."cinemalist.php");
+        }
+        public function updateCinema($name){
+            $cinema=$this->cinemaDBDAO->read($name);
+            include_once(VIEWS_PATH."cinemaUpdate.php");
         }
     } 
 ?>

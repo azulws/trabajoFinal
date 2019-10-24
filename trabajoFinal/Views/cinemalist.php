@@ -10,6 +10,8 @@ if($lista==false){
 				'<dd> Valor de la entrada $'.$item->getTicketValue().'</dd>'.
 				'<form action="'.FRONT_ROOT.'cinema/RemoveDB">
 				<button name="name" value="'.$item->getName().'">Eliminar</button></form>'.
+				'<form action="'.FRONT_ROOT.'cinema/updateCinema">
+				<button name="name" value="'.$item->getName().'">Change</button></form>'.
 			'</dl>';	
 	}
 }

@@ -90,9 +90,9 @@
         }
     }
 
-    public function Remove($cinema){
+    public function Remove($name){
         $sql = "DELETE FROM cinemas WHERE cinema_name = :cinema_name";
-        $parameters['cinema_name'] = $cinema;
+        $parameters['cinema_name'] = $name;
         
         try{
             $this->connection = Connection::getInstance();
@@ -102,31 +102,49 @@
             echo $e;
         }
     }
-/*
-    public function read ($title)
-    {
-        $sql = "SELECT * FROM cinemas where title = :title";
-        $parameters['title'] = $title;
+    public function Update($name,$ticket_value,$capacity){
 
+      $sql = "UPDATE cinemas SET ticket_value = :ticket_value, capacity = :capacity WHERE cinema_name = :cinema_name";
+      $parameters['cinema_name'] = $name;
+      $parameters['ticket_value'] = $ticket_value;
+      $parameters['capacity'] = $capacity;
+
+      try{
+        $this->connection = Connection::getInstance();
+        return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e){
+        echo $e;
+      }
+    }
+    public function read ($name)
+    {
+        $sql = "SELECT * FROM cinemas where cinema_name = :cinema_name";
+        $parameters['cinema_name'] = $name;
         try
         {
-            $this->connection = Conn::getInstance();
+            $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
         }
         catch(PDOException $e)
         {
-            echo $e
+            echo $e;
         }
-
-        if(!empty)
+        if(!empty($resultSet))
         {
-            return $this->mapear($resultSet);
-            else
-                return false;
-        }
+            $result = $this->mapear($resultSet);
+            $cinema = new Cinema();
+            $cinema->setName($result[0]->getName());
+            $cinema->setTicketValue($result[0]->getTicketValue());
+            $cinema->setAddress($result[0]->getAddress());
+            $cinema->setCapacity($result[0]->getCapacity());
+            return $cinema;
+            
+        }else
+            return false;
     }
 
-
+/*
     public funtion readby($id)
     {
         sql= "SELECT * FROM cinemas where id_cinema =:id_cinema";
@@ -233,39 +251,6 @@
 
     }
 
-
-
-    public function update ($id,$title)
-
-    {
-
-      $sql = "UPDATE cinemas SET title = :title  WHERE id_cinema = :id_event";
-
-      $parameters['id_cinema'] = $id;
-
-      $parameters['title'] = $title;
-
-
-
-      try
-
-      {
-
-          $this->connection = Conn::getInstance();
-
-          return $this->connection->ExecuteNonQuery($sql, $parameters);
-
-      }
-
-      catch(PDOException $e)
-
-      {
-
-          echo $e;
-
-      }
-
-    }
 */
 
 
