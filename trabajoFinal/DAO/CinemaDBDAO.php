@@ -69,31 +69,39 @@
         //    return count($resp) > 0 ? $resp : null;
      }
 
-       public function Add($cinema)
-      {
-            // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
+    public function Add($cinema){
+        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-            $sql = "INSERT INTO cinemas (cinema_name,ticket_value,address,capacity) VALUES (:cinema_name, :ticket_value, :address, :capacity)";
+        $sql = "INSERT INTO cinemas (cinema_name,ticket_value,address,capacity) VALUES (:cinema_name, :ticket_value, :address, :capacity)";
 
-            $parameters['cinema_name'] = $cinema->getName();
-            $parameters['ticket_value'] = $cinema->getTicketValue();
-            $parameters['address'] = $cinema->getAddress();
-            $parameters['capacity'] = $cinema->getCapacity();
+        $parameters['cinema_name'] = $cinema->getName();
+        $parameters['ticket_value'] = $cinema->getTicketValue();
+        $parameters['address'] = $cinema->getAddress();
+        $parameters['capacity'] = $cinema->getCapacity();
 
-            try
-            {
+        try
+        {
+                $this->connection = Connection::getInstance();
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+    }
 
-                    $this->connection = Connection::getInstance();
-                    return $this->connection->ExecuteNonQuery($sql, $parameters);
-            }
-            catch(PDOException $e)
-            {
-                echo $e;
-            }
-
-
-      }
-
+    public function Remove($cinema){
+        $sql = "DELETE FROM cinemas WHERE cinema_name = :cinema_name";
+        $parameters['cinema_name'] = $cinema;
+        
+        try{
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
+        }
+        catch(PDOException $e){
+            echo $e;
+        }
+    }
 /*
     public function read ($title)
     {
@@ -258,44 +266,6 @@
       }
 
     }
-
-
-
-    public function delete ($title)
-
-    {
-
-        $sql = "DELETE FROM cinema WHERE title = :title";
-
-
-
-        $parameters['title'] = $title;
-
-
-
-        try
-
-        {
-
-            $this->connection = Conn::getInstance();
-
-            return $this->connection->ExecuteNonQuery($sql, $parameters);
-
-        }
-
-        catch(PDOException $e)
-
-        {
-
-            //echo $e;
-
-            echo '<script>alert("No se puede borrar porque el evento esta vinculado a un calendario");</script>';
-
-        }
-
-   }
-
-
 */
 
 

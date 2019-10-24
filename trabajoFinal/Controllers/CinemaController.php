@@ -54,9 +54,9 @@
             $this->showcinemaList();
         }
 
-        public function RemoveDB($cinema) //TODO configurar dbdao
+        public function RemoveDB($name) //TODO configurar dbdao
         {
-            $this->cinemaDBDAO->Remove($cinema);
+            $this->cinemaDBDAO->Remove($name);
 
             $this->showcinemaListDB();
         }
@@ -69,7 +69,6 @@
         public function showcinemaListDB(){
             $lista = $this->cinemaDBDAO->readAll();
             include_once(VIEWS_PATH."cinemalist.php");
-
         }
     } 
 ?>

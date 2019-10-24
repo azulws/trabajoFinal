@@ -8,7 +8,7 @@ if($lista==false){
 				'<dd> Address: '.$item->getAddress().'</dd>'.
 				'<dd> Capacity: '.$item->getCapacity().'</dd>'.
 				'<dd> Valor de la entrada $'.$item->getTicketValue().'</dd>'.
-				'<form action="'.FRONT_ROOT.'cinema/Remove">
+				'<form action="'.FRONT_ROOT.'cinema/RemoveDB">
 				<button name="name" value="'.$item->getName().'">Eliminar</button></form>'.
 			'</dl>';	
 	}
