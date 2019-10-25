@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Amb",
+        "address": "Cordoba",
+        "capacity": "500",
+        "ticketValue": "200"
+    },
+    {
+        "name": "Cine paseo",
+        "address": "Diagonal",
+        "capacity": "500",
+        "ticketValue": "200"
+    },
+    {
+        "name": "Test",
+        "address": "direccion test",
+        "capacity": "1000",
+        "ticketValue": "500"
+    }
+]
