@@ -16,14 +16,6 @@
         "rol": "1"
     },
     {
-        "email": "matiemanuel@gmail.com",
-        "password": "1234",
-        "name": "Matias",
-        "lastname": "Cer",
-        "dni": "12345678",
-        "rol": 0
-    },
-    {
         "email": "azul@hotmail.com",
         "password": "azul",
         "name": "azul",

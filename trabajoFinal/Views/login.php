@@ -16,5 +16,5 @@ if($_SESSION['logged']==false){
     echo "<form class='login' action='".FRONT_ROOT."Home/Index' method='POST'>
         <button type='submit' name='action'>Desconectar</button>
     </form>";
-}
+}   //TODO cambiar loguin para loguear con DB
 ?>

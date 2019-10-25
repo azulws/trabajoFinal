@@ -54,19 +54,13 @@
             $this->showcinemaList();
         }
 
-        public function RemoveDB($name) //TODO configurar dbdao
+        public function RemoveDB($name)
         {
             $this->cinemaDBDAO->Remove($name);
 
             $this->showcinemaListDB();
         }
 
-        public function Update($name,$ticket_value,$capacity)
-        {
-            $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
-
-            $this->showcinemaListDB();
-        }
         public function showcinemaList(){
             $lista = $this->cinemaDAO->GetAll();
             include_once(VIEWS_PATH."cinemalist.php");
@@ -76,9 +70,16 @@
             $lista = $this->cinemaDBDAO->readAll();
             include_once(VIEWS_PATH."cinemalist.php");
         }
-        public function updateCinema($name){
+        public function ShowUpdateCinema($name){
             $cinema=$this->cinemaDBDAO->read($name);
             include_once(VIEWS_PATH."cinemaUpdate.php");
+        }
+        
+        public function UpdateDB($name,$ticket_value,$capacity)
+        {
+            $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
+
+            $this->showcinemaListDB();
         }
     } 
 ?>

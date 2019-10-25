@@ -2,13 +2,16 @@
 namespace Controllers;
 use Models\User; 
 use DAO\UserDAO as UserDAO;
+use DAO\UserDBDAO as UserDBDAO;
 use DAO\MovieDAO as MovieDAO;
 
 class LoginController{
     private $userDAO;
+    private $userDBDAO;
 
     public function __construct(){
         $this->userDAO = new UserDAO();
+        $this->userDBDAO = new UserDBDAO();
     }
 
     public function receiveAction(){
@@ -54,7 +57,7 @@ class LoginController{
         require_once(VIEWS_PATH."home.php");
     }
 
-    public function createUser($name, $lastname, $email, $password, $dni)
+    public function createUser($name, $lastname, $email, $password, $dni, $rol)
     {
         $usuario = new User();
         $usuario->setEmail($email);
@@ -62,9 +65,56 @@ class LoginController{
         $usuario->setName($name);
         $usuario->setLastname($lastname);
         $usuario->setDni($dni);
-        $usuario->setRol(0);
+        $usuario->setRol($rol);
 
         $this->userDAO->Add($usuario);
         include_once(VIEWS_PATH.'home.php');
     }
+
+    public function createUserDB($name, $lastname, $email, $password, $dni)
+    {
+        $usuario = new User();
+        $usuario->setEmail($email);
+        $usuario->setPassword($password);
+        $usuario->setName($name);
+        $usuario->setLastname($lastname);
+        $usuario->setDni($dni);
+        $usuario->setRol(2);    //rol tiene que ser 1 o 2 ya que son los unicos valores cargados
+
+        $this->userDBDAO->Add($usuario);
+
+        include_once(VIEWS_PATH.'home.php');
+    }
+
+    public function showUserList(){
+        $lista = $this->userDAO->GetAll();
+        include_once(VIEWS_PATH."userlist.php");
+    }
+
+    public function showUserListDB(){
+        $lista = $this->userDBDAO->readAll();
+        include_once(VIEWS_PATH."userlist.php");
+    }
+
+    public function Remove($email) //TODO cambiar a $user
+    {
+        $this->userDAO->Remove($email);
+
+        $this->showUserList();
+    }
+
+    public function RemoveDB($email)
+    {
+        $this->userDBDAO->Remove($email);
+
+        $this->showUserListDB();
+    }
+
+    public function UpdateToAdminDB($email) //TODO corregir problema
+    {
+        $this->userDBDAO->Update($email);
+
+        $this->showUserListDB();
+    }
+    
 }

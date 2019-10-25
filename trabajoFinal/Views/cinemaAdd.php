@@ -8,7 +8,7 @@
 			<br>
      			<input type="number" name="captotal" value="captotal"placeholder="capacity total" required class="form-control">
 			<br>
-     			<input type="number" name="ticket" value="ticket" placeholder=" precio ticket" required class="form-control">
+     			<input type="number" name="ticket" value="ticket" placeholder="precio ticket" required class="form-control">
 			<br>
      			<button type="submit">Cargar</button>
     </form>
