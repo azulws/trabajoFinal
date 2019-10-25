@@ -22,7 +22,7 @@ class LoginController{
         }
     }
 
-    public function log($mail,$password){
+    public function log(){
         $register = $this->userDBDAO->read($_POST['user_mail']);
         if($register!=null){
             if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
