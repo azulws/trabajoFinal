@@ -6,9 +6,9 @@
 			<br>
      			<input type="text" name="address" placeholder="Address" required class="form-control" >
 			<br>
-     			<input type="number" name="captotal" value="captotal"placeholder="capacity total" required class="form-control">
+     			<input type="number" name="captotal" value="captotal"placeholder="capacity total" required class="form-control" min="10">
 			<br>
-     			<input type="number" name="ticket" value="ticket" placeholder="precio ticket" required class="form-control">
+     			<input type="number" name="ticket" value="ticket" placeholder="precio ticket" required class="form-control" min="1">
 			<br>
      			<button type="submit">Cargar</button>
     </form>

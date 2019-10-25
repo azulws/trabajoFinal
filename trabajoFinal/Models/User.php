@@ -6,7 +6,7 @@
         private $name;
         private $lastname;
         private $dni;
-        private $rol;
+        private $role;
         public function __contruct(){
             
         }
@@ -41,11 +41,11 @@
         public function setDni($dni){
             $this->dni=$dni;
         }
-        public function getRol(){
-            return $this->rol;
+        public function getRole(){
+            return $this->role;
         }
-        public function setRol($rol){
-            $this->rol=$rol;
+        public function setRol($role){
+            $this->role=$role;
         }
 
     }

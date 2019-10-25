@@ -65,7 +65,7 @@
         $parameters['userName'] = $user->getName();
         $parameters['last_name'] = $user->getLastName();
         $parameters['dni'] = $user->getDni();
-        $parameters['role_id'] = $user->getRol();
+        $parameters['role_id'] = $user->getRole();
 
         try
         {
@@ -91,18 +91,22 @@
         }
     }
     
-    public function Update($email){
-
-      $sql = "UPDATE users SET rol = :1 WHERE email = :email"; //TODO verificar que este seteando bien el valor
-      $parameters['email'] = $email;
-
-      try{
-        $this->connection = Connection::getInstance();
-        return $this->connection->ExecuteNonQuery($sql, $parameters);
-      }
-      catch(PDOException $e){
-        echo $e;
-      }
+    public function UpdateRole($email){
+        $user=$this->read($email);
+        if($user->getRole()==2){
+            $sql = "UPDATE users SET role_id = 1 WHERE email = :email";
+            
+        }else{
+            $sql = "UPDATE users SET role_id = 2 WHERE email = :email";
+        }
+        $parameters['email'] = $email;
+        try{
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
+        }
+        catch(PDOException $e){
+            echo $e;
+        }
     }
 
     public function read ($email)
@@ -127,7 +131,7 @@
             $user->setName($result[0]->getName());
             $user->setLastName($result[0]->getLastName());
             $user->setDni($result[0]->getDni());
-            $user->setRol($result[0]->getRol());
+            $user->setRol($result[0]->getRole());
             return $user;
         }else
             return false;
