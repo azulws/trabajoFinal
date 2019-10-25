@@ -22,8 +22,8 @@ class LoginController{
         }
     }
 
-    public function log(){
-        $register = $this->userDAO->traerUser($_POST['user_mail']);
+    public function log($mail,$password){
+        $register = $this->userDBDAO->read($_POST['user_mail']);
         if($register!=null){
             if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
                 $_SESSION["logged"]=true;
