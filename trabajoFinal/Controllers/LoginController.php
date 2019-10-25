@@ -23,12 +23,12 @@ class LoginController{
     }
 
     public function log(){
-        $register = $this->userDAO->traerUser($_POST['user_mail']);
+        $register = $this->userDBDAO->read($_POST['user_mail']);
         if($register!=null){
             if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
                 $_SESSION["logged"]=true;
                 $_SESSION["name"]=$register->getName();
-                if($register->getRol()=="1"){ //Rol==1 administrador
+                if($register->getRole()=="1"){ //Rol==1 administrador
                     require_once(VIEWS_PATH."admin.php");// View administrador
                 }else{
                     $movieList;
@@ -57,7 +57,7 @@ class LoginController{
         require_once(VIEWS_PATH."home.php");
     }
 
-    public function createUser($name, $lastname, $email, $password, $dni, $rol)
+    public function createUser($name, $lastname, $email, $password, $dni, $role)
     {
         $usuario = new User();
         $usuario->setEmail($email);
@@ -65,7 +65,7 @@ class LoginController{
         $usuario->setName($name);
         $usuario->setLastname($lastname);
         $usuario->setDni($dni);
-        $usuario->setRol($rol);
+        $usuario->setRol($role);
 
         $this->userDAO->Add($usuario);
         include_once(VIEWS_PATH.'home.php');
@@ -79,7 +79,7 @@ class LoginController{
         $usuario->setName($name);
         $usuario->setLastname($lastname);
         $usuario->setDni($dni);
-        $usuario->setRol(2);    //rol tiene que ser 1 o 2 ya que son los unicos valores cargados
+        $usuario->setRol(2);    //role tiene que ser 1 o 2 ya que son los unicos valores cargados
 
         $this->userDBDAO->Add($usuario);
 
@@ -110,9 +110,9 @@ class LoginController{
         $this->showUserListDB();
     }
 
-    public function UpdateToAdminDB($email) //TODO corregir problema
+    public function UpdateRoleDB($email) //TODO corregir problema
     {
-        $this->userDBDAO->Update($email);
+        $this->userDBDAO->UpdateRole($email);
 
         $this->showUserListDB();
     }

@@ -5,7 +5,7 @@
         "name": "asd",
         "lastname": "original",
         "dni": "123",
-        "rol": "2"
+        "role": "2"
     },
     {
         "email": "admin@admin.com",
@@ -13,7 +13,7 @@
         "name": "admin",
         "lastname": "admin",
         "dni": "1234",
-        "rol": "1"
+        "role": "1"
     },
     {
         "email": "azul@hotmail.com",
@@ -21,7 +21,7 @@
         "name": "azul",
         "lastname": "gottero",
         "dni": "41231231",
-        "rol": 0
+        "role": 0
     },
     {
         "email": "test@test.com",
@@ -29,6 +29,6 @@
         "name": "test",
         "lastname": "test",
         "dni": "12309123409",
-        "rol": 0
+        "role": 0
     }
 ]

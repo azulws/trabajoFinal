@@ -27,7 +27,7 @@
                      $user->setName($content["name"]);
                      $user->setLastname($content["lastname"]);
                      $user->setDni($content["dni"]);
-                     $user->setRol($content["rol"]);
+                     $user->setRol($content["role"]);
                      array_push($this->userList, $user);
                  }
              }
@@ -82,7 +82,7 @@
                 $valuesArray["name"] = $user->getName();
                 $valuesArray["lastname"] = $user->getLastname();
                 $valuesArray["dni"] = $user->getDni();
-                $valuesArray["rol"] = $user->getRol();
+                $valuesArray["role"] = $user->getRole();
 
                 array_push($arrayToEncode, $valuesArray);
             }
