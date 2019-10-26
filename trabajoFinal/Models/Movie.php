@@ -6,6 +6,7 @@ class Movie {
     private $points;
     private $description;
     private $poster;
+    private $movieId; //movieId movie_id
 
     public function __construct(){
 
@@ -48,6 +49,15 @@ class Movie {
         return $this->poster ;
     }
 
+    public function setMovieId($movieId){
+        $this->movieId = $movieId ;
+    }
+
+    public function getMovieId(){
+        return $this->movieId;
+    }
+
+
     public function echoToString(){
         return "Title: ".$this->getTitle()
         ." - Estreno: ".$this->getReleaseDate()
@@ -55,6 +65,7 @@ class Movie {
         ."\nDescription: ".$this->getDescription();
     
     }
+
 }
 /*
  [popularity] => 695.215 [vote_count] => 1838 [video] => 
