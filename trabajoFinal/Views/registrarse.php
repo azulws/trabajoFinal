@@ -1,8 +1,21 @@
-<form class="signup" method="POST" action="<?php FRONT_ROOT.'Login/crear'?>">
-    <input type="name" name="name">
-    <input type="surname" name="surname">
-    <input type="email" name="Email">
-    <input type="pass" name="Password">
-    <input type="dni" name="DNI">
-    <button type="submit" name="signIn">Sign UP </button>
-</form>
+<form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."Login/createUserDB";?>>
+		<div align="center">
+     		<h2>Registro de usuario</h2>
+             <input type="text" name="name" placeholder="Name">
+			<br>
+            <input type="text" name="lastname" placeholder="Lastname">
+            <br>
+             <input type="email" name="email" placeholder="Email">
+     		<br>
+             <input type="password" name="password" placeholder="Contraseña">
+            <br>
+            <input type="number" name="dni" placeholder="dni">
+            <br>
+            !--<button type="submit" name="register">Registrarse</button>
+         </div>
+    </form>
+<?php
+echo "<form class='login' action='".FRONT_ROOT."Home/Index' method='POST'>
+        <button type='submit' name='action'>Volver</button>
+    </form>";
+?>

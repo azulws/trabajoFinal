@@ -2,7 +2,7 @@
     namespace DAO;
 
     use DAO\IUser as IUser;
-    use Models\Usuario as Usuario;
+    use Models\User as User;
 
     class UserDAO implements IUser
     {
@@ -21,13 +21,13 @@
                  
                  foreach($contentArray as $content)
                  {
-                     $user = new Usuario();
+                     $user = new User();
                      $user->setEmail($content["email"]);
                      $user->setPassword($content["password"]);
-                     $user->setNombre($content["nombre"]);
-                     $user->setApellido($content["apellido"]);
+                     $user->setName($content["name"]);
+                     $user->setLastname($content["lastname"]);
                      $user->setDni($content["dni"]);
-                     $user->setRol($content["rol"]);
+                     $user->setRol($content["role"]);
                      array_push($this->userList, $user);
                  }
              }
@@ -40,7 +40,7 @@
             $this->SaveData();
         }
 
-        public function traerUsuario($email){
+        public function traerUser($email){
             $this->RetrieveData();
             foreach($this->userList as $user){
                 if($email===$user->getEmail()){
@@ -79,10 +79,10 @@
                 $valuesArray = array();
                 $valuesArray["email"] = $user->getEmail();
                 $valuesArray["password"] = $user->getPassword();
-                $valuesArray["nombre"] = $user->getNombre();
-                $valuesArray["apellido"] = $user->getApellido();
+                $valuesArray["name"] = $user->getName();
+                $valuesArray["lastname"] = $user->getLastname();
                 $valuesArray["dni"] = $user->getDni();
-                $valuesArray["rol"] = $user->getRol();
+                $valuesArray["role"] = $user->getRole();
 
                 array_push($arrayToEncode, $valuesArray);
             }
