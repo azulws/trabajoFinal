@@ -20,4 +20,6 @@
 	Router::Route(new Request());
 
 	require_once(VIEWS_PATH."footer.php");
+
+	console("hello").log(arg):
 ?>
