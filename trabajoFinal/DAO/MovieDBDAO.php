@@ -1,5 +1,5 @@
 <?php
-    title$titlespace DAO;
+    namespace DAO;
     use DAO\Connection;
     use \PDO as PDO;
     use \Exception as Exception;
@@ -18,7 +18,7 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM Movies";
+        $sql = "SELECT * FROM movies";
         try
         {
             $this->connection = Connection::getInstance();
@@ -47,7 +47,6 @@
             $Movie->setMovieId($v['movie_id']);
             array_push($MovieList,$Movie);
         }
-        echo count($MovieList);
         if(count($MovieList)>0)
             return $MovieList;
         else
@@ -57,8 +56,8 @@
     public function Add($Movie){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO Movies (title,release_date,poster,movie_description,movie_id) 
-        VALUES (:title, :release_date, :poster, :movie_description, :movie_id)";
+        $sql = "INSERT INTO movies (title,release_date,points,poster,movie_description,movie_id) 
+        VALUES (:title, :release_date, :points,:poster, :movie_description, :movie_id)";
 
         $parameters['title'] = $Movie->getTitle();
         $parameters['release_date'] = $Movie->getReleaseDate();
@@ -66,7 +65,7 @@
         $parameters['poster'] = $Movie->getPoster();
         $parameters['movie_description'] = $Movie->getDescription();
         $parameters['movie_id'] = $Movie->getMovieId();
-
+        
         try
         {
                 $this->connection = Connection::getInstance();
@@ -107,7 +106,7 @@
     }*/
     public function read ($title)
     {
-        $sql = "SELECT * FROM Movies where title = :title";
+        $sql = "SELECT * FROM movies where title = :title";
         $parameters['title'] = $title;
         try
         {
@@ -132,6 +131,22 @@
             
         }else
             return false;
+    }
+    public function readOrderByDate(){
+        $sql = "SELECT * FROM movies ORDER BY release_date DESC";
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if (!empty($resultSet))
+           return $this->mapear($resultSet);
+        else 
+           return false;
     }
 }
       

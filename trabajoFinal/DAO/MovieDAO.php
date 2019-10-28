@@ -46,6 +46,7 @@ class MovieDAO{
         $movie->setPoints($v->vote_average);
         $movie->setDescription($v->overview);
         $movie->setPoster($v->poster_path);
+        $movie->setMovieId($v->id);
         array_push($this->movieList, $movie);
         //var_dump($movie);//veo los datos que hay guardados dentro de cada movie
       }
