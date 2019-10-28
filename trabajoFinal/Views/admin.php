@@ -10,6 +10,9 @@
 <form action="<?php echo FRONT_ROOT."Movie/moviesToDB";?>">
 	<button type="submit">METER PELIS</button>
 </form>
+<form action="<?php echo FRONT_ROOT."Genres/genresToDB";?>">
+	<button type="submit">METER GENEROS</button>
+</form>
 <form action="<?php echo FRONT_ROOT."Login/home";?>">
     <button>Volver</button>
 </form>

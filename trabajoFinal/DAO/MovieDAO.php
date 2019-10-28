@@ -35,24 +35,22 @@ class MovieDAO{
     foreach($responseArray as $key=>$value){ //entro al array, las key son los campos del json, incluyendo el array
       if($key=="page"){
       echo 'Pagina: '.$value;
-    }
-    if($key=="results"){ //actuo si el valor de la key es el campo del json llamado results(el arreglo de movie)
-      foreach($value as $k=>$v){ //value es el array de movie
-        //k es la posicion dentro del arreglo, cada posicion contiene una movie
-        //v es la informacion de la movie
-        $movie=new Movie();
-        $movie->setTitle($v->title);
-        $movie->setReleaseDate($v->release_date);
-        $movie->setPoints($v->vote_average);
-        $movie->setDescription($v->overview);
-        $movie->setPoster($v->poster_path);
-        $movie->setMovieId($v->id);
-        array_push($this->movieList, $movie);
-        //var_dump($movie);//veo los datos que hay guardados dentro de cada movie
+      }
+      if($key=="results"){ //actuo si el valor de la key es el campo del json llamado results(el arreglo de movie)
+        foreach($value as $k=>$v){ //value es el array de movie
+          //k es la posicion dentro del arreglo, cada posicion contiene una movie
+          //v es la informacion de la movie
+          $movie=new Movie();
+          $movie->setTitle($v->title);
+          $movie->setReleaseDate($v->release_date);
+          $movie->setPoints($v->vote_average);
+          $movie->setDescription($v->overview);
+          $movie->setPoster($v->poster_path);
+          $movie->setMovieId($v->id);
+          array_push($this->movieList, $movie);
+        }
       }
     }
-  }
     return $this->movieList;
   }
-
 }

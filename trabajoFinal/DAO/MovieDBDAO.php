@@ -36,7 +36,7 @@
 
     protected function mapear($value) {
 
-        $MovieList = array();
+        $movieList = array();
         foreach($value as $v){
             $Movie = new Movie();
             $Movie->setTitle($v['title']);
@@ -45,10 +45,10 @@
             $Movie->setDescription($v['movie_description']);
             $Movie->setPoints($v['points']);
             $Movie->setMovieId($v['movie_id']);
-            array_push($MovieList,$Movie);
+            array_push($movieList,$Movie);
         }
-        if(count($MovieList)>0)
-            return $MovieList;
+        if(count($movieList)>0)
+            return $movieList;
         else
             return false;
      }
