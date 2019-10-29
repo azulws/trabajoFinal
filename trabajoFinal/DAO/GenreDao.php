@@ -1,5 +1,6 @@
 <?php
     namespace DAO;
+    use Models\Genre;
     class GenreDAO{
         private $genreList = array();
         public function getMoviesGenres(){
@@ -14,6 +15,7 @@
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_POSTFIELDS => "{}",
+            CURLOPT_SSL_VERIFYPEER => false,
             ));
             
             $response = curl_exec($curl);
@@ -24,17 +26,22 @@
             if ($err) {
             echo "cURL Error #:" . $err;
             } else {
-            echo $response;
+                return json_decode($response);
             }
         }
         
         public function getGenres(){
             $responseArray= $this->getMoviesGenres();
-            foreach($responseArray as $v){
-                $genre = new Genre();
-                $genre->setId($v->id);
-                $genre->setDescription($v->name);
-                array_push($this->genreList,$genre);
+             
+            foreach($responseArray as $k){
+                
+               /* $genre = new Genre();
+                $genre->setId($k["id"]);
+                $genre->setDescription($k->name);*/
+                echo '<pre>';
+                print_r($responseArray);
+                echo '</pre>';
+                //array_push($this->genreList,$genre);
             }
             return $this->genreList;
         }
