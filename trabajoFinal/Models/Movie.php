@@ -6,7 +6,8 @@ class Movie {
     private $points;
     private $description;
     private $poster;
-    private $movieId; //movieId movie_id
+    private $movieId;
+    private $runtime;
 
     public function __construct(){
 
@@ -46,17 +47,24 @@ class Movie {
     }
 
     public function getPoster(){
-        return $this->poster ;
+        return $this->poster;
     }
 
     public function setMovieId($movieId){
-        $this->movieId = $movieId ;
+        $this->movieId = $movieId;
     }
 
     public function getMovieId(){
         return $this->movieId;
     }
 
+    public function setRuntime($runtime){
+        $this->runtime = $runtime;
+    }
+
+    public function getRuntime(){
+        return $this->runtime;
+    }
 
     public function echoToString(){
         return "Title: ".$this->getTitle()

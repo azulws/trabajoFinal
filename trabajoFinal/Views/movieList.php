@@ -6,6 +6,7 @@ foreach($lista as $item){
          '<p> Estreno: '.$item->getReleaseDate().'</p>'.
          '<p> Points: '.$item->getPoints().'</p>'.
          '<p> Description: '.$item->getDescription().'</p>'.
+         '<p> Duracion: '.$item->getRuntime().'</p>'.
          '</div>';
 }
 ?>

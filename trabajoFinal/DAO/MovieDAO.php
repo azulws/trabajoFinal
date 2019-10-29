@@ -29,10 +29,37 @@ class MovieDAO{
     
   }
 
+  private function getDetails($idMovie){
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://api.themoviedb.org/3/movie/".$idMovie."?language=en-US&api_key=".API_KEY,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_POSTFIELDS => "{}",
+      CURLOPT_SSL_VERIFYPEER => false,
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+      echo "cURL Error #:" . $err;
+    } else {
+      return json_decode($response);
+    }
+  }
+
 
   public function getMovies($pageNumber){
-    $responseArray= $this->getNowPlayingPage($pageNumber);
-    foreach($responseArray as $key=>$value){ //entro al array, las key son los campos del json, incluyendo el array
+    $responseArrayNP= $this->getNowPlayingPage($pageNumber);
+    foreach($responseArrayNP as $key=>$value){ //entro al array, las key son los campos del json, incluyendo el array
       if($key=="page"){
       echo 'Pagina: '.$value;
       }
@@ -47,6 +74,15 @@ class MovieDAO{
           $movie->setDescription($v->overview);
           $movie->setPoster($v->poster_path);
           $movie->setMovieId($v->id);
+          $responseArrayD= $this->getDetails($v->id);
+          foreach($responseArrayD as $key=>$value){
+            if($key=="runtime"){
+                $movie->setRuntime($value);
+                if($value==null){
+                   $movie->setRuntime(120); //a ip man le falta la duracion en la api
+                }
+            }
+          }
           array_push($this->movieList, $movie);
         }
       }
