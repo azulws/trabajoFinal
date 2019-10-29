@@ -32,16 +32,14 @@
         
         public function getGenres(){
             $responseArray= $this->getMoviesGenres();
-             
+            
             foreach($responseArray as $k){
-                
-               /* $genre = new Genre();
-                $genre->setId($k["id"]);
-                $genre->setDescription($k->name);*/
-                echo '<pre>';
-                print_r($responseArray);
-                echo '</pre>';
-                //array_push($this->genreList,$genre);
+                foreach($k as $v){
+                    $genre = new Genre();
+                    $genre->setId($v->id);
+                    $genre->setDescription($v->name);
+                    array_push($this->genreList,$genre);
+                }
             }
             return $this->genreList;
         }
