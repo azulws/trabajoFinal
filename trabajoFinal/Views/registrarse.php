@@ -11,7 +11,7 @@
             <br>
             <input type="number" name="dni" placeholder="dni">
             <br>
-            !--<button type="submit" name="register">Registrarse</button>
+            <button type="submit" name="register">Registrarse</button>
          </div>
     </form>
 <?php
