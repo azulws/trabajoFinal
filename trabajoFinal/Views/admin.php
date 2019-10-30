@@ -13,6 +13,7 @@
 <form action="<?php echo FRONT_ROOT."Genre/genresToDB";?>">
 	<button type="submit">METER GENEROS</button>
 </form>
+
 <form action="<?php echo FRONT_ROOT."Login/home";?>">
     <button>Volver</button>
 </form>

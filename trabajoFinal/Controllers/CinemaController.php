@@ -74,7 +74,11 @@
             $cinema=$this->cinemaDBDAO->read($name);
             include_once(VIEWS_PATH."cinemaUpdate.php");
         }
-        
+        public function ShowMovieFunctions(){
+            //TODO $lista = $this->movieFunctionDBDAO->GetAll();;
+            include_once(VIEWS_PATH."movieFuctionList.php");
+        }
+
         public function UpdateDB($name,$ticket_value,$capacity)
         {
             $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
