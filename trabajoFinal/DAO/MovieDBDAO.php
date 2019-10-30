@@ -4,7 +4,7 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
-    use Models\Movie;
+    use Models\Movie as Movie;
 
     class MovieDBDAO
     {

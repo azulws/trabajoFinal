@@ -1,6 +1,6 @@
 <?php
     namespace DAO;
-    use Models\Genre;
+    use Models\Genre as Genre;
     class GenreDAO{
         private $genreList = array();
         public function getMoviesGenres(){
