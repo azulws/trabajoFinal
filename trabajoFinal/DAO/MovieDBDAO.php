@@ -5,15 +5,18 @@
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
     use Models\Movie as Movie;
+    use DAO\GenresByMoviesDBDAO as GenresByMoviesDBDAO;
 
     class MovieDBDAO
     {
          
          private $connection;
+         private $genresByMoviesDBDAO;
 
          public function __construct()
          {
             $this->connection = null;
+            $this->genresByMoviesDBDAO = new GenresByMoviesDBDAO();
          }
 
          
@@ -56,8 +59,10 @@
 
      public function writeAll($movieList){
          foreach($movieList as $movie){
-            if($this->read($movie->getTitle())==false)
+            if($this->read($movie->getTitle())==false){
                 $this->Add($movie);
+                $this->genresByMoviesDBDAO->writeAll($movie);
+            }    
          }
      }
 
@@ -137,7 +142,7 @@
             $movie->setPoster($result[0]->getposter());
             $movie->setDescription($result[0]->getDescription());
             $movie->setMovieId($result[0]->getMovieId());
-            $movie->setRuntime($results[0]->getRuntime());
+            $movie->setRuntime($result[0]->getRuntime());
 
             return $movie;
             

@@ -15,11 +15,7 @@
 
         public function genresToDB(){
             $genres=$this->genreDAO->getGenres();
-            /*foreach($genres as $genre){
-                if($this->genreDBDAO->read($genre->getId())==false){
-                    $this->genreDBDAO->Add($genre);
-                }
-            }*/
             $this->genreDBDAO->writeAll($genres);
+            include_once(VIEWS_PATH.'admin.php');
         }
     }
