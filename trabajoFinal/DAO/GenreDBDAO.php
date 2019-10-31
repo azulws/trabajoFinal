@@ -49,6 +49,14 @@
             return false;
      }
 
+    public function writeAll($genreList){
+        foreach($genreList as $genre){
+           if($this->read($genre->getId())==false)
+               $this->Add($genre);
+        }
+    }
+
+
     public function Add($Genre){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
