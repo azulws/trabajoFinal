@@ -83,11 +83,7 @@ class MovieDAO{
                 }
             }
           }
-          $genresByMovies;
-          foreach($v->genres as $id){
-            array_push($genresByMovies,$id);    //continuar con seteo de generos
-          }
-          $movie->setGenres($genresByMovies);
+          $movie->setGenres($v->genre_ids);
           array_push($this->movieList, $movie);
         }
       }

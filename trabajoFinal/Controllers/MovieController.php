@@ -26,7 +26,7 @@ class MovieController{
     public function moviesToDB(){
         $pageNumber = 1;
         $movies=$this->movieList->getMovies($pageNumber);
-        foreach($movies as $movie){
+        /foreach($movies as $movie){ //TODO PASAR A DAO
             if($this->movieDBDAO->read($movie->getTitle())==false){
                 $this->movieDBDAO->Add($movie);
             }
