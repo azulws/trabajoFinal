@@ -79,7 +79,7 @@ class MovieDAO{
             if($key=="runtime"){
                 $movie->setRuntime($value);
                 if($value==null){
-                   $movie->setRuntime(120); //a ip man le falta la duracion en la api
+                   $movie->setRuntime(120);
                 }
             }
           }

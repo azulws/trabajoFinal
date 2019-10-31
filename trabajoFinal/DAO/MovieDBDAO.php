@@ -56,7 +56,8 @@
 
      public function writeAll($movieList){
          foreach($movieList as $movie){
-             $this->Add($movie);
+            if($this->read($movie->getTitle())==false)
+                $this->Add($movie);
          }
      }
 
