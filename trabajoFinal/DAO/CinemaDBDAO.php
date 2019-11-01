@@ -145,7 +145,7 @@
     }
 
 /*
-    public funtion readby($id)
+    public function readby($id)
     {
         sql= "SELECT * FROM cinemas where id_cinema =:id_cinema";
         $parameters['id_cinema'] = $id;

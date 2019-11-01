@@ -8,7 +8,7 @@
     use Models\Movie as Movie;
     use Models\MovieFunction as MovieFunction;
 
-    class MovieFunction()
+    class MovieFunctionDBDAO
     {
          
       private $connection;
@@ -45,26 +45,26 @@
         foreach($value as $v)
         {
             $movieFunction = new MovieFunction();
-            $movieFunction->setMovieFunctionId ($v['movieFuntion_id']);
+            $movieFunction->setMovieFunctionId ($v['movieFunction_id']);
             $movieFunction->setCinemaId($v['cinema_id']);
-            $movieFunction->setStartDateTime($v['startDateTime']);
+            $movieFunction->setMovieId($v['movie_id']);
+            $movieFunction->setStartDateTime($v['start_datetime']);
             array_push($movieFunctionList,$movieFunction);
         }
-        echo count($movieFunctionList);
         if(count($movieFunctionList)>0)
             return $movieFunctionList;
         else
             return false;
      }
 
-      public function Add($movieFunction) // movieFuntion is an object
+      public function Add($movieFunction) // movieFunction is an object
        {
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO movieFuntions( movieFuntion_id, start_datetime, cinema_id, movie_id) VALUES (:movieFuntion_id, :start_datetime, :cinema_id, :movie_id)";
+        $sql = "INSERT INTO movieFunctions( movieFunction_id, start_datetime, cinema_id, movie_id) VALUES (:movieFunction_id, :start_datetime, :cinema_id, :movie_id)";
 
-        $parameters['movieFunction_id'] = $movieFunction->getMovieFuntionId();
-        $parameters['startDateTime'] = $movieFunction-> getStartDateTime();
+        $parameters['movieFunction_id'] = $movieFunction->getMovieFunctionId();
+        $parameters['start_datetime'] = $movieFunction-> getStartDateTime();
         $parameters['cinema_id'] = $movieFunction->getCinemaId();
         $parameters['movie_id'] = $movieFunction->getMovieId();
 
@@ -79,10 +79,10 @@
         }
     }
 
-    public function Remove($movieFunction) //$movieFuntion is an object
+    public function Remove($movieFunction) //$movieFunction is an object
     {
-        $sql = "DELETE FROM movieFuntions WHERE  movieFunction_id = :movieFuntion_id";
-        $parameters['movieFuntions_id'] = $movieFunction->getMovieFunctionId();
+        $sql = "DELETE FROM movieFunctions WHERE  movieFunction_id = :movieFunction_id";
+        $parameters['movieFunctions_id'] = $movieFunction->getMovieFunctionId();
         
         try{
             $this->connection = Connection::getInstance();
@@ -92,26 +92,11 @@
             echo $e;
         }
     }
-    public function Update($movieFuntionId,$starDatetime,$cinema, $movie){ //cinema and movie are objects
 
-      $sql = "UPDATE movieFuntions SET movie_id = :movie_id, cinema_id = :cinema_id WHERE movieFunction_Id = :movieFunction_Id";
-    
-      $parameters['cinema_id'] = $cinema->getCinemaId();
-      $parameters['movie_id'] = $movie->getMovieId();
-      $parameters['startDateTime'] = $startDateTime;
-
-      try{
-        $this->connection = Connection::getInstance();
-        return $this->connection->ExecuteNonQuery($sql, $parameters);
-      }
-      catch(PDOException $e){
-        echo $e;
-      }
-    }
-    public function read ($movieFuntion)
+    public function read ($movieFunction)
     {
-        $sql = "SELECT * FROM movieFunctions where movieFunction_id = :movieFucntion_id";
-        $parameters['movieFunction_id'] = $movieFunction->getMovieFuntionId();
+        $sql = "SELECT * FROM movieFunctions where movieFunction_id = :movieFunction_id";
+        $parameters['movieFunction_id'] = $movieFunction->getMovieFunctionId();
         try
         {
             $this->connection = Connection::getInstance();
@@ -124,16 +109,16 @@
         if(!empty($resultSet))
         {
             $result = $this->mapear($resultSet);
-            $movieFunction = new MovieFuntions();
-            $movieFunction->setMovieFunctionId($result[0]->getMovieFuntionId());
-            $movieFunction->setCinema($result[0]->getCinema());
-            $movieFunction->setMovie($result[0]->getMovie());
+            $movieFunction = new MovieFunctions();
+            $movieFunction->setMovieFunctionId($result[0]->getMovieFunctionId());
+            $movieFunction->setCinemaId($result[0]->getCinemaId());
+            $movieFunction->setMovieId($result[0]->getMovieId());
             $movieFunction->setStartDateTime($result[0]->getStartTime());
-            return $movieFuntion;
+            return $movieFunction;
             
         }else
      
         return false;
     }
-       
+}     
 ?>

@@ -1,63 +1,56 @@
 <?php 
         namespace Models;
-
-
-
-        class MovieFunction(){
+        class MovieFunction{
 
             private $movieFunctionId;
             private $startDateTime;
-            private $cinema; //objtec cinema
-            private $movie; // object movie
+            private $cinemaId; //object cinema
+            private $movieId; // object movie
 
 
-            public funtion __construct($movieFunctionId,$startDateTime,$cinema,$movie)
+            public function __construct()
              {
-              $this->$movieFunctionId=$movieFunctionId;
-              $this->$startDateTime=$startDateTime;
-              $this->$cinema=$cinema;
-              $this->$movie=$movie;
             
              }
 
              public function getMovieFunctionId()
              {
-                 return->$this->$movieFunction;
+                return $this->movieFunctionId;
              }
             
              public function getStartDateTime()
              {
-                 return->$this->$startDateTime;
+                 return $this->startDateTime;
              }
             
-             public function getCinema()
+             public function getCinemaId()
              {
-                 return->$this->$cinema;
+                 return $this->cinemaId;
              }
            
-             public function getMovie()
+             public function getMovieId()
              {
-                 return->$this->$movie;
+                 return $this->movieId;
              }
 
-             public function setMovieFunction($movieFunctionId)
+             public function setMovieFunctionId($movieFunctionId)
              {
-                 $this->movieFunctionId =$movieFunctionId:
+                 $this->movieFunctionId =$movieFunctionId;
              }
            
              public function setStartDateTime($startDateTime)
              {
-                 $this->$startDateTime =$startDateTime:
+                 $this->startDateTime =$startDateTime;
              }
             
-             public function setCinemaId($cinema)
+             public function setCinemaId($cinemaId)
              {
-                 $this->$cinema =$cinema:
+                 $this->cinemaId =$cinemaId;
              }
             
-             public function setMovie($movieId)
+             public function setMovieId($movieId)
              {
-                 $this->$movieId =$movie:
+                 $this->movieId =$movieId;
              }
 
 

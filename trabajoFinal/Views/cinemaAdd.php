@@ -1,4 +1,3 @@
-
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."Cinema/AddDB";?>>
 		<div align="center">
      		<h2>Alta de cinema </h2>
