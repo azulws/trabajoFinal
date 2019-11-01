@@ -13,14 +13,14 @@
          
       private $connection;
 
-      public function __construct()
+        public function __construct()
          {
             $this->connection = null;
          }
 
          
-      public function readAll()
-      {
+    public function readAll()
+    {
         $sql = "SELECT * FROM movieFunctions";
         try
         {
@@ -45,7 +45,6 @@
         foreach($value as $v)
         {
             $movieFunction = new MovieFunction();
-            $movieFunction->setMovieFunctionId ($v['movieFunction_id']);
             $movieFunction->setCinemaId($v['cinema_id']);
             $movieFunction->setMovieId($v['movie_id']);
             $movieFunction->setStartDateTime($v['start_datetime']);
@@ -61,10 +60,10 @@
        {
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO movieFunctions( movieFunction_id, start_datetime, cinema_id, movie_id) VALUES (:movieFunction_id, :start_datetime, :cinema_id, :movie_id)";
-
-        $parameters['movieFunction_id'] = $movieFunction->getMovieFunctionId();
-        $parameters['start_datetime'] = $movieFunction-> getStartDateTime();
+        $sql = "INSERT INTO movieFunctions(start_datetime,cinema_id,movie_id)
+        VALUES (:start_datetime,:cinema_id,:movie_id)";
+        
+        $parameters['start_datetime'] = $movieFunction->getStartDateTime();
         $parameters['cinema_id'] = $movieFunction->getCinemaId();
         $parameters['movie_id'] = $movieFunction->getMovieId();
 

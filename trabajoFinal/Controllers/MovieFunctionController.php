@@ -23,11 +23,16 @@
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($date);
             $movieFunction->setCinemaId($cinemaId);
-            $movieFunction->setMovieFunctionId($movieId);
+            $movieFunction->setMovieId($movieId);
 
             $this->movieFunctionDBDAO->Add($movieFunction);
 
             $this->ShowAddView();
+        }
+
+        public function showMovieFunctionListDB(){
+            $lista = $this->movieFunctionDBDAO->readAll();
+            include_once(VIEWS_PATH."movieFunctionList.php");
         }
     }
        

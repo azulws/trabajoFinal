@@ -35,22 +35,22 @@
 
              public function setMovieFunctionId($movieFunctionId)
              {
-                 $this->movieFunctionId =$movieFunctionId;
+                 $this->movieFunctionId=$movieFunctionId;
              }
            
              public function setStartDateTime($startDateTime)
              {
-                 $this->startDateTime =$startDateTime;
+                 $this->startDateTime=$startDateTime;
              }
             
              public function setCinemaId($cinemaId)
              {
-                 $this->cinemaId =$cinemaId;
+                 $this->cinemaId=$cinemaId;
              }
             
              public function setMovieId($movieId)
              {
-                 $this->movieId =$movieId;
+                 $this->movieId=$movieId;
              }
 
 

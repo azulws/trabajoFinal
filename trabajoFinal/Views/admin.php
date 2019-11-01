@@ -14,7 +14,10 @@
 	<button type="submit">METER GENEROS</button>
 </form>
 <form action="<?php echo FRONT_ROOT."MovieFunction/showAddView";?>">
-	<button type="submit">METER GENEROS</button>
+	<button type="submit">METER FUNCIONES</button>
+</form>
+<form action="<?php echo FRONT_ROOT."MovieFunction/showMovieFunctionListDB";?>">
+	<button type="submit">MOSTRAR FUNCIONES</button>
 </form>
 <form action="<?php echo FRONT_ROOT."Login/home";?>">
     <button>Volver</button>
