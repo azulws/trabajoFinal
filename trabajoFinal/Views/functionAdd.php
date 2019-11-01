@@ -1,6 +1,7 @@
-<form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."Cinema/AddDB";?>>
+<form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."function/cambiar";?>>
+    //cambiar el action anterior
 		<div align="center">
-     		<h2>Alta de cinema </h2>
+     		<h2>Alta de funcion </h2>
      			<input type="text" name="name" placeholder="Name" required class="form-control">
 			<br>
      			<input type="text" name="address" placeholder="Address" required class="form-control" >

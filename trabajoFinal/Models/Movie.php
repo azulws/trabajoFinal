@@ -8,8 +8,9 @@ class Movie {
     private $poster;
     private $movieId;
     private $runtime;
+    private $genres;
 
-    public function __construct(){
+    public function __construct($genres=array()){
 
     }
 
@@ -64,6 +65,14 @@ class Movie {
 
     public function getRuntime(){
         return $this->runtime;
+    }
+
+    public function setGenres($genres){
+        $this->genres = $genres;
+    }
+
+    public function getGenres(){
+        return $this->genres;
     }
 
     public function echoToString(){

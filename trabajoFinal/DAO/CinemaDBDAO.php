@@ -4,7 +4,7 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
-    use Models\Cinema;
+    use Models\Cinema as Cinema;
 
     class cinemaDBDAO
     {
@@ -145,7 +145,7 @@
     }
 
 /*
-    public funtion readby($id)
+    public function readby($id)
     {
         sql= "SELECT * FROM cinemas where id_cinema =:id_cinema";
         $parameters['id_cinema'] = $id;

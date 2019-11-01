@@ -1,21 +1,57 @@
-<?php
-    namespace Models;
-    class MovieFunction{
-        private $id;
-        private $startDatetime;
+<?php 
+        namespace Models;
+        class MovieFunction{
 
-        public function getId(){
-            return $this->id;
-        }
-        public function setId($id){
-            $this->id=$id;
-        }
+            private $movieFunctionId;
+            private $startDateTime;
+            private $cinemaId; //object cinema
+            private $movieId; // object movie
 
-        public function getStartDatetime(){
-            return $this->startDatetime;
+
+            public function __construct()
+             {
+            
+             }
+
+             public function getMovieFunctionId()
+             {
+                return $this->movieFunctionId;
+             }
+            
+             public function getStartDateTime()
+             {
+                 return $this->startDateTime;
+             }
+            
+             public function getCinemaId()
+             {
+                 return $this->cinemaId;
+             }
+           
+             public function getMovieId()
+             {
+                 return $this->movieId;
+             }
+
+             public function setMovieFunctionId($movieFunctionId)
+             {
+                 $this->movieFunctionId=$movieFunctionId;
+             }
+           
+             public function setStartDateTime($startDateTime)
+             {
+                 $this->startDateTime=$startDateTime;
+             }
+            
+             public function setCinemaId($cinemaId)
+             {
+                 $this->cinemaId=$cinemaId;
+             }
+            
+             public function setMovieId($movieId)
+             {
+                 $this->movieId=$movieId;
+             }
+
+
         }
-        public function setStartDatetime($startDatetime){
-            $this->startDatetime=$startDatetime;
-        }
-    }
-?>

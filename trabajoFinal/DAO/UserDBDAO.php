@@ -4,7 +4,7 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
-    use Models\User;
+    use Models\User as User;
 
     class userDBDAO
     {
@@ -48,7 +48,6 @@
             $user->setRol($v['role_id']);
             array_push($userList,$user);
         }
-        echo count($userList);
         if(count($userList)>0)
             return $userList;
         else
@@ -58,7 +57,8 @@
     public function Add($user){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO users (email,pass,userName,last_name,dni,role_id) VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";
+        $sql = "INSERT INTO users (email,pass,userName,last_name,dni,role_id) 
+        VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";
 
         $parameters['email'] = $user->getEmail();
         $parameters['pass'] = $user->getPassword();

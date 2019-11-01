@@ -6,7 +6,7 @@
     use DAO\QueryType as QueryType;
     use Models\Genre as Genre;
 
-    class GenreDBDAO
+    class GenresByMoviesDBDAO
     {
          
          private $connection;
@@ -16,9 +16,9 @@
             $this->connection = null;
          }
 
-         
+         /*
       public function readAll(){
-        $sql = "SELECT * FROM genres";
+        $sql = "SELECT * FROM genresByMovies";
         try
         {
             $this->connection = Connection::getInstance();
@@ -48,23 +48,23 @@
         else
             return false;
      }
-
-    public function writeAll($genreList){
-        foreach($genreList as $genre){
-           if($this->read($genre->getId())==false)
-               $this->Add($genre);
+*/
+    public function writeAll($movie){
+        foreach($movie->getGenres() as $genreId){
+           if($this->read($movie->getMovieId(),$genreId)==false)
+               $this->Add($movie,$genreId);
         }
     }
 
 
-    public function Add($Genre){
+    public function Add($movie,$genreId){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO genres (genre_id,genre_description) 
-        VALUES (:genre_id, :genre_description)";
+        $sql = "INSERT INTO genresByMovies (genre_id,movie_id) 
+        VALUES (:genre_id, :movie_id)";
 
-        $parameters['genre_id'] = $Genre->getId();
-        $parameters['genre_description'] = $Genre->getDescription();
+        $parameters['genre_id'] = $genreId;
+        $parameters['movie_id'] = $movie->getMovieId();
         
         try
         {
@@ -104,10 +104,12 @@
         echo $e;
       }
     }*/
-    public function read ($id)
+    
+    public function read ($movie_id,$genre_id)
     {
-        $sql = "SELECT * FROM genres where genre_id = :genre_id";
-        $parameters['genre_id'] = $id;
+        $sql = "SELECT * FROM genresByMovies where genre_id = :genre_id and movie_id = :movie_id";
+        $parameters['genre_id'] = $genre_id;
+        $parameters['movie_id'] = $movie_id;
         try
         {
             $this->connection = Connection::getInstance();
@@ -119,11 +121,11 @@
         }
         if(!empty($resultSet))
         {
-            $result = $this->mapear($resultSet);
+            /*$result = $this->mapear($resultSet);
             $Genre = new Genre();
             $Genre->setId($result[0]->getId());
-            $Genre->setDescription($result[0]->getDescription());
-            return $Genre;
+            $Genre->setDescription($result[0]->getDescription());*/
+            return true; //TODO fijarse si se necesita una clase para generobymovies
             
         }else
             return false;

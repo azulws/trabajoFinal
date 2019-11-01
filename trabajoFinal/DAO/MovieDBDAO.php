@@ -4,16 +4,19 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
-    use Models\Movie;
+    use Models\Movie as Movie;
+    use DAO\GenresByMoviesDBDAO as GenresByMoviesDBDAO;
 
     class MovieDBDAO
     {
          
          private $connection;
+         private $genresByMoviesDBDAO;
 
          public function __construct()
          {
             $this->connection = null;
+            $this->genresByMoviesDBDAO = new GenresByMoviesDBDAO();
          }
 
          
@@ -53,6 +56,16 @@
         else
             return false;
      }
+
+     public function writeAll($movieList){
+         foreach($movieList as $movie){
+            if($this->read($movie->getTitle())==false){
+                $this->Add($movie);
+                $this->genresByMoviesDBDAO->writeAll($movie);
+            }    
+         }
+     }
+
 
     public function Add($movie){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
@@ -129,7 +142,7 @@
             $movie->setPoster($result[0]->getposter());
             $movie->setDescription($result[0]->getDescription());
             $movie->setMovieId($result[0]->getMovieId());
-            $movie->setRuntime($results[0]->getRuntime());
+            $movie->setRuntime($result[0]->getRuntime());
 
             return $movie;
             
