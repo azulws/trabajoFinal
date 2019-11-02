@@ -25,6 +25,10 @@
 <form action="<?php echo FRONT_ROOT."MovieFunction/listMovieFunctionListDB";?>">
 	<button type="submit">MOSTRAR PELICULAS EN CARTELERA</button>
 </form>
+<form action="<?php echo FRONT_ROOT."MovieFunction/showMovieFunctionByGenreDB";?>">
+	<button type="submit">MOSTRAR POR GENEROS</button>
+</form>
+
 <form action="<?php echo FRONT_ROOT."Login/home";?>">
     <button>Volver</button>
 </form>

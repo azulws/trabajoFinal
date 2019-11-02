@@ -55,8 +55,23 @@
                 array_push($lista,$this->movieDBDAO->read($v['movie_id']));
             }
             include_once(VIEWS_PATH."movieList.php");
-
         }
+
+        public function showMovieFunctionByGenreDB(){
+            $genres = $this->genreDBDAO->readAll();
+            include_once(VIEWS_PATH."selectGenre.php");
+        }
+
+        public function listMovieFunctionListByGenreDB(){
+            $moviesArray = $this->movieFunctionDBDAO->readAllMovies();
+            $lista = array();
+            //TODO implementar que solo pase las que tengan el mismo id pasado
+            foreach($moviesArray as $array=>$v){
+                array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+            }
+            include_once(VIEWS_PATH."movieList.php");
+        }
+        
     }
     
 ?> 
