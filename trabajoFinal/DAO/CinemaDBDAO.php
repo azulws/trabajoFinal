@@ -44,6 +44,7 @@
             $cinema->setTicketValue($v['ticket_value']);
             $cinema->setAddress($v['address']);
             $cinema->setCapacity($v['capacity']);
+            $cinema->setId($v['cinema_id']);
             array_push($cinemaList,$cinema);
         }
         echo count($cinemaList);
@@ -138,6 +139,7 @@
             $cinema->setTicketValue($result[0]->getTicketValue());
             $cinema->setAddress($result[0]->getAddress());
             $cinema->setCapacity($result[0]->getCapacity());
+            $cinema->setId($result[0]->getId());
             return $cinema;
             
         }else

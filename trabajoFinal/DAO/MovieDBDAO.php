@@ -119,10 +119,10 @@
         echo $e;
       }
     }*/
-    public function read ($title)
+    public function read ($id)
     {
-        $sql = "SELECT * FROM movies where title = :title";
-        $parameters['title'] = $title;
+        $sql = "SELECT * FROM movies where movie_id = :movie_id";
+        $parameters['movie_id'] = $id;
         try
         {
             $this->connection = Connection::getInstance();

@@ -15,6 +15,9 @@ define('DB_USER',"l00eJjeC8z");
 define('DB_PASS',"gCbVP1r61s");
 define('DB_NAME',"l00eJjeC8z");
 
+//localdate
+date_default_timezone_set("America/Argentina/Buenos_Aires");
+
 
 /*
 info DB:

@@ -37,6 +37,42 @@
            return false;
     }  
 
+    public function readAllMovies()
+    {
+        $sql = "SELECT movie_id FROM movieFunctions GROUP BY movie_id";
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if (!empty($resultSet))
+           return $resultSet;
+        else 
+           return false;
+    }  
+
+    public function readOrderByTime()
+    {
+        $sql = "SELECT * FROM movieFunctions ORDER BY start_datetime";
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if (!empty($resultSet))
+           return $this->mapear($resultSet);
+        else 
+           return false;
+    }  
+    
     protected function mapear($value)
      {
 
@@ -119,5 +155,9 @@
      
         return false;
     }
+
+
+
+    
 }     
 ?>
