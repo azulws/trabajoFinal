@@ -4,6 +4,8 @@ use Models\User;
 use DAO\UserDAO as UserDAO;
 use DAO\UserDBDAO as UserDBDAO;
 use DAO\MovieDAO as MovieDAO;
+use DAO\MovieFunctionDBDAO as MovieFunctionDBDAO;
+use DAO\MovieDBDAO as MovieDBDAO;
 
 class LoginController{
     private $userDAO;
@@ -31,11 +33,16 @@ class LoginController{
                 if($register->getRole()=="1"){ //Rol==1 administrador
                     require_once(VIEWS_PATH."admin.php");// View administrador
                 }else{
-                    $movieList;
-                    $this->movieList = new MovieDAO();
-                    $pageNumber = 1;
-                    $lista = $this->movieList->getMovies($pageNumber);
-                    include_once(VIEWS_PATH.'home.php');//View usuario
+                    $movieFunctionDBDAO = new MovieFunctionDBDAO();
+                    $movieDBDAO = new MovieDBDAO();
+                    $moviesArray = $movieFunctionDBDAO->readAllMovies();
+                    $lista = array();
+                    if($moviesArray!=false){
+                        foreach($moviesArray as $array=>$v){
+                        array_push($lista,$movieDBDAO->read($v['movie_id']));
+                    }
+                }
+                include_once(VIEWS_PATH.'home.php');
                 }        
             }elseif($_POST["user_password"]!=$register->getPassword()){
                 require_once(VIEWS_PATH.'home.php');

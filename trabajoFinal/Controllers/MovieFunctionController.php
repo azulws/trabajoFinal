@@ -3,6 +3,7 @@
     use DAO\MovieFunctionDBDAO as MovieFunctionDBDAO;
     use DAO\MovieDBDAO as MovieDBDAO;
     use DAO\CinemaDBDAO as CinemaDBDAO;
+    use DAO\GenreDBDAO as GenreDBDAO;
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
     use Models\MovieFunction as MovieFunction;
@@ -12,12 +13,14 @@
         private $movieFunctionDBDAO;
         private $movieDBDAO;
         private $cinemaDBDAO;
+        private $genreDBDAO;
 
         public function __construct()
         {
             $this->movieFunctionDBDAO = new MovieFunctionDBDAO();
             $this->movieDBDAO = new MovieDBDAO();
             $this->cinemaDBDAO = new CinemaDBDAO();
+            $this->genreDBDAO = new GenreDBDAO();
         }
       
         public function showAddView(){
@@ -51,8 +54,10 @@
         public function listMovieFunctionListDB(){
             $moviesArray = $this->movieFunctionDBDAO->readAllMovies();
             $lista = array();
-            foreach($moviesArray as $array=>$v){
+            if($moviesArray!=false){
+                foreach($moviesArray as $array=>$v){
                 array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+                }
             }
             include_once(VIEWS_PATH."movieList.php");
         }
@@ -62,12 +67,13 @@
             include_once(VIEWS_PATH."selectGenre.php");
         }
 
-        public function listMovieFunctionListByGenreDB(){
-            $moviesArray = $this->movieFunctionDBDAO->readAllMovies();
+        public function listMovieFunctionListByGenreDB($genreId){
+            $moviesArray = $this->movieFunctionDBDAO->readAllMoviesByGenres($genreId);
             $lista = array();
-            //TODO implementar que solo pase las que tengan el mismo id pasado
-            foreach($moviesArray as $array=>$v){
+            if($moviesArray!=false){
+                foreach($moviesArray as $array=>$v){
                 array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+                }
             }
             include_once(VIEWS_PATH."movieList.php");
         }

@@ -53,6 +53,27 @@
            return $resultSet;
         else 
            return false;
+    }
+    
+    public function readAllMoviesByGenres($genreId)
+    {
+        $sql = "SELECT m.movie_id FROM movieFunctions as m JOIN genresByMovies as gbm 
+        on m.movie_id = gbm.movie_id WHERE gbm.genre_id = :genreId GROUP BY m.movie_id";
+        $parameters['genreId'] = $genreId;
+
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql,$parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if (!empty($resultSet))
+           return $resultSet;
+        else 
+           return false;
     }  
 
     public function readOrderByTime()
