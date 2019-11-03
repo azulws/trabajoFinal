@@ -158,6 +158,13 @@
             }
             return false;
         }
+
+        public function RemoveDB($movieFunctionId) //TODO cambiar a $cinema
+        {
+            $this->movieFunctionDBDAO->Remove($movieFunctionId);
+
+            $this->showMovieFunctionListDB();
+        }
                                                                                                                                
  }
     
