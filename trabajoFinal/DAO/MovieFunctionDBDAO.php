@@ -178,7 +178,26 @@
         return false;
     }
 
-    public function validateMovieFunctionDate($movie_id,$startDateTime)
+    public function validateMovieFunctionDate($cinema_id,$startDateTime)
+    {
+        $sql = "SELECT * FROM movieFunctions WHERE cinema_id = :cinema_id AND start_datetime LIKE '".$startDateTime."%' ";
+        //$parameters['startDateTime'] = $startDateTime;
+        $parameters['cinema_id'] = $cinema_id;
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql,$parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if (!empty($resultSet))
+           return $this->mapear($resultSet);
+        else 
+           return false;
+    }  
+    public function validateMovieFunctionDateByMovie($movie_id,$startDateTime)
     {
         $sql = "SELECT * FROM movieFunctions WHERE movie_id = :movie_id AND start_datetime LIKE '".$startDateTime."%' ";
         //$parameters['startDateTime'] = $startDateTime;
