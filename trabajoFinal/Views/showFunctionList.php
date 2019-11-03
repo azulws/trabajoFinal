@@ -3,9 +3,9 @@ if($lista==false){
 	echo '<script>alert("No hay funciones en la base de datos");</script>';
 }else{
 	foreach($lista as $item){
+		echo "<h2>"."Cine: ".$item->getCinemaId()."</h2>";
 		echo '<dl>'.
 				'<dt> Pelicula: '.$item->getMovieId().'<dt>'.
-				'<dt> Cine: '.$item->getCinemaId().'<dt>'.
 				'<dd> Fecha y hora: '.$item->getStartDatetime().'</dd>'.
 			'</dl>';
 	}
