@@ -179,8 +179,8 @@
 
     public function validateMovieFunctionDate($movie_id,$startDateTime)
     {
-        $sql = "SELECT * FROM movieFunctions WHERE movie_id = :movie_id AND start_datetime = LIKE ':startDateTime%'";
-        $parameters['startDateTime'] = $startDateTime;
+        $sql = "SELECT * FROM movieFunctions WHERE movie_id = :movie_id AND start_datetime LIKE '".$startDateTime."%' ";
+        //$parameters['startDateTime'] = $startDateTime;
         $parameters['movie_id'] = $movie_id;
         try
         {

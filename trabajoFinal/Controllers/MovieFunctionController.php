@@ -81,16 +81,13 @@
         
         public function validateFunctionByDate($cinemaId,$movieId,$date){
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($movieId,$date);
-            var_dump($response);
             if($response==false){
-                echo "cinemaId es igual al del response";
-                $this->temp = $response;
-                //include_once(VIEWS_PATH."movieFunctionAddTime.php");
+                $this->temp = NULL;
+                include_once(VIEWS_PATH."movieFunctionAddTime.php");
             }else{
                 if($cinemaId == $response[0]->getCinemaId()){
                     $this->temp = $response;
-                    echo "la peli esta siendo usada cinemaId es igual al del response";
-                    //include_once(VIEWS_PATH."movieFunctionAddTime.php");
+                    include_once(VIEWS_PATH."movieFunctionAddTime.php");
                 }else{
                     echo "La pelicula esta siendo usada por otro cine, kb";
                 }
@@ -105,6 +102,7 @@
             $newFunction->setStartDateTime($combinedDT);
 
             $overlap = false;
+            var_dump($this->temp);
             if($this->temp != null){
                 foreach($this->temp as $function){
                     $overlap = overlapFunctions($function,$newFunction);
@@ -118,6 +116,7 @@
                 }
             }
             else{
+                echo "holaaa soy 118";
                 var_dump($this->temp);
             }
         }
