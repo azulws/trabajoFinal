@@ -8,6 +8,8 @@ if($lista==false){
 				'<dt> Pelicula: '.$item->getMovieId().'<dt>'.
 				'<dd> Fecha y hora: '.$item->getStartDatetime().'</dd>'.
 			'</dl>';
+		echo '<form action="'.FRONT_ROOT.'MovieFunction/RemoveDB">
+		<button name="name" value="'.$item->getMovieFunctionId().'">Eliminar</button></form>';
 	}
 }
 

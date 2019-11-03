@@ -136,10 +136,10 @@
         }
     }
 
-    public function Remove($movieFunction) //$movieFunction is an object
+    public function Remove($movieFunctionId) //$movieFunction is an object
     {
         $sql = "DELETE FROM movieFunctions WHERE  movieFunction_id = :movieFunction_id";
-        $parameters['movieFunctions_id'] = $movieFunction->getMovieFunctionId();
+        $parameters['movieFunction_id'] = $movieFunctionId;
         
         try{
             $this->connection = Connection::getInstance();
