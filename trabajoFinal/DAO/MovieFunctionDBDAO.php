@@ -102,6 +102,7 @@
         foreach($value as $v)
         {
             $movieFunction = new MovieFunction();
+            $movieFunction->setMovieFunctionId($v["movieFunction_id"]);
             $movieFunction->setCinemaId($v['cinema_id']);
             $movieFunction->setMovieId($v['movie_id']);
             $movieFunction->setStartDateTime($v['start_datetime']);

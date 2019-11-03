@@ -7,6 +7,7 @@
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
     use Models\MovieFunction as MovieFunction;
+    use DateTime;
 
     class MovieFunctionController
     {
@@ -14,7 +15,6 @@
         private $movieDBDAO;
         private $cinemaDBDAO;
         private $genreDBDAO;
-        private $temp; //Se usa en caso de tener que guardar un dato entre pasajes de formularios
 
         public function __construct()
         {
@@ -81,12 +81,17 @@
         
         public function validateFunctionByDate($cinemaId,$movieId,$date){
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($movieId,$date);
+            var_dump($cinemaId);
+            var_dump($movieId);
+            var_dump($date);
+            $cineId=$cinemaId;
+            $movId=$movieId;
+            $d=$date;
             if($response==false){
-                $this->temp = NULL;
                 include_once(VIEWS_PATH."movieFunctionAddTime.php");
             }else{
                 if($cinemaId == $response[0]->getCinemaId()){
-                    $this->temp = $response;
+                    //aca entro si la peli ya se esta dando ese dia en el cine
                     include_once(VIEWS_PATH."movieFunctionAddTime.php");
                 }else{
                     echo "La pelicula esta siendo usada por otro cine, kb";
@@ -95,6 +100,7 @@
         }                                                                                          
         
         public function validateFunctionByTime($cinemaId,$movieId,$date,$time){
+            $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($movieId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
             $newFunction->setCinemaId($cinemaId);
@@ -102,10 +108,9 @@
             $newFunction->setStartDateTime($combinedDT);
 
             $overlap = false;
-            var_dump($this->temp);
-            if($this->temp != null){
-                foreach($this->temp as $function){
-                    $overlap = overlapFunctions($function,$newFunction);
+            if($response != false){
+                foreach($response as $function){
+                    $overlap = $this->overlapFunctions($function,$newFunction);
                 }
     
                 if($overlap==false){
@@ -117,21 +122,23 @@
             }
             else{
                 echo "holaaa soy 118";
-                var_dump($this->temp);
+                var_dump($response);
             }
         }
 
         public function overlapFunctions($functionA, $functionB){ //true si se solapan, false si no
             //setup
+            var_dump($functionB);
             $startDateA = new DateTime($functionA->getStartDateTime());
             $movieA = $this->movieDBDAO->read($functionA->getMovieId());
-            $finishDateA = new DateTime($startDateA);
+            $finishDateA = $startDateA;
             $finishDateA->modify('+'.$movieA->getRuntime().' minute');
             $finishDateA->modify('+15 minute');
 
             $startDateB = new DateTime($functionB->getStartDateTime());
             $movieB = $this->movieDBDAO->read($functionB->getMovieId());
-            $finishDateB = new DateTime($startDateB);
+            var_dump($movieB);
+            $finishDateB = $startDateB;
             $finishDateB->modify('+'.$movieB->getRuntime().' minute');
             $finishDateB->modify('+15 minute');
             

@@ -14,9 +14,9 @@
 		<div align="center">
      		<h2>Elegir horario </h2>
 			 	<!-- Add($cinemaId,$movieId,$date) -->
-				<input readonly name="cinemaId" value= <?php $_POST['cinemaId']?>>
-				<input readonly name="movieId" value= <?php $_POST['movieId']?>>
-				<input readonly name="date" value= <?php $_POST['date']?>>
+				<input readonly name="cinemaId" value= <?php echo $cineId;?>>
+				<input readonly name="movieId" value= <?php echo $movId;?>>
+				<input readonly name="date" value= <?php echo $d;?>>
 				<input type="time" name = "time" min='15:00' max='23:00'>
 				<br><br><br>
      			<button type="submit">Cargar funcion</button>
