@@ -14,6 +14,7 @@
         private $movieDBDAO;
         private $cinemaDBDAO;
         private $genreDBDAO;
+        private $temp; //Se usa en caso de tener que guardar un dato entre pasajes de formularios
 
         public function __construct()
         {
@@ -29,10 +30,10 @@
             require_once(VIEWS_PATH.'movieFunctionAdd.php');
         }
 
-        public function Add($cinemaId,$movieId,$date)
+        public function Add($cinemaId,$movieId,$dateTime)
         {
             $movieFunction = new MovieFunction();
-            $movieFunction->setStartDateTime($date);
+            $movieFunction->setStartDateTime($dateTime);
             $movieFunction->setCinemaId($cinemaId);
             $movieFunction->setMovieId($movieId);
 
@@ -78,6 +79,78 @@
             include_once(VIEWS_PATH."movieList.php");
         }
         
-    }
+        public function validateFunctionByDate($cinemaId,$movieId,$date){
+            $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($movieId,$date);
+            var_dump($response);
+            if($response==false){
+                echo "cinemaId es igual al del response";
+                $this->temp = $response;
+                //include_once(VIEWS_PATH."movieFunctionAddTime.php");
+            }else{
+                if($cinemaId == $response[0]->getCinemaId()){
+                    $this->temp = $response;
+                    echo "la peli esta siendo usada cinemaId es igual al del response";
+                    //include_once(VIEWS_PATH."movieFunctionAddTime.php");
+                }else{
+                    echo "La pelicula esta siendo usada por otro cine, kb";
+                }
+            }
+        }                                                                                          
+        
+        public function validateFunctionByTime($cinemaId,$movieId,$date,$time){
+            $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
+            $newFunction = new MovieFunction();
+            $newFunction->setCinemaId($cinemaId);
+            $newFunction->setMovieFunctionId($movieId);
+            $newFunction->setStartDateTime($combinedDT);
+
+            $overlap = false;
+            if($this->temp != null){
+                foreach($this->temp as $function){
+                    $overlap = overlapFunctions($function,$newFunction);
+                }
+    
+                if($overlap==false){
+                    $this->Add($cinemaId,$movieId,$combinedDT);
+                }else{
+                    echo 'Se superponen las fechas';
+                    include_once(VIEWS_PATH.'movieFunctionAdd.php');
+                }
+            }
+            else{
+                var_dump($this->temp);
+            }
+        }
+
+        public function overlapFunctions($functionA, $functionB){ //true si se solapan, false si no
+            //setup
+            $startDateA = new DateTime($functionA->getStartDateTime());
+            $movieA = $this->movieDBDAO->read($functionA->getMovieId());
+            $finishDateA = new DateTime($startDateA);
+            $finishDateA->modify('+'.$movieA->getRuntime().' minute');
+            $finishDateA->modify('+15 minute');
+
+            $startDateB = new DateTime($functionB->getStartDateTime());
+            $movieB = $this->movieDBDAO->read($functionB->getMovieId());
+            $finishDateB = new DateTime($startDateB);
+            $finishDateB->modify('+'.$movieB->getRuntime().' minute');
+            $finishDateB->modify('+15 minute');
+            
+            //validation
+            if($startDateA==$startDateB)
+            return true;
+                else{
+                    if($startDateA<$startDateB && $finishDateA > $startDateB){
+                        return true;
+                }else{
+                    if($finishDateB > $startDateA && $startDateA>$startDateB){
+                        return true;
+                    }    
+                }
+            }
+            return false;
+        }
+                                                                                                                               
+ }
     
 ?> 
