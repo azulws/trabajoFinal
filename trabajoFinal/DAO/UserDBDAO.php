@@ -10,6 +10,7 @@
     {
          
          private $connection;
+         private $tablename = "users";
 
          public function __construct()
          {
@@ -18,7 +19,7 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM $this->tablename" ;
         try
         {
             $this->connection = Connection::getInstance();
@@ -54,10 +55,10 @@
             return false;
      }
 
-    public function Add($user){
+    public function Add( User $user){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO users (email,pass,userName,last_name,dni,role_id) 
+        $sql = "INSERT INTO $this->tablename (email,pass,userName,last_name,dni,role_id) 
         VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";
 
         $parameters['email'] = $user->getEmail();
@@ -78,9 +79,9 @@
         }
     }
 
-    public function Remove($email){
-        $sql = "DELETE FROM users WHERE email = :email";
-        $parameters['email'] = $email;
+    public function Remove($id){
+        $sql = "DELETE FROM $this->tablename WHERE user_id = :user_id";
+        $parameters['email'] = $id;
         
         try{
             $this->connection = Connection::getInstance();
@@ -91,15 +92,15 @@
         }
     }
     
-    public function UpdateRole($email){
-        $user=$this->read($email);
+    public function UpdateRole($id){
+        $user=$this->read($id);
         if($user->getRole()==2){
-            $sql = "UPDATE users SET role_id = 1 WHERE email = :email";
+            $sql = "UPDATE $this->tablename SET role_id = 1 WHERE user_id = :user_id";
             
         }else{
-            $sql = "UPDATE users SET role_id = 2 WHERE email = :email";
+            $sql = "UPDATE users SET role_id = 2 WHERE user_id = :user_id";
         }
-        $parameters['email'] = $email;
+        $parameters['email'] = $id;
         try{
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
@@ -111,7 +112,7 @@
 
     public function read ($email)
     {
-        $sql = "SELECT * FROM users where email = :email";
+        $sql = "SELECT * FROM $this->tablename  where email = :email";
         $parameters['email'] = $email;
         try
         {

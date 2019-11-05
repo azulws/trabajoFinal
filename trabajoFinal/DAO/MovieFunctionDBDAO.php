@@ -12,6 +12,7 @@
     {
          
       private $connection;
+      private $tablename = "movieFunctions";
 
         public function __construct()
          {
@@ -21,7 +22,7 @@
          
     public function readAll()
     {
-        $sql = "SELECT * FROM movieFunctions";
+        $sql = "SELECT * FROM $this->tablename";
         try
         {
             $this->connection = Connection::getInstance();
@@ -39,7 +40,7 @@
 
     public function readAllMovies()
     {
-        $sql = "SELECT movie_id FROM movieFunctions GROUP BY movie_id";
+        $sql = "SELECT movie_id FROM $this->tablename GROUP BY movie_id";
         try
         {
             $this->connection = Connection::getInstance();
@@ -57,7 +58,7 @@
     
     public function readAllMoviesByGenres($genreId)
     {
-        $sql = "SELECT m.movie_id FROM movieFunctions as m JOIN genresByMovies as gbm 
+        $sql = "SELECT m.movie_id FROM $this->tablename as m JOIN genresByMovies as gbm 
         on m.movie_id = gbm.movie_id WHERE gbm.genre_id = :genreId GROUP BY m.movie_id";
         $parameters['genreId'] = $genreId;
 
@@ -78,7 +79,7 @@
 
     public function readOrderByTime()
     {
-        $sql = "SELECT * FROM movieFunctions ORDER BY start_datetime";
+        $sql = "SELECT * FROM $this->tablename ORDER BY start_datetime";
         try
         {
             $this->connection = Connection::getInstance();
@@ -119,7 +120,7 @@
        {
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO movieFunctions(start_datetime,cinema_id,movie_id)
+        $sql = "INSERT INTO $this->tablename (start_datetime,cinema_id,movie_id)
         VALUES (:start_datetime,:cinema_id,:movie_id)";
 
 
@@ -140,7 +141,7 @@
 
     public function Remove($movieFunctionId)  
     {
-        $sql = "DELETE FROM movieFunctions WHERE  movieFunction_id = :movieFunction_id";
+        $sql = "DELETE FROM $this->tablename WHERE  movieFunction_id = :movieFunction_id";
         $parameters['movieFunction_id'] = $movieFunctionId;
         
         try{
@@ -154,7 +155,7 @@
 
     public function read ($movieFunction_id)
     {
-        $sql = "SELECT * FROM movieFunctions where movieFunction_id = :movieFunction_id";
+        $sql = "SELECT * FROM $this->tablename  where movieFunction_id = :movieFunction_id";
         $parameters['movieFunction_id'] = $movieFunction_id;
         try
         {
@@ -183,7 +184,7 @@
     //esta es otr funcion
     public function readOrderByCinemaId($cinema_id)
     {
-        $sql = "SELECT * FROM movieFunctions WHERE cinema_id = :cinema_id";
+        $sql = "SELECT * FROM  $this->tablename WHERE cinema_id = :cinema_id";
         $parameters['cinema_id']= $cinema_id;
         try
         {

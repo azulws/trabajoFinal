@@ -10,6 +10,7 @@
     {
          
          private $connection;
+         private $tablename = "cinemas";
 
          public function __construct()
          {
@@ -18,7 +19,7 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM cinemas";
+        $sql = "SELECT * FROM $this->tablename ";
         try
         {
             $this->connection = Connection::getInstance();
@@ -73,7 +74,7 @@
     public function Add( Cinema $cinema){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO cinemas (cinema_name,ticket_value,address,capacity) VALUES (:cinema_name, :ticket_value, :address, :capacity)";
+        $sql = "INSERT INTO $this->tablename (cinema_name,ticket_value,address,capacity) VALUES (:cinema_name, :ticket_value, :address, :capacity)";
 
         $parameters['cinema_name'] = $cinema->getName();
         $parameters['ticket_value'] = $cinema->getTicketValue();
@@ -92,7 +93,7 @@
     }
 
     public function Remove($id){
-        $sql = "DELETE FROM cinemas WHERE cinema_id= :cinema_id";
+        $sql = "DELETE FROM $this->tablename WHERE cinema_id= :cinema_id";
         $parameters['cinema_id'] = $id;
         
         try{
@@ -105,7 +106,7 @@
     }
     public function Update($name,$ticket_value,$capacity){
 
-      $sql = "UPDATE cinemas SET ticket_value = :ticket_value, capacity = :capacity WHERE cinema_name = :cinema_name";
+      $sql = "UPDATE $this->tablename SET ticket_value = :ticket_value, capacity = :capacity WHERE cinema_name = :cinema_name";
       $parameters['cinema_name'] = $name;
       $parameters['ticket_value'] = $ticket_value;
       $parameters['capacity'] = $capacity;
@@ -120,7 +121,7 @@
     }
     public function read ($id)
     {
-        $sql = "SELECT * FROM cinemas where cinema_id = :cinema_id";
+        $sql = "SELECT * FROM $this->tablename where cinema_id = :cinema_id";
         $parameters['cinema_id'] = $id;
         try
         {
@@ -149,7 +150,7 @@
 /*
     public function readby($id)
     {
-        sql= "SELECT * FROM cinemas where id_cinema =:id_cinema";
+        sql= "SELECT * FROM $this->tablename where id_cinema =:id_cinema";
         $parameters['id_cinema'] = $id;
         try
         {
@@ -171,7 +172,7 @@
 
     {
 
-        $sql = "SELECT * FROM cinemas where date = :date";
+        $sql = "SELECT * FROM $this->tablename where date = :date";
 
 
 
@@ -215,7 +216,7 @@
 
     {
 
-      $sql = "SELECT * FROM events where img = :img";
+      $sql = "SELECT * FROM $this->tablename where img = :img";
 
 
 

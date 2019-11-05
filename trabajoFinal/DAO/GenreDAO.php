@@ -3,6 +3,7 @@
     use Models\Genre as Genre;
     class GenreDAO{
         private $genreList = array();
+        
         public function getMoviesGenres(){
             $curl = curl_init();
             
