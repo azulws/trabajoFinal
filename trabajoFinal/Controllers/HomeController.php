@@ -19,6 +19,11 @@
                 }
             }
             include_once(VIEWS_PATH.'home.php');
-        }        
+        }
+        
+        public function logOut(){
+            session_destroy();
+            $this->Index();
+        }
     }
 ?>

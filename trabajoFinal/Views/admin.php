@@ -1,17 +1,17 @@
 <form action="<?php echo FRONT_ROOT."cinema/showcinemaListDB";?>">
-	<button type="submit">Cinema list</button>
+	<button type="submit">LISTAR CINES</button>
 </form>
 <form action="<?php echo FRONT_ROOT."cinema/ShowAddView";?>">
-	<button type="submit">cinemaAdd</button>
+	<button type="submit">AGREGAR CINE</button>
 </form>
 <form action="<?php echo FRONT_ROOT."Login/showUserListDB";?>">
-	<button type="submit">User list</button>
+	<button type="submit">LISTAR USUARIOS</button>
 </form>
 <form action="<?php echo FRONT_ROOT."Movie/moviesToDB";?>">
-	<button type="submit">METER PELIS</button>
+	<button type="submit">CARGAR PELICULAS DE API A DB</button>
 </form>
 <form action="<?php echo FRONT_ROOT."Genre/genresToDB";?>">
-	<button type="submit">METER GENEROS</button>
+	<button type="submit">CARGAR GENEROS DE API A DB</button>
 </form>
 <form action="<?php echo FRONT_ROOT."MovieFunction/showAddView";?>">
 	<button type="submit">AGREGAR FUNCIONES</button>

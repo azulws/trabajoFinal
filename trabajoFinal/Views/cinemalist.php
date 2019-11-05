@@ -11,11 +11,8 @@ if($lista==false){
 				'<form action="'.FRONT_ROOT.'cinema/RemoveDB">
 				<button name="name" value="'.$item->getName().'">Eliminar</button></form>'.
 				'<form action="'.FRONT_ROOT.'cinema/ShowUpdateCinema">
-				<button name="name" value="'.$item->getName().'">Change</button>
+				<button name="name" value="'.$item->getName().'">Modificar</button>
 				</form>'.
-				'<form action="'.FRONT_ROOT.'cinema/ShowMovieFunctions">
-                <button name="name" value="'.$item->getName().'">FUNCIONES</button>
-  				</form>'.
 			'</dl>';
 	}
 }
