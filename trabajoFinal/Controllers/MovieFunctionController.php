@@ -192,8 +192,9 @@
                 {
                     foreach($lista as $item)
                     {   
-                        $movie = $this->movieDBDAO->read($item->getMovieId());
-                        $item->setEndDateTime($movie);
+                        //$movie = $this->movieDBDAO->read($item->getMovieId());
+                        //$item->setEndDateTime($movie);
+                        //include_once(VIEWS_PATH."showFunctionListByCinema.php");
                         include_once(VIEWS_PATH."showFunctionList.php");
                     }
                 }
