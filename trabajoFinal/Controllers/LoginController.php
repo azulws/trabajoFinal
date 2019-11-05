@@ -95,12 +95,12 @@ class LoginController{
 
     public function showUserList(){
         $lista = $this->userDAO->GetAll();
-        include_once(VIEWS_PATH."userlist.php");
+        include_once(VIEWS_PATH."userList.php");
     }
 
     public function showUserListDB(){
         $lista = $this->userDBDAO->readAll();
-        include_once(VIEWS_PATH."userlist.php");
+        include_once(VIEWS_PATH."userList.php");
     }
 
     public function Remove($email) //TODO cambiar a $user

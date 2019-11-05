@@ -73,7 +73,7 @@
             $lista = array();
             if($moviesArray!=false){
                 foreach($moviesArray as $array=>$v){
-                array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+                    array_push($lista,$this->movieDBDAO->read($v['movie_id']));
                 }
             }
             include_once(VIEWS_PATH."movieList.php");
