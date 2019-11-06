@@ -15,10 +15,11 @@
          </div>
     </form>
 <?php
-echo "<form class='login' action='".FRONT_ROOT."Login/createUserDB' method='POST'>
+echo "<form class='login' action='".FRONT_ROOT."Login/log' method='POST'>
         <button type='submit' name='action'>Volver</button>
     </form>";
 ?>
+<!--
 <form class="needs-validation"style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;"action=<?php echo FRONT_ROOT."Login/createUserDB";?> novalidate>
   <div class="form-row">
     <div class="col-md-4 mb-3">
@@ -105,3 +106,4 @@ echo "<form class='login' action='".FRONT_ROOT."Login/createUserDB' method='POST
   }, false);
 })();
 </script>
+-->

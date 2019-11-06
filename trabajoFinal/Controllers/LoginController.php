@@ -58,7 +58,6 @@ class LoginController{
 */
     public function log($user_mail='', $password='')
         {   
-            var_dump($user_mail);
             if($user_mail){
                 $user = $this->userDBDAO->read($user_mail);   
                 $role=$user->getRole();
@@ -89,12 +88,13 @@ class LoginController{
                         $_SESSION["logged"] = $user;
                         include_once(VIEWS_PATH."validate-session.php");
                         //puedo ser super admin
+                        include_once(VIEWS_PATH."header.php");
                         include_once(VIEWS_PATH."admin.php");
                         }else 
                         $rol=5;
                         break;
                 case 4: 
-                        //borrado logico inahbilito a este usuario.
+                        //borrado logico o inahbilito a este usuario.
                          $this->index("usuario inhabilitado o eliminado");
                         break;
                 case 5:
