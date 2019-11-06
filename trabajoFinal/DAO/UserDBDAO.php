@@ -24,15 +24,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     protected function mapear($value) {
@@ -98,7 +99,7 @@
             $sql = "UPDATE $this->tablename SET role_id = 1 WHERE user_id = :user_id";
             
         }else{
-            $sql = "UPDATE users SET role_id = 2 WHERE user_id = :user_id";
+            $sql = "UPDATE $this->tablename SET role_id = 2 WHERE user_id = :user_id";
         }
         $parameters['email'] = $id;
         try{
@@ -118,24 +119,25 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                $result = $this->mapear($resultSet);
+                $user = new User();
+                $user->setEmail($result[0]->getEmail());
+                $user->setPassword($result[0]->getPassword());
+                $user->setName($result[0]->getName());
+                $user->setLastName($result[0]->getLastName());
+                $user->setDni($result[0]->getDni());
+                $user->setRol($result[0]->getRole());
+                return $user;
+            }else
+                return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $user = new User();
-            $user->setEmail($result[0]->getEmail());
-            $user->setPassword($result[0]->getPassword());
-            $user->setName($result[0]->getName());
-            $user->setLastName($result[0]->getLastName());
-            $user->setDni($result[0]->getDni());
-            $user->setRol($result[0]->getRole());
-            return $user;
-        }else
-            return false;
+       
     }
 
 }

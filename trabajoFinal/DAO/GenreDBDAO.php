@@ -23,15 +23,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+        else 
+           return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     protected function mapear($value) {
@@ -112,21 +113,21 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+             {
+                $result = $this->mapear($resultSet);
+                $Genre = new Genre();
+                $Genre->setId($result[0]->getId());
+                $Genre->setDescription($result[0]->getDescription());
+                return $Genre;   
+        }else
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $Genre = new Genre();
-            $Genre->setId($result[0]->getId());
-            $Genre->setDescription($result[0]->getDescription());
-            return $Genre;
-            
-        }else
-            return false;
+        
     }
 }
       

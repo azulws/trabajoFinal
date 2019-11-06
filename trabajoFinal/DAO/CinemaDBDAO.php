@@ -90,7 +90,7 @@
                 else
                  return false;
                 
-            }
+         }
         catch(PDOException $e)
         {
             echo $e;
@@ -132,24 +132,25 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                 $result = $this->mapear($resultSet);
+                 $cinema = new Cinema();
+                 $cinema->setName($result[0]->getName());
+                 $cinema->setTicketValue($result[0]->getTicketValue());
+                 $cinema->setAddress($result[0]->getAddress());
+                 $cinema->setCapacity($result[0]->getCapacity());
+                 $cinema->setId($result[0]->getId());
+                 return $cinema;  
+
+             }else
+                return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $cinema = new Cinema();
-            $cinema->setName($result[0]->getName());
-            $cinema->setTicketValue($result[0]->getTicketValue());
-            $cinema->setAddress($result[0]->getAddress());
-            $cinema->setCapacity($result[0]->getCapacity());
-            $cinema->setId($result[0]->getId());
-            return $cinema;
-            
-        }else
-            return false;
+        
     }
 
 /*
@@ -161,17 +162,17 @@
         {
             $this->connection = Conn getInstance();
             $resultSet =$this->connection->execute)($sql,$parameters);
-        }
+             if(!emptyresultSet))
+             {
+               return $this->mapear($resutSet);
+                 else
+                return false;
+         }
         catch(PDOException $e){
 
             echo $e
         }
-        if(!emptyresultSet))
-        {
-            return $this->mapear($resutSet);
-            else
-                return false;
-
+       
     }
      public function readByDate ($date)
 

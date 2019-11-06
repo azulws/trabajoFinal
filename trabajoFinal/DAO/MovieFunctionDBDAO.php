@@ -35,15 +35,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     public function readAllMovies()
@@ -53,15 +54,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $resultSet;
+             else 
+             return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $resultSet;
-        else 
-           return false;
+        
     }
     
     public function readAllMoviesByGenres($genreId)
@@ -74,15 +76,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql,$parameters);
+            if (!empty($resultSet))
+            return $resultSet;
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $resultSet;
-        else 
-           return false;
+        
     }  
 
     public function readOrderByTime()
@@ -92,15 +95,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
     
     protected function mapear($value)
@@ -169,24 +173,24 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                $result = $this->mapear($resultSet);
+                $movieFunction = new MovieFunctions();
+                $movieFunction->setMovieFunctionId($result[0]->getMovieFunctionId());
+                $movieFunction->setCinemaId($result[0]->getCinemaId());
+                $movieFunction->setMovieId($result[0]->getMovieId());
+                $movieFunction->setStartDateTime($result[0]->getStartTime());
+                return $movieFunction;  
+        }else
+     
+        return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $movieFunction = new MovieFunctions();
-            $movieFunction->setMovieFunctionId($result[0]->getMovieFunctionId());
-            $movieFunction->setCinemaId($result[0]->getCinemaId());
-            $movieFunction->setMovieId($result[0]->getMovieId());
-            $movieFunction->setStartDateTime($result[0]->getStartTime());
-            return $movieFunction;
-            
-        }else
-     
-        return false;
+        
     }
     //esta es otr funcion
     public function readOrderByCinemaId($cinema_id)
@@ -197,15 +201,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql,$parameters);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+       
     }
    
    

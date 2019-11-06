@@ -115,21 +115,21 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+             /*$result = $this->mapear($resultSet);
+             $Genre = new Genre();
+             $Genre->setId($result[0]->getId());
+             $Genre->setDescription($result[0]->getDescription());*/
+             return true; //TODO fijarse si se necesita una clase para generobymovies   
+        }else
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            /*$result = $this->mapear($resultSet);
-            $Genre = new Genre();
-            $Genre->setId($result[0]->getId());
-            $Genre->setDescription($result[0]->getDescription());*/
-            return true; //TODO fijarse si se necesita una clase para generobymovies
-            
-        }else
-            return false;
+        
     }
 }
       

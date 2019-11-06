@@ -27,15 +27,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     protected function mapear($value) {
@@ -128,27 +129,28 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                $result = $this->mapear($resultSet);
+                $movie = new Movie();
+                $movie->setTitle($result[0]->getTitle());
+                $movie->setReleaseDate($result[0]->getReleaseDate());
+                $movie->setPoints($result[0]->getPoints());
+                $movie->setPoster($result[0]->getposter());
+                $movie->setDescription($result[0]->getDescription());
+                $movie->setMovieId($result[0]->getMovieId());
+                $movie->setRuntime($result[0]->getRuntime());
+    
+                return $movie;
+                
+            }else
+                return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $movie = new Movie();
-            $movie->setTitle($result[0]->getTitle());
-            $movie->setReleaseDate($result[0]->getReleaseDate());
-            $movie->setPoints($result[0]->getPoints());
-            $movie->setPoster($result[0]->getposter());
-            $movie->setDescription($result[0]->getDescription());
-            $movie->setMovieId($result[0]->getMovieId());
-            $movie->setRuntime($result[0]->getRuntime());
-
-            return $movie;
-            
-        }else
-            return false;
+       
     }
     public function readOrderByDate(){
         $sql = "SELECT * FROM $this->tablename ORDER BY release_date DESC";
@@ -156,15 +158,16 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+             else 
+              return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }
 }
       
