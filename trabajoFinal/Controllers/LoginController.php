@@ -29,7 +29,7 @@ class LoginController{
         if($register!=null){
             if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
                 $_SESSION["logged"]=$register;               
-                var_dump($_SESSION['user_id']=$register->getId());
+                var_dump($_SESSION['logged']);
                 if($register->getRole()=="1"){ //Rol==1 administrador
                     require_once(VIEWS_PATH."admin.php");// View administrador
                 }else{

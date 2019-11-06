@@ -7,8 +7,6 @@
     {
         public function Index($message = "")
         {
-            $_SESSION["logged"]=false;
-            $_SESSION["name"]=null;
             $movieFunctionDBDAO = new MovieFunctionDBDAO();
             $movieDBDAO = new MovieDBDAO();
             $moviesArray = $movieFunctionDBDAO->readAllMovies();

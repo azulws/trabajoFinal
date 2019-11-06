@@ -1,14 +1,14 @@
 <?php
-if(!isset($_SESSION['logged']))
+if(isset($_SESSION['logged']))
 {
-    echo 'Estas logeado con la cuenta de: '.$_SESSION['name'];
+    var_dump($_SESSION['logged']);
+    echo 'Estas logeado con la cuenta de: '.$_SESSION['logged'];
     echo "<form class='login' action='".FRONT_ROOT."Login/logout' method='POST'>
         <button type='submit' name='action'>Desconectar</button>
     </form>";
     echo"estoy aca";
     
-}else{
-   
+}else{   
     echo "<form class='login' action='".FRONT_ROOT."Login/receiveAction' method='POST'> 
     <h2>Bienvenido</h2>
     <fieldset>
