@@ -36,11 +36,9 @@
             include_once(VIEWS_PATH."validate-session.php");
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
-            $movieFunction->setCinemaId($cinemaId);
-            $movieFunction->setMovieId($movieId);
-            $movie= new Movie();
-            $movie = $this->movieDBDAO->read($movieId);
-            $movieFunction->setEndDateTime($movie);
+            $movieFunction->setCinema($this->cinemaDBDAO->read($cinemaId));
+            $movieFunction->setMovie($this->movieDBDAO->read($movieId));
+            //$movieFunction->setEndDateTime($movie);
             $this->movieFunctionDBDAO->Add($movieFunction);
 
             $this->ShowAddView();
@@ -182,23 +180,13 @@
         //chicos la unica manera que consegui de mostrar 
         public function showMovieFunctionsByCinema($cinema_id)
         {   include_once(VIEWS_PATH."validate-session.php");
-            $id = (int) $cinema_id;
-            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id);
-            $cinema = $this->cinemaDBDAO->read($id);
-            if($lista==false)
-            {
-            	echo '<script>alert("No hay funciones en la base de datos");</script>';
-            }else
-                {
-                    foreach($lista as $item)
-                    {   
-                        //$movie = $this->movieDBDAO->read($item->getMovieId());
-                        //$item->setEndDateTime($movie);
-                        //include_once(VIEWS_PATH."showFunctionListByCinema.php");
-                        include_once(VIEWS_PATH."showFunctionList.php");
-                    }
-                }
-            }                                                                                                                        
- }
+            var_dump($cinema_id); echo "<br>";
+            $id = (int) $cinema_id;echo "<br>";
+
+            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id); 
+            include_once(VIEWS_PATH."showFunctionList.php");                                                                           
+ 
+        }
+    }
     
 ?> 

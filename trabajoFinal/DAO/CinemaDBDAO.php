@@ -24,20 +24,20 @@
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+                return $this->mapear($resultSet);
+             else 
+                 return false; 
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
-    protected function mapear($value) {
-
-        
+    protected function mapear($value) 
+    {
         $cinemaList = array();
         foreach($value as $v){
             $cinema = new Cinema();
@@ -84,8 +84,13 @@
         try
         {
                 $this->connection = Connection::getInstance();
-                return $this->connection->ExecuteNonQuery($sql, $parameters);
-        }
+                $result = $this->connection->ExecuteNonQuery($sql, $parameters);
+                if($result)
+                    return $result;
+                else
+                 return false;
+                
+            }
         catch(PDOException $e)
         {
             echo $e;

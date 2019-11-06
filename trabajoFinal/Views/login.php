@@ -1,5 +1,14 @@
 <?php
-if($_SESSION['logged']==false){
+if(!isset($_SESSION['logged']))
+{
+    echo 'Estas logeado con la cuenta de: '.$_SESSION['name'];
+    echo "<form class='login' action='".FRONT_ROOT."Login/logout' method='POST'>
+        <button type='submit' name='action'>Desconectar</button>
+    </form>";
+    echo"estoy aca";
+    
+}else{
+   
     echo "<form class='login' action='".FRONT_ROOT."Login/receiveAction' method='POST'> 
     <h2>Bienvenido</h2>
     <fieldset>
@@ -10,11 +19,6 @@ if($_SESSION['logged']==false){
     </form>
     <form class='login' action='".FRONT_ROOT."Login/receiveAction' method='POST'> 
     <button type='submit' name='action' value='Registrar'>Registrar</button>
-</form>";
-}else{
-    echo 'Estas logeado con la cuenta de: '.$_SESSION['name'];
-    echo "<form class='login' action='".FRONT_ROOT."Home/Index' method='POST'>
-        <button type='submit' name='action'>Desconectar</button>
-    </form>";
+    </form>";   
 }   //TODO cambiar loguin para loguear con DB
 ?>

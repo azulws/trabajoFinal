@@ -43,10 +43,16 @@
             $cinema->setAddress($address);
             $cinema->setCapacity($capacity);
             $cinema->setTicketValue($ticketValue);
-
-            $this->cinemaDBDAO->Add($cinema);
-
-            $this->ShowAddView();
+            $result=$this->cinemaDBDAO->Add($cinema); 
+           
+            if($result==null)
+            {
+                include_once(VIEWS_PATH."errorEnConexionDb");
+            }else
+             {
+                $this->ShowAddView();
+             }
+                 
         }
 
         public function Remove($id) //TODO cambiar a $cinema

@@ -7,16 +7,24 @@
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
     use Models\MovieFunction as MovieFunction;
+    use DAO\CinemaDBDAO as CinemaDBDAO;
+    use DAO\MovieDBDAO as MovieDBDAO;
 
     class MovieFunctionDBDAO
     {
          
       private $connection;
+      private $cinemaDBDAO;
+      private $movieDBDAO;
+
       private $tablename = "movieFunctions";
 
         public function __construct()
          {
             $this->connection = null;
+            $this->cinemaDBDAO = new CinemaDBDAO();
+            $this->movieDBDAO = new MovieDBDAO();
+
          }
 
          
@@ -104,10 +112,10 @@
         {
             $movieFunction = new MovieFunction();
             $movieFunction->setMovieFunctionId($v['movieFunction_id']);
-            $movieFunction->setCinemaId($v['cinema_id']);
-            $movieFunction->setMovieId($v['movie_id']);
+            $movieFunction->setCinema($this->cinemaDBDAO->read($v['cinema_id']));
+            $movieFunction->setMovie($this->movieDBDAO->read($v['movie_id']));
             $movieFunction->setStartDateTime($v['start_datetime']);
-            //setEndDateTime
+            //setEndDateTime $this->getMovieFunctionEndTime//
             array_push($movieFunctionList,$movieFunction);
         }
         if(count($movieFunctionList)>0)
@@ -174,7 +182,6 @@
             $movieFunction->setCinemaId($result[0]->getCinemaId());
             $movieFunction->setMovieId($result[0]->getMovieId());
             $movieFunction->setStartDateTime($result[0]->getStartTime());
-           // $movieFunction->setEndDateTime($result[0]->getEndTime()); esto en la controller
             return $movieFunction;
             
         }else

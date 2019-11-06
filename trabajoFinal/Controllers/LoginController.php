@@ -28,9 +28,7 @@ class LoginController{
         $register = $this->userDBDAO->read($_POST['user_mail']);
         if($register!=null){
             if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
-                $_SESSION["logged"]=true;
-                $_SESSION["name"]=$register->getName();
-               // $_SESSION['user_id']=$register->getId();
+                $_SESSION["logged"]=$register;               
                 var_dump($_SESSION['user_id']=$register->getId());
                 if($register->getRole()=="1"){ //Rol==1 administrador
                     require_once(VIEWS_PATH."admin.php");// View administrador
@@ -132,6 +130,12 @@ class LoginController{
         include_once(VIEWS_PATH."validate-session.php");
         $this->userDBDAO->UpdateRole($id);
         $this->showUserListDB();
+    }
+    public function logout()
+    {   
+        session_destroy();
+        echo "estoy aca";
+        header("location:../index.php");
     }
     
 }
