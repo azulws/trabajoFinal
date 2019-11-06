@@ -24,6 +24,9 @@
             $this->genreDBDAO = new GenreDBDAO();
         }
       
+        public function index($message=''){
+            $this->showMovieFunctionListDB();
+        }
         public function showAddView(){
             include_once(VIEWS_PATH."validate-session.php");
             $cinemas = $this->cinemaDBDAO->readAll();
@@ -101,7 +104,8 @@
                     $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
                     include_once(VIEWS_PATH."movieFunctionAddTime.php");
                 }else{
-                    echo "La pelicula esta siendo usada por otro cine, kb";
+                    $message = "La pelicula esta siendo usada por otro cine ese dia";
+                    
                 }
             }
         }                                                                                          
@@ -127,7 +131,7 @@
                 if($notOverlap==true){
                     $this->Add($cinemaId,$movieId,$combinedDT);
                 }else{
-                    echo 'Se superponen las fechas';
+                    $message = 'Se superponen las fechas';
                     $cineId=$cinemaId;
                     $movId=$movieId;
                     $d=$date;

@@ -13,6 +13,7 @@
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."MovieFunction/validateFunctionByTime";?>>
 		<div align="center">
      		<h2>Elegir horario </h2>
+			 <p><?php $message;?><p>
 			 	<!-- Add($cinemaId,$movieId,$date) -->
 				<input readonly name="cinemaId" value= <?php echo $cineId;?>>
 				<input readonly name="movieId" value= <?php echo $movId;?>>

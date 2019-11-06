@@ -9,5 +9,5 @@
   </div>
 </div>
 <!-- JAVASCRIPTS -->
-<?php include_once(ROOT."Views\layout\scripts\index.html");?>
+<?php include_once(VIEWS_PATH."layout/scripts/index.html");?>
 </html>

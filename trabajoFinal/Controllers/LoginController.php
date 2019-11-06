@@ -21,16 +21,8 @@ class LoginController{
     public function Index($message = "")
         {
             include_once(VIEWS_PATH."home.php");
-
         }   
 
-    public function receiveAction(){
-        if($_POST["action"]=="Ingresar"){
-            $this->log($_POST['user_mail'],$_POST['user_password']);
-        }elseif($_POST["action"]=="Registrar"){
-            $this->register();
-        }
-    }
 /*
     public function log(){
         $register = $this->userDBDAO->read($_POST['user_mail']);
@@ -57,10 +49,37 @@ class LoginController{
     }
 */
     public function log($user_mail='', $password='')
+        {
+            $role = 0;
+            if($user_mail){
+                $user = $this->userDBDAO->read($user_mail);   
+                if($user!= false && ($user->getPassword() === $password)){
+                    $role= $user->getRole();
+                    $_SESSION['logged'] = $user;
+            }
+            switch($role){
+                case 1:
+                    include_once(VIEWS_PATH."validate-session.php");
+                    include_once(VIEWS_PATH."admin.php");
+                    break;
+                case 2:
+                    include_once(VIEWS_PATH."validate-session.php");
+                    include_once(VIEWS_PATH."userHome.php");
+                    break;
+                case 0:
+                    $this->index("Usuario y/o Contraseña incorrectos"); 
+                    break;
+            }
+        }
+    }
+
+
+/*
+    public function log($user_mail='', $password='')
         {   
             if($user_mail){
                 $user = $this->userDBDAO->read($user_mail);   
-                $role=$user->getRole();
+                $role= $user->getRole();
             }else{
                 $role=0;
             }             
@@ -108,7 +127,7 @@ class LoginController{
 
             }
         }
-
+*/
     public function register(){
         require_once(VIEWS_PATH."registrarse.php");
     }
@@ -163,7 +182,7 @@ class LoginController{
     public function showUserListDB(){
         include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->userDBDAO->readAll();
-        include_once(VIEWS_PATH."userlist.php");
+        include_once(VIEWS_PATH."userList.php");
     }
 
     public function Remove($id) //TODO cambiar a $user
