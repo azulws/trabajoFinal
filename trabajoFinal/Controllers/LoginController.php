@@ -16,40 +16,44 @@ class LoginController{
         $this->userDBDAO = new UserDBDAO();
     }
 
-    public function receiveAction(){
-        if($_POST["action"]=="Ingresar"){
-            $this->log();
-        }elseif($_POST["action"]=="Registrar"){
-            $this->register();
-        }
-    }
-
-    public function log(){
-        $register = $this->userDBDAO->read($_POST['user_mail']);
-        if($register!=null){
-            if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
-                $_SESSION["logged"]=true;
-                $_SESSION["name"]=$register->getName();
-                if($register->getRole()=="1"){ //Rol==1 administrador
-                    require_once(VIEWS_PATH."admin.php");// View administrador
-                }else{
-                    $movieFunctionDBDAO = new MovieFunctionDBDAO();
-                    $movieDBDAO = new MovieDBDAO();
-                    $moviesArray = $movieFunctionDBDAO->readAllMovies();
-                    $lista = array();
-                    if($moviesArray!=false){
-                        foreach($moviesArray as $array=>$v){
-                        array_push($lista,$movieDBDAO->read($v['movie_id']));
-                    }
+        public function Index($message = "")
+        {
+            $movieFunctionDBDAO = new MovieFunctionDBDAO();
+            $movieDBDAO = new MovieDBDAO();
+            $moviesArray = $movieFunctionDBDAO->readAllMovies();
+            $lista = array();
+            if($moviesArray!=false){
+                foreach($moviesArray as $array=>$v){
+                array_push($lista,$movieDBDAO->read($v['movie_id']));
                 }
-                include_once(VIEWS_PATH.'home.php');
-                }        
-            }elseif($_POST["user_password"]!=$register->getPassword()){
-                require_once(VIEWS_PATH.'home.php');
-            }else{
-            require_once(VIEWS_PATH.'home.php');
             }
-        }     
+            include_once(VIEWS_PATH.'login.php');
+        }
+
+    public function log($user_mail='', $password='')
+        {
+            $role = 0;
+            if($user_mail){
+                $user = $this->userDBDAO->read($user_mail);   
+                if($user!= false && ($user->getPassword() === $password)){
+                    $role= $user->getRole();
+                    $_SESSION['logged'] = $user;
+            }
+            switch($role){
+                case 1:
+                    include_once(VIEWS_PATH."validate-session.php");
+                    //include_once(VIEWS_PATH."admin.php");
+                    break;
+                case 2:
+                    include_once(VIEWS_PATH."validate-session.php");
+                    //include_once(VIEWS_PATH."userHome.php");
+                    break;
+                case 0:
+                    $this->Index("Usuario y/o Contraseña incorrectos"); 
+                    break;
+            }
+        }
+        include_once(VIEWS_PATH.'login.php');
     }
 
     public function register(){
@@ -58,10 +62,6 @@ class LoginController{
 
     public function homeAdmin(){
         require_once(VIEWS_PATH."admin.php");
-    }
-
-    public function home(){
-        require_once(VIEWS_PATH."home.php");
     }
 
     public function createUser($name, $lastname, $email, $password, $dni, $role)
@@ -122,6 +122,12 @@ class LoginController{
         $this->userDBDAO->UpdateRole($email);
 
         $this->showUserListDB();
+    }
+
+    public function logout()
+    {   
+        session_destroy();
+        header("location:../index.php");
     }
     
 }
