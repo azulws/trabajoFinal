@@ -39,11 +39,13 @@
             include_once(VIEWS_PATH."validate-session.php");
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
-            $movieFunction->setCinema($this->cinemaDBDAO->read($cinemaId));
-            $movieFunction->setMovie($this->movieDBDAO->read($movieId));
-            //$movieFunction->setEndDateTime($movie);
+            $cinema= new Cinema();
+            $cinema=$this->cinemaDBDAO->read($cinemaId);
+            $movieFunction->setCinema($cinema);
+            $movie = new Movie();
+            $movie = $this->movieDBDAO->read($movieId);
+            $movieFunction->setMovie($movie);            
             $this->movieFunctionDBDAO->Add($movieFunction);
-
             $this->ShowAddView();
         }
 
@@ -115,9 +117,19 @@
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
-            $newFunction->setCinemaId($cinemaId);
-            $newFunction->setMovieId($movieId);
+            $cinema= new Cinema();
+            $cinema=$this->cinemaDBDAO->read($cinemaId);
+            print_r($cinema);
+            $newFunction->setCinema( $cinema);
+            echo"llego aca"; echo '<br>';
+            $movie = new Movie();
+            $movie= $this->movieDBDAO->read($movieId);
+            print_r($movie);
+            echo '<br>';
+            $newFunction->setMovie($movie);
+                                    
             $newFunction->setStartDateTime($combinedDT);
+            echo"llego aca";echo '<br>';
 
             $notOverlap = false;
             if($response != false){
@@ -127,9 +139,9 @@
                         break;
                     }
                 }
-                var_dump($notOverlap);
+                
                 if($notOverlap==true){
-                    $this->Add($cinemaId,$movieId,$combinedDT);
+                    $this->Add($cinema,$movie,$combinedDT);
                 }else{
                     $message = 'Se superponen las fechas';
                     $cineId=$cinemaId;
@@ -139,7 +151,7 @@
                 }
             }
             else{
-                $this->Add($cinemaId,$movieId,$combinedDT);
+                $this->Add($cinema,$movie,$combinedDT);
             }
         }
 
@@ -183,10 +195,9 @@
 
         //chicos la unica manera que consegui de mostrar 
         public function showMovieFunctionsByCinema($cinema_id)
-        {   include_once(VIEWS_PATH."validate-session.php");
-            var_dump($cinema_id); echo "<br>";
+        {  
+             include_once(VIEWS_PATH."validate-session.php");
             $id = (int) $cinema_id;echo "<br>";
-
             $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id); 
             include_once(VIEWS_PATH."showFunctionList.php");                                                                           
  
