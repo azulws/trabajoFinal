@@ -30,7 +30,7 @@
          
     public function readAll()
     {
-        $sql = "SELECT * FROM $this->tablename";
+        $sql = "SELECT * FROM $this->tablename ";
         try
         {
             $this->connection = Connection::getInstance();
@@ -119,7 +119,6 @@
             $movieFunction->setCinema($this->cinemaDBDAO->read($v['cinema_id']));
             $movieFunction->setMovie($this->movieDBDAO->read($v['movie_id']));
             $movieFunction->setStartDateTime($v['start_datetime']);
-            //setEndDateTime $this->getMovieFunctionEndTime//
             array_push($movieFunctionList,$movieFunction);
         }
         if(count($movieFunctionList)>0)
@@ -137,8 +136,8 @@
 
 
         $parameters['start_datetime'] = $movieFunction->getStartDateTime();
-        $parameters['cinema'] = $movieFunction->getCinemaId();
-        $parameters['movie'] = $movieFunction->getMovieId();
+        $parameters['cinema'] = $movieFunction->getCinema();
+        $parameters['movie'] = $movieFunction->getMovie();
 
         try
         {
@@ -178,8 +177,8 @@
                 $result = $this->mapear($resultSet);
                 $movieFunction = new MovieFunctions();
                 $movieFunction->setMovieFunctionId($result[0]->getMovieFunctionId());
-                $movieFunction->setCinemaId($result[0]->getCinemaId());
-                $movieFunction->setMovieId($result[0]->getMovieId());
+                $movieFunction->setCinema($this->cienemaDBDAO->read($result[0]->getId()));
+                $movieFunction->setMovie($this->movieDBDAO->read($result[0]->getMovieId()));
                 $movieFunction->setStartDateTime($result[0]->getStartTime());
                 return $movieFunction;  
         }else
@@ -212,7 +211,46 @@
         }
        
     }
-   
-   
-}     
+    public function validateMovieFunctionDate($cinema_id,$startDateTime)
+    {
+        $sql = "SELECT * FROM movieFunctions WHERE cinema_id = :cinema_id AND start_datetime LIKE '".$startDateTime."%' ";
+        //$parameters['startDateTime'] = $startDateTime;
+        $parameters['cinema_id'] = $cinema_id;
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql,$parameters);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+         else 
+            return false;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+       
+    }  
+    public function validateMovieFunctionDateByMovie($movie_id,$startDateTime)
+    {
+        $sql = "SELECT * FROM movieFunctions WHERE movie_id = :movie_id AND start_datetime LIKE '".$startDateTime."%' ";
+        //$parameters['startDateTime'] = $startDateTime;
+        $parameters['movie_id'] = $movie_id;
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql,$parameters);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+         else 
+            return false;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+       
+    }  
+}    
+     
 ?>

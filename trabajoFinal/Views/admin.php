@@ -29,6 +29,6 @@
 	<button type="submit">MOSTRAR POR GENEROS</button>
 </form>
 
-<form action="<?php echo FRONT_ROOT."login/logout";?>">
+<form action="<?php echo FRONT_ROOT."Login/logout";?>">
     <button>Desconectar</button>
 </form>
