@@ -1,18 +1,46 @@
 <?php
-if($lista==false){
-	echo '<script>alert("No hay funciones en la base de datos");</script>';
-}else{
-	foreach($lista as $item){
-		echo "<h2>"."Cine: ".$item->getCinemaId()."</h2>";
-		echo '<dl>'.
-				'<dt> Pelicula: '.$item->getMovieId().'<dt>'.
-				'<dd> Fecha y hora: '.$item->getStartDatetime().'</dd>'.
-			'</dl>';
-		echo '<form action="'.FRONT_ROOT.'MovieFunction/RemoveDB">
-		<button name="name" value="'.$item->getMovieFunctionId().'">Eliminar</button></form>';
-	}
-}
-
-echo '<form action="'.FRONT_ROOT.'Login/homeAdmin">
-	<button>Volver</button></form>';
+include_once(VIEWS_PATH.'login.php');
 ?>
+<div class="wrapper row4">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <div class="content"> 
+      <div class="scrollable">
+      <form action="<?php echo FRONT_ROOT."MovieFunction/removeDB"?>" method="POST">
+        <table style="text-align:center;">
+          <thead class="bgColor">
+            <tr>
+              <th style="width: 30%;">Pelicula</th>
+              <th style="width: 10%;">Duración (mins)</th>
+              <th style="width: 20%;">Cine</th>
+              <th style="width: 30%;">Inicio - Fin</th>
+              <th style="width: 10%;">Valor entrada</th>
+              <th style="width: 10%;">Acción</th>
+            </tr>
+          </thead>
+          <tbody class="bgColor">
+            <?php
+              foreach($lista as $item)
+              {
+                ?>
+                  <tr>
+                    <td class="border"><?php echo $item->getMovie()->getTitle() ?></td>
+                    <td class="border"><?php echo $item->getMovie()->getRuntime() ?></td>
+                    <td class="border"><?php echo $item->getCinema()->getName() ?></td>
+                    <td class="border"><?php echo $item->getStartDateTime().' - '.date("H:i",strtotime($item->getEndDateTime($item->getMovie()))) ?></td>
+					          <td class="border"><?php echo '$ '.$item->getCinema()->getTicketValue() ?></td>
+                    <td class="border">
+                      <button type="submit" name="id" class="btn" value="<?php echo $item->getMovieFunctionId() ?>"> Eliminar </button>
+                    </td>
+                  </tr>
+                <?php
+              }
+            ?>                          
+          </tbody>
+        </table></form> 
+      </div>
+    </div>
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>

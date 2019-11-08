@@ -75,7 +75,7 @@ class LoginController{
         $usuario->setRol($role);
 
         $this->userDAO->Add($usuario);
-        include_once(VIEWS_PATH.'home.php');
+        $this->Index();
     }
 
     public function createUserDB($name, $lastname, $email, $password, $dni)
@@ -90,7 +90,7 @@ class LoginController{
 
         $this->userDBDAO->Add($usuario);
 
-        include_once(VIEWS_PATH.'home.php');
+        $this->Index();
     }
 
     public function showUserList(){
@@ -129,5 +129,7 @@ class LoginController{
         session_destroy();
         header("location:../index.php");
     }
+
+
     
 }

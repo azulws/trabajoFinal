@@ -34,9 +34,10 @@
         {
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
-            $movieFunction->setCinemaId($cinemaId);
-            $movieFunction->setMovieId($movieId);
-
+            $cinema = $this->cinemaDBDAO->readById($cinemaId);
+            $movieFunction->setCinema($cinema);
+            $movie = $this->movieDBDAO->read($movieId);
+            $movieFunction->setMovie($movie);
             $this->movieFunctionDBDAO->Add($movieFunction);
 
             $this->ShowAddView();
@@ -102,8 +103,11 @@
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
-            $newFunction->setCinemaId($cinemaId);
-            $newFunction->setMovieId($movieId);
+
+            $cinema = $this->cinemaDBDAO->readById($cinemaId);
+            $movieFunction->setCinema($cinema);
+            $movie = $this->movieDBDAO->read($movieId);
+            $movieFunction->setMovie($movie);
             $newFunction->setStartDateTime($combinedDT);
 
             $notOverlap = false;

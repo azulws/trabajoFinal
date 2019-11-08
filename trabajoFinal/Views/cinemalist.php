@@ -4,18 +4,18 @@ if($lista==false){
 }else{
 	foreach($lista as $item){
 		echo '<dl>'.
-				'<dt> cinema: '.$item->getName().'<dt>'.
-				'<dd> Address: '.$item->getAddress().'</dd>'.
-				'<dd> Capacity: '.$item->getCapacity().'</dd>'.
-				'<dd> Valor de la entrada $'.$item->getTicketValue().'</dd>'.
+				'<dt> Cine: '.$item->getName().'<dt>'.
+				'<dd> Dirección: '.$item->getAddress().'</dd>'.
+				'<dd> Capacidad: '.$item->getCapacity().'</dd>'.
+				'<dd> Valor de la entrada: $'.$item->getTicketValue().'</dd>'.
 				'<form action="'.FRONT_ROOT.'cinema/RemoveDB">
-				<button name="name" value="'.$item->getName().'">Eliminar</button></form>'.
+				<button name="id" value="'.$item->getId().'">Eliminar</button></form>'.
 				'<form action="'.FRONT_ROOT.'cinema/ShowUpdateCinema">
-				<button name="name" value="'.$item->getName().'">Modificar</button>
+				<button name="id" value="'.$item->getId().'">Modificar</button>
 				</form>'.
 			'</dl>';
 	}
 }
-echo '<form action="'.FRONT_ROOT.'Login/homeAdmin">
+echo '<form action="'.FRONT_ROOT.'Login/Index">
 <button>Volver</button></form>';
 ?>

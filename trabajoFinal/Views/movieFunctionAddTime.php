@@ -24,6 +24,6 @@
 </form>
 
 <?php
-echo '<form action="'.FRONT_ROOT.'Login/homeAdmin">
+echo '<form action="'.FRONT_ROOT.'Login/Index">
 <button>Volver</button></form>';
 ?>

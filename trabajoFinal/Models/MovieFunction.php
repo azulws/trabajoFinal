@@ -4,9 +4,8 @@
 
             private $movieFunctionId;
             private $startDateTime;
-            private $cinemaId; //object cinema
-            private $movieId; // object movie
-
+            private $cinema;
+            private $movie;
 
             public function __construct()
              {
@@ -23,14 +22,14 @@
                  return $this->startDateTime;
              }
             
-             public function getCinemaId()
+             public function getCinema()
              {
-                 return $this->cinemaId;
+                 return $this->cinema;
              }
            
-             public function getMovieId()
+             public function getMovie()
              {
-                 return $this->movieId;
+                 return $this->movie;
              }
 
              public function setMovieFunctionId($movieFunctionId)
@@ -43,15 +42,20 @@
                  $this->startDateTime=$startDateTime;
              }
             
-             public function setCinemaId($cinemaId)
+             public function setCinema($cinema)
              {
-                 $this->cinemaId=$cinemaId;
+                 $this->cinema=$cinema;
              }
             
-             public function setMovieId($movieId)
+             public function setMovie($movie)
              {
-                 $this->movieId=$movieId;
+                 $this->movie=$movie;
              }
 
+             public function getEndDateTime()
+             {
+                $minutes = $this->getMovie()->getRuntime();
+                return date('Y-m-d H:i:s', strtotime('+'.$minutes.'minutes',strtotime($this->getStartDateTime())));
+             }
 
         }
