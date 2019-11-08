@@ -19,6 +19,6 @@
     </form>
 </div>
 <?php
-echo '<form action="'.FRONT_ROOT.'Login/Index">
+echo '<form action="'.FRONT_ROOT.'Login/homeAdmin">
 <button>Volver</button></form>';
 ?>

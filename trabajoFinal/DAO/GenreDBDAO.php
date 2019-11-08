@@ -58,6 +58,7 @@
 
 
     public function Add($Genre){
+        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
         $sql = "INSERT INTO genres (genre_id,genre_description) 
         VALUES (:genre_id, :genre_description)";
@@ -75,7 +76,34 @@
             echo $e;
         }
     }
+/*
+    public function Remove($title){
+        $sql = "DELETE FROM Movies WHERE title = :title";
+        $parameters['title'] = $title;
+        
+        try{
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($sql, $parameters);
+        }
+        catch(PDOException $e){
+            echo $e;
+        }
+    }
+    public function Update($title,$release_date,$movie_description){
 
+      $sql = "UPDATE Movies SET release_date = :release_date, movie_description = :movie_description WHERE title = :title";
+      $parameters['title'] = $title;
+      $parameters['release_date'] = $release_date;
+      $parameters['movie_description'] = $movie_description;
+
+      try{
+        $this->connection = Connection::getInstance();
+        return $this->connection->ExecuteNonQuery($sql, $parameters);
+      }
+      catch(PDOException $e){
+        echo $e;
+      }
+    }*/
     public function read ($id)
     {
         $sql = "SELECT * FROM genres where genre_id = :genre_id";

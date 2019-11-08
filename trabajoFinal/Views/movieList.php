@@ -13,4 +13,5 @@ if($lista!=false){
 }else{
     echo "<p>NO HAY PELICULAS</p>";
 }
-?>-->
+
+?>

@@ -18,7 +18,7 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM users ORDER BY role_id";
+        $sql = "SELECT * FROM users";
         try
         {
             $this->connection = Connection::getInstance();
@@ -55,6 +55,7 @@
      }
 
     public function Add($user){
+        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
         $sql = "INSERT INTO users (email,pass,userName,last_name,dni,role_id) 
         VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";

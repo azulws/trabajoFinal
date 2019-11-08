@@ -3,7 +3,7 @@
 
     use DAO\CinemaDAO as cinemaDAO;
     use DAO\CinemaDBDAO as cinemaDBDAO;
-    use Models\Cinema as cinema;
+    use Models\Cinema as Cinema;
 
     class cinemaController
     {
@@ -47,9 +47,9 @@
             $this->ShowAddView();
         }
 
-        public function Remove($name)
+        public function Remove($id) //TODO cambiar a $cinema
         {
-            $this->cinemaDAO->Remove($name);
+            $this->cinemaDAO->Remove($id);
 
             $this->showcinemaList();
         }
@@ -71,24 +71,17 @@
             include_once(VIEWS_PATH."cinemalist.php");
         }
         public function ShowUpdateCinema($id){
-            $cinema=$this->cinemaDBDAO->readById($id);
+            $cinema=$this->cinemaDBDAO->read($id);
             include_once(VIEWS_PATH."cinemaUpdate.php");
         }
         public function ShowMovieFunctions(){
             //TODO $lista = $this->movieFunctionDBDAO->GetAll();;
-            include_once(VIEWS_PATH."movieFuctionList.php");
+           // include_once(VIEWS_PATH."movieList.php");
         }
 
-        public function UpdateDB($name,$address,$ticket_value,$capacity,$id)
+        public function UpdateDB($name,$ticket_value,$capacity)
         {
-            $cinema = new Cinema();
-            $cinema->setName($name);
-            $cinema->setAddress($address);
-            $cinema->setTicketValue($ticket_value);
-            $cinema->setCapacity($capacity);
-            $cinema->setId($id);
-
-            $this->cinemaDBDAO->Update($cinema);
+            $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
 
             $this->showcinemaListDB();
         }

@@ -34,10 +34,11 @@
         {
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
-            $cinema = $this->cinemaDBDAO->readById($cinemaId);
-            $movieFunction->setCinema($cinema);
+            $movieFunction->setCinemaId($cinemaId);
+            $movieFunction->setMovieId($movieId);
+            $movie= new Movie();
             $movie = $this->movieDBDAO->read($movieId);
-            $movieFunction->setMovie($movie);
+            $movieFunction->setEndDateTime($movie);
             $this->movieFunctionDBDAO->Add($movieFunction);
 
             $this->ShowAddView();
@@ -74,7 +75,7 @@
             $lista = array();
             if($moviesArray!=false){
                 foreach($moviesArray as $array=>$v){
-                    array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+                array_push($lista,$this->movieDBDAO->read($v['movie_id']));
                 }
             }
             include_once(VIEWS_PATH."movieList.php");
@@ -103,11 +104,8 @@
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
-
-            $cinema = $this->cinemaDBDAO->readById($cinemaId);
-            $movieFunction->setCinema($cinema);
-            $movie = $this->movieDBDAO->read($movieId);
-            $movieFunction->setMovie($movie);
+            $newFunction->setCinemaId($cinemaId);
+            $newFunction->setMovieId($movieId);
             $newFunction->setStartDateTime($combinedDT);
 
             $notOverlap = false;
@@ -169,7 +167,26 @@
 
             $this->showMovieFunctionListDB();
         }
-                                                                                                                               
+
+        //chicos la unica manera que consegui de mostrar 
+        public function showMovieFunctionsByCinema($cinema_id)
+        {
+            $id = (int) $cinema_id;
+            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id);
+            $cinema = $this->cinemaDBDAO->read($id);
+            if($lista==false)
+            {
+            	echo '<script>alert("No hay funciones en la base de datos");</script>';
+            }else
+                {
+                    foreach($lista as $item)
+                    {   
+                        $movie = $this->movieDBDAO->read($item->getMovieId());
+                        $item->setEndDateTime($movie);
+                        include_once(VIEWS_PATH."showFunctionList.php");
+                    }
+                }
+            }                                                                                                                        
  }
     
 ?> 

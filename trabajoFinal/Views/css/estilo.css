@@ -13,7 +13,17 @@ fieldset {
     position:bottom;
 }
 
-/*
+form {
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 10px 10px;
+    background: #f4f7f8;
+    border-radius: 10px;
+    border: 5px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 200px;
+}
+
 button {
     padding: 19px 39px 18px 39px;
     color: #FFF;
@@ -27,7 +37,7 @@ button {
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
 }
-*/
+
 .intento {
 
     color: #FFF;
@@ -61,13 +71,4 @@ button {
 .titleMovie{
     font-size: 50px;
     text-align: center;
-}
-
-.bgColor{
-    background-color: #d9dfc1;
-
-}
-
-.border{
-    border: 1px solid #000000;
 }

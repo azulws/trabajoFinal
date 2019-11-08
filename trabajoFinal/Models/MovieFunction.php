@@ -4,8 +4,10 @@
 
             private $movieFunctionId;
             private $startDateTime;
-            private $cinema;
-            private $movie;
+            private $cinemaId; //object cinema
+            private $movieId; // object movie
+            private $endDateTime;
+
 
             public function __construct()
              {
@@ -22,14 +24,14 @@
                  return $this->startDateTime;
              }
             
-             public function getCinema()
+             public function getCinemaId()
              {
-                 return $this->cinema;
+                 return $this->cinemaId;
              }
            
-             public function getMovie()
+             public function getMovieId()
              {
-                 return $this->movie;
+                 return $this->movieId;
              }
 
              public function setMovieFunctionId($movieFunctionId)
@@ -42,20 +44,24 @@
                  $this->startDateTime=$startDateTime;
              }
             
-             public function setCinema($cinema)
+             public function setCinemaId($cinema_id)
              {
-                 $this->cinema=$cinema;
+                 $this->cinemaId=$cinema_id;
              }
             
-             public function setMovie($movie)
+             public function setMovieId($movie_id)
              {
-                 $this->movie=$movie;
-             }
+                 $this->movieId=$movie_id;
+             }  
+             // esto agregado ahora
+             public function setEndDateTime(Movie $movie){ 
+                (int) $minutes = (int) $movie->getRuntime(); //poner en un variable externa 15 minutos
+                $this->endDateTime = date('Y-m-d H:i:s', strtotime('+'.$minutes.'minutes',strtotime($this->getStartDateTime()))) ;// capaz que falta :m
+                
+            }
+              public function getEndDateTime(){
+                  return $this->endDateTime;
+              }
 
-             public function getEndDateTime()
-             {
-                $minutes = $this->getMovie()->getRuntime();
-                return date('Y-m-d H:i:s', strtotime('+'.$minutes.'minutes',strtotime($this->getStartDateTime())));
-             }
 
         }
