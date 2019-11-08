@@ -30,5 +30,11 @@ class MovieController{
         $lista = $this->movieList->getMovies($pageNumber);
         include_once(VIEWS_PATH.'movieListAdmin.php');
     }
+
+    public function listMovieApi(){
+        $pageNumber = 1;
+        $lista = $this->movieList->getMovies($pageNumber);
+        include_once(VIEWS_PATH.'movieListApi.php');
+    }
     
 }
