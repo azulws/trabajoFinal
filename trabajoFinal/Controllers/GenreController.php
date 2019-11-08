@@ -14,6 +14,7 @@
         }
 
         public function genresToDB(){
+            include_once(VIEWS_PATH."validate-session.php");
             $genres=$this->genreDAO->getGenres();
             $this->genreDBDAO->writeAll($genres);
             include_once(VIEWS_PATH.'admin.php');

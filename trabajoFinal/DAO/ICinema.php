@@ -3,8 +3,8 @@
 
     interface ICinema
     {
-        function Add($cinema);
-        function Remove($name);
+        function Add(Cinema $cinema);
+        function Remove($id);
         function GetAll();
     }
 ?>

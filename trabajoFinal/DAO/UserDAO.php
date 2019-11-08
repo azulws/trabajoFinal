@@ -4,7 +4,7 @@
     use DAO\IUser as IUser;
     use Models\User as User;
 
-    class UserDAO implements IUser
+    class UserDAO 
     {
         private $userList = array();
         private $fileName = ROOT."Data/users.json";
@@ -33,7 +33,7 @@
              }
         }
 
-        public function Add($user){
+        public function Add( User $user){
             $this->RetrieveData();     
             if(!in_array($user->getEmail(),$this->userList))
                 array_push($this->userList, $user);

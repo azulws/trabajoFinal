@@ -7,6 +7,8 @@
         private $lastname;
         private $dni;
         private $role;
+        private $user_id;
+        
         public function __contruct(){
             
         }
@@ -44,8 +46,15 @@
         public function getRole(){
             return $this->role;
         }
-        public function setRol($role){
+        public function setRole($role){
             $this->role=$role;
+        }
+        public function getId(){
+            return $this->user_id;
+        }
+        public function setId($id)
+        {
+            $this->user_id =$id;
         }
 
     }

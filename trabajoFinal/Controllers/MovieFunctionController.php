@@ -24,37 +24,53 @@
             $this->genreDBDAO = new GenreDBDAO();
         }
       
+        public function index($message=''){
+            $this->showMovieFunctionListDB();
+        }
         public function showAddView(){
+            include_once(VIEWS_PATH."validate-session.php");
             $cinemas = $this->cinemaDBDAO->readAll();
             $movies = $this->movieDBDAO->readAll();
             require_once(VIEWS_PATH.'movieFunctionAdd.php');
         }
 
         public function Add($cinemaId,$movieId,$dateTime)
-        {
+        { 
+            include_once(VIEWS_PATH."validate-session.php");
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
+<<<<<<< HEAD
             $movieFunction->setCinemaId($cinemaId);
             $movieFunction->setMovieId($movieId);
             $movie= new Movie();
             $movie = $this->movieDBDAO->read($movieId);
             $movieFunction->setEndDateTime($movie);
+=======
+            $cinema= new Cinema();
+            $cinema=$this->cinemaDBDAO->read($cinemaId);
+            $movieFunction->setCinema($cinema);
+            $movie = new Movie();
+            $movie = $this->movieDBDAO->read($movieId);
+            $movieFunction->setMovie($movie);            
+>>>>>>> entrega
             $this->movieFunctionDBDAO->Add($movieFunction);
-
             $this->ShowAddView();
         }
 
         public function showMovieFunctionListDB(){
+            include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->movieFunctionDBDAO->readAll();
             include_once(VIEWS_PATH."showFunctionList.php");
         }
 
         public function showMovieFunctionOrderByTimeDB(){
+            include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->movieFunctionDBDAO->readOrderByTime();
             include_once(VIEWS_PATH."showFunctionList.php");
         }
 
         public function listMovieFunctionListDB(){
+            include_once(VIEWS_PATH."validate-session.php");
             $moviesArray = $this->movieFunctionDBDAO->readAllMovies();
             $lista = array();
             if($moviesArray!=false){
@@ -66,11 +82,13 @@
         }
 
         public function showMovieFunctionByGenreDB(){
+            include_once(VIEWS_PATH."validate-session.php");
             $genres = $this->genreDBDAO->readAll();
             include_once(VIEWS_PATH."selectGenre.php");
         }
 
         public function listMovieFunctionListByGenreDB($genreId){
+            include_once(VIEWS_PATH."validate-session.php");
             $moviesArray = $this->movieFunctionDBDAO->readAllMoviesByGenres($genreId);
             $lista = array();
             if($moviesArray!=false){
@@ -82,6 +100,7 @@
         }
         
         public function validateFunctionByDate($cinemaId,$movieId,$date){
+            include_once(VIEWS_PATH."validate-session.php");
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDateByMovie($movieId,$date);
             $cineId=$cinemaId;
             $movId=$movieId;
@@ -95,18 +114,30 @@
                     $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
                     include_once(VIEWS_PATH."movieFunctionAddTime.php");
                 }else{
-                    echo "La pelicula esta siendo usada por otro cine, kb";
+                    $message = "La pelicula esta siendo usada por otro cine ese dia";
+                    
                 }
             }
         }                                                                                          
         
         public function validateFunctionByTime($cinemaId,$movieId,$date,$time){
+            include_once(VIEWS_PATH."validate-session.php");
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
-            $newFunction->setCinemaId($cinemaId);
-            $newFunction->setMovieId($movieId);
+            $cinema= new Cinema();
+            $cinema=$this->cinemaDBDAO->read($cinemaId);
+            print_r($cinema);
+            $newFunction->setCinema( $cinema);
+            echo"llego aca"; echo '<br>';
+            $movie = new Movie();
+            $movie= $this->movieDBDAO->read($movieId);
+            print_r($movie);
+            echo '<br>';
+            $newFunction->setMovie($movie);
+                                    
             $newFunction->setStartDateTime($combinedDT);
+            echo"llego aca";echo '<br>';
 
             $notOverlap = false;
             if($response != false){
@@ -116,11 +147,11 @@
                         break;
                     }
                 }
-                var_dump($notOverlap);
+                
                 if($notOverlap==true){
-                    $this->Add($cinemaId,$movieId,$combinedDT);
+                    $this->Add($cinema,$movie,$combinedDT);
                 }else{
-                    echo 'Se superponen las fechas';
+                    $message = 'Se superponen las fechas';
                     $cineId=$cinemaId;
                     $movId=$movieId;
                     $d=$date;
@@ -128,12 +159,13 @@
                 }
             }
             else{
-                $this->Add($cinemaId,$movieId,$combinedDT);
+                $this->Add($cinema,$movie,$combinedDT);
             }
         }
 
         public function notOverlapFunctions($functionA, $functionB){ //true si se solapan, false si no
             //setup
+            include_once(VIEWS_PATH."validate-session.php");
             $startDateA = new DateTime($functionA->getStartDateTime());
             $movieA = $this->movieDBDAO->read($functionA->getMovieId());
             $finishDateA = new DateTime($functionA->getStartDateTime());
@@ -163,6 +195,7 @@
 
         public function RemoveDB($movieFunctionId) //TODO cambiar a $cinema
         {
+            include_once(VIEWS_PATH."validate-session.php");
             $this->movieFunctionDBDAO->Remove($movieFunctionId);
 
             $this->showMovieFunctionListDB();
@@ -170,6 +203,7 @@
 
         //chicos la unica manera que consegui de mostrar 
         public function showMovieFunctionsByCinema($cinema_id)
+<<<<<<< HEAD
         {
             $id = (int) $cinema_id;
             $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id);
@@ -188,5 +222,16 @@
                 }
             }                                                                                                                        
  }
+=======
+        {  
+             include_once(VIEWS_PATH."validate-session.php");
+            $id = (int) $cinema_id;echo "<br>";
+            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id); 
+            include_once(VIEWS_PATH."showFunctionList.php");                                                                           
+ 
+        }
+        
+    }
+>>>>>>> entrega
     
 ?> 

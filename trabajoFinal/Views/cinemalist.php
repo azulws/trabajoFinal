@@ -14,7 +14,11 @@ if($lista==false){
 				<button name="name" value="'.$item->getName().'">Change</button>
 				</form>'.
 				'<form action="'.FRONT_ROOT.'MovieFunction/showMovieFunctionsByCinema">
+<<<<<<< HEAD
                 <button name="name" value="'.$item->getCinemaId().'">FUNCIONES</button>
+=======
+                <button name="name" value="'.$item->getId().'">FUNCIONES</button>
+>>>>>>> entrega
   				</form>'.
 			'</dl>';
 	}

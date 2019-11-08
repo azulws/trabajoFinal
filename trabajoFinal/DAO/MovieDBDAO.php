@@ -12,6 +12,7 @@
          
          private $connection;
          private $genresByMoviesDBDAO;
+         private $tablename = "movies";
 
          public function __construct()
          {
@@ -21,20 +22,21 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM movies";
+        $sql = "SELECT * FROM $this->tablename ";
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     protected function mapear($value) {
@@ -67,10 +69,10 @@
      }
 
 
-    public function Add($movie){
+    public function Add( Movie $movie){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
-        $sql = "INSERT INTO movies (title,release_date,points,poster,movie_description,movie_id,runtime)
+        $sql = "INSERT INTO  $this->tablename (title,release_date,points,poster,movie_description,movie_id,runtime)
         VALUES (:title, :release_date, :points,:poster, :movie_description, :movie_id, :runtime)";
 
         $parameters['title'] = $movie->getTitle();
@@ -93,7 +95,7 @@
     }
 /*
     public function Remove($title){
-        $sql = "DELETE FROM Movies WHERE title = :title";
+        $sql = "DELETE FROM $this->tablename WHERE title = :title";
         $parameters['title'] = $title;
         
         try{
@@ -106,7 +108,7 @@
     }
     public function Update($title,$release_date,$movie_description){
 
-      $sql = "UPDATE Movies SET release_date = :release_date, movie_description = :movie_description WHERE title = :title";
+      $sql = "UPDATE $this->tablename SET release_date = :release_date, movie_description = :movie_description WHERE title = :title";
       $parameters['title'] = $title;
       $parameters['release_date'] = $release_date;
       $parameters['movie_description'] = $movie_description;
@@ -121,49 +123,51 @@
     }*/
     public function read ($id)
     {
-        $sql = "SELECT * FROM movies where movie_id = :movie_id";
+        $sql = "SELECT * FROM $this->tablename where movie_id = :movie_id";
         $parameters['movie_id'] = $id;
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                $result = $this->mapear($resultSet);
+                $movie = new Movie();
+                $movie->setTitle($result[0]->getTitle());
+                $movie->setReleaseDate($result[0]->getReleaseDate());
+                $movie->setPoints($result[0]->getPoints());
+                $movie->setPoster($result[0]->getposter());
+                $movie->setDescription($result[0]->getDescription());
+                $movie->setMovieId($result[0]->getMovieId());
+                $movie->setRuntime($result[0]->getRuntime());
+    
+                return $movie;
+                
+            }else
+                return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $movie = new Movie();
-            $movie->setTitle($result[0]->getTitle());
-            $movie->setReleaseDate($result[0]->getReleaseDate());
-            $movie->setPoints($result[0]->getPoints());
-            $movie->setPoster($result[0]->getposter());
-            $movie->setDescription($result[0]->getDescription());
-            $movie->setMovieId($result[0]->getMovieId());
-            $movie->setRuntime($result[0]->getRuntime());
-
-            return $movie;
-            
-        }else
-            return false;
+       
     }
     public function readOrderByDate(){
-        $sql = "SELECT * FROM movies ORDER BY release_date DESC";
+        $sql = "SELECT * FROM $this->tablename ORDER BY release_date DESC";
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+             else 
+              return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }
 }
       

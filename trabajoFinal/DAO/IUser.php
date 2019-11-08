@@ -3,8 +3,8 @@
 
     interface IUser
     {
-        function Add($user);
-        function Remove($email);
+        function Add(User $user);
+        function Remove($id);
         function GetAll();
     }
 ?>
