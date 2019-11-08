@@ -20,7 +20,7 @@ include_once(VIEWS_PATH.'login.php');
                                    <td><?php echo $movie->getTitle() ?></td>
                                    <td><?php echo $movie->getDescription() ?></td>
                                    <td><?php echo $movie->getRuntime() ?></td>
-                                   <td><?php foreach($movie->getGenres() as $genre) echo "** ".$genre->getDescription()." **";?></td>
+                                   <td><?php foreach($movie->getGenres() as $genre) echo $genre->getDescription()." \n";?></td>
                                    <td><?php echo '<img src="https://image.tmdb.org/t/p/w500'.$movie->getPoster().'" width="250" height="357">' ?></td>
                               </tr>
                          <?php } ?>                        

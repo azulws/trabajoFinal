@@ -27,13 +27,13 @@ class MovieController{
 
     public function listMovieAdmin(){
         $pageNumber = 1;
-        $lista = $this->movieList->getMovies($pageNumber);
+        $lista = $this->movieList->getMoviesByPage($pageNumber);
         include_once(VIEWS_PATH.'movieListAdmin.php');
     }
 
     public function listMovieApi(){
         $pageNumber = 1;
-        $lista = $this->movieList->getMovies($pageNumber);
+        $lista = $this->movieList->getAllMovies(5);
         include_once(VIEWS_PATH.'movieListApi.php');
     }
     
