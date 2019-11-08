@@ -165,7 +165,7 @@
             $finishDateA->modify('+15 minute');
 
             $startDateB = new DateTime($functionB->getStartDateTime());
-            $movieB = $this->movieDBDAO->read($functionB->getMovieId());
+            $movieB = $this->movieDBDAO->read($functionB->getMovie());
             $finishDateB = new DateTime($functionB->getStartDateTime());
             $finishDateB->modify('+'.$movieB->getRuntime().' minute');
             $finishDateB->modify('+15 minute');
@@ -207,8 +207,7 @@
                     foreach($lista as $item)
                     {   
                         include_once(VIEWS_PATH."validate-session.php");
-                        $movie = $this->movieDBDAO->read($item->getMovieId());
-                        $item->setEndDateTime($movie);
+                        $movie = $this->movieDBDAO->read($item->getMovie()->getMovieId());
                         include_once(VIEWS_PATH."showFunctionList.php");
                     }
                 }

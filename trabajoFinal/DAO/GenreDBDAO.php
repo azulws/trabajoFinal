@@ -77,34 +77,6 @@
             echo $e;
         }
     }
-/*
-    public function Remove($title){
-        $sql = "DELETE FROM $this->tablename WHERE title = :title";
-        $parameters['title'] = $title;
-        
-        try{
-            $this->connection = Connection::getInstance();
-            return $this->connection->ExecuteNonQuery($sql, $parameters);
-        }
-        catch(PDOException $e){
-            echo $e;
-        }
-    }
-    public function Update($title,$release_date,$movie_description){
-
-      $sql = "UPDATE $this->tablename SET release_date = :release_date, movie_description = :movie_description WHERE title = :title";
-      $parameters['title'] = $title;
-      $parameters['release_date'] = $release_date;
-      $parameters['movie_description'] = $movie_description;
-
-      try{
-        $this->connection = Connection::getInstance();
-        return $this->connection->ExecuteNonQuery($sql, $parameters);
-      }
-      catch(PDOException $e){
-        echo $e;
-      }
-    }*/
     public function read ($id)
     {
         $sql = "SELECT * FROM $this->tablename where genre_id = :genre_id";
@@ -127,8 +99,7 @@
         {
             echo $e;
         }
-        
-    }
 }
+    }
       
 ?>
