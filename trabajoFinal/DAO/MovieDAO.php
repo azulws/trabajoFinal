@@ -1,7 +1,14 @@
 <?php namespace DAO;
 use Models\Movie as Movie;
+use DAO\GenreDBDAO as GenreDBDAO;
+
 class MovieDAO{
   private $movieList = array();
+  private $genreDBDAO;
+
+  public function __construct(){
+    $this->genreDBDAO = new GenreDBDAO();
+  }
 
   private function getNowPlayingPage($pageNumber){
     $curl = curl_init();
@@ -83,7 +90,13 @@ class MovieDAO{
                 }
             }
           }
-          $movie->setGenres($v->genre_ids);
+          $genres_array=array();
+          $responseGenreArray = $v->genre_ids;
+          foreach($responseGenreArray as $genre){
+            $new = $this->genreDBDAO->read($genre);
+            array_push($genres_array,$new);
+          }
+          $movie->setGenres($genres_array);
           array_push($this->movieList, $movie);
         }
       }

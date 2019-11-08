@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="<?php echo FRONT_ROOT."Login/showUserListDB";?>">Usuarios</a>
   <a class="navbar-brand" href="<?php echo FRONT_ROOT."cinema/showcinemaListDB";?>">Cines</a>
-  <a class="navbar-brand" href="#">Peliculas (falta)</a>
+  <a class="navbar-brand" href="<?php echo FRONT_ROOT.'Movie/listMovieAdmin'?>">Peliculas</a>
   <a class="navbar-brand" href="#">Ventas (falta)</a>
   <a class="navbar-brand" href="<?php echo FRONT_ROOT."MovieFunction/showMovieFunctionListDB";?>">Funciones</a>
   <a class="navbar-brand" href="<?php echo FRONT_ROOT.'Login/logout'?>">Desconectarse</a>

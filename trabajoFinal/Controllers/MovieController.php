@@ -24,5 +24,11 @@ class MovieController{
         $this->movieDBDAO->writeAll($movies);
         include_once(VIEWS_PATH.'admin.php');
     }
+
+    public function listMovieAdmin(){
+        $pageNumber = 1;
+        $lista = $this->movieList->getMovies($pageNumber);
+        include_once(VIEWS_PATH.'movieListAdmin.php');
+    }
     
 }
