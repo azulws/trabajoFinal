@@ -29,8 +29,7 @@
             $cinema->setAddress($address);
             $cinema->setCapacity($capacity);
             $cinema->setTicketValue($ticketValue);
-
-            $this->cinemaDAO->Add($cinema);
+            $result=$this->cinemaDBDAO->Add($cinema);
 
             $this->ShowAddView();
         }
@@ -57,25 +56,15 @@
 
         public function Remove($id) //TODO cambiar a $cinema
         {
-<<<<<<< HEAD
-            $this->cinemaDAO->Remove($id);
-
-=======
             include_once(VIEWS_PATH."validate-session.php");
             $this->cinemaDAO->Remove($id);
->>>>>>> entrega
             $this->showcinemaList();
         }
 
         public function RemoveDB($id)
         {
-<<<<<<< HEAD
-            $this->cinemaDBDAO->Remove($id);
-
-=======
             include_once(VIEWS_PATH."validate-session.php");
             $this->cinemaDBDAO->Remove($id);
->>>>>>> entrega
             $this->showcinemaListDB();
         }
 
@@ -92,13 +81,9 @@
             $lista = $this->cinemaDBDAO->readAll();
             include_once(VIEWS_PATH."cinemalist.php");
         }
-<<<<<<< HEAD
-        public function ShowUpdateCinema($id){
-=======
         public function ShowUpdateCinema($id)
         {
             include_once(VIEWS_PATH."validate-session.php");
->>>>>>> entrega
             $cinema=$this->cinemaDBDAO->read($id);
             include_once(VIEWS_PATH."cinemaUpdate.php");
         }

@@ -6,12 +6,12 @@
         private $capacity;      
         private $ticketValue;
         private $id;
-/*
+
         public function __construct(){
 
         }
 
-        public function __construct($name,$address,$capacity,$ticketValue){
+/*        public function __construct($name,$address,$capacity,$ticketValue){
             $this->name=$name;
             $this->address=$address;
             $this->capacity=$capacity;

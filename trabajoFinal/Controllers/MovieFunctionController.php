@@ -39,20 +39,12 @@
             include_once(VIEWS_PATH."validate-session.php");
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
-<<<<<<< HEAD
-            $movieFunction->setCinemaId($cinemaId);
-            $movieFunction->setMovieId($movieId);
-            $movie= new Movie();
-            $movie = $this->movieDBDAO->read($movieId);
-            $movieFunction->setEndDateTime($movie);
-=======
             $cinema= new Cinema();
             $cinema=$this->cinemaDBDAO->read($cinemaId);
             $movieFunction->setCinema($cinema);
             $movie = new Movie();
             $movie = $this->movieDBDAO->read($movieId);
             $movieFunction->setMovie($movie);            
->>>>>>> entrega
             $this->movieFunctionDBDAO->Add($movieFunction);
             $this->ShowAddView();
         }
@@ -203,7 +195,6 @@
 
         //chicos la unica manera que consegui de mostrar 
         public function showMovieFunctionsByCinema($cinema_id)
-<<<<<<< HEAD
         {
             $id = (int) $cinema_id;
             $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id);
@@ -215,6 +206,7 @@
                 {
                     foreach($lista as $item)
                     {   
+                        include_once(VIEWS_PATH."validate-session.php");
                         $movie = $this->movieDBDAO->read($item->getMovieId());
                         $item->setEndDateTime($movie);
                         include_once(VIEWS_PATH."showFunctionList.php");
@@ -222,16 +214,7 @@
                 }
             }                                                                                                                        
  }
-=======
-        {  
-             include_once(VIEWS_PATH."validate-session.php");
-            $id = (int) $cinema_id;echo "<br>";
-            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id); 
-            include_once(VIEWS_PATH."showFunctionList.php");                                                                           
- 
-        }
-        
-    }
->>>>>>> entrega
+                
+    
     
 ?> 

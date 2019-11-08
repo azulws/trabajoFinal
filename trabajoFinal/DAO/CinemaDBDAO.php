@@ -71,7 +71,7 @@
         //    return count($resp) > 0 ? $resp : null;
      }
 
-    public function Add( Cinema $cinema){
+    public function Add(Cinema $cinema){
         // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
         $sql = "INSERT INTO $this->tablename (cinema_name,ticket_value,address,capacity) VALUES (:cinema_name, :ticket_value, :address, :capacity)";
@@ -98,11 +98,7 @@
     }
 
     public function Remove($id){
-<<<<<<< HEAD
-        $sql = "DELETE FROM cinemas WHERE cinema_id= :cinema_id";
-=======
         $sql = "DELETE FROM $this->tablename WHERE cinema_id= :cinema_id";
->>>>>>> entrega
         $parameters['cinema_id'] = $id;
         
         try{
@@ -130,11 +126,7 @@
     }
     public function read ($id)
     {
-<<<<<<< HEAD
-        $sql = "SELECT * FROM cinemas where cinema_id = :cinema_id";
-=======
         $sql = "SELECT * FROM $this->tablename where cinema_id = :cinema_id";
->>>>>>> entrega
         $parameters['cinema_id'] = $id;
         try
         {
