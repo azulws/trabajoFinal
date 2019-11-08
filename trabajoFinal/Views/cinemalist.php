@@ -6,7 +6,6 @@ include_once(VIEWS_PATH.'login.php');
     <!-- main body -->
     <div class="content"> 
       <div class="scrollable">
-      <form method="POST">
         <table style="text-align:center;">
           <thead class="bgColor">
             <tr>
@@ -29,19 +28,23 @@ include_once(VIEWS_PATH.'login.php');
                     <td class="border"><?php echo $cinema->getCapacity() ?></td>
                     <td class="border"><?php echo $cinema->getTicketValue() ?></td>
                     <td class="border">
-                    <input type="submit" name = "id" value="<?php echo $cinema->getId() ?>" formaction=<?php echo FRONT_ROOT.'Cinema/ShowUpdateCinema'?>>
+                      <form action=<?php echo FRONT_ROOT.'Cinema/ShowUpdateCinema'?> method = "POST">
+                        <input type="hidden" name = "email" value=<?php echo $cinema->getId() ?>>
+                        <button type=submit> Modificar </button>
+                      </form>
                     </td>
                     <td class="border">
-                    <input type="submit" name = "id" value="<?php echo $cinema->getId() ?>" formaction=<?php echo FRONT_ROOT.'Cinema/RemoveDB'?>>
+                      <form action=<?php echo FRONT_ROOT.'Cinema/RemoveDB'?> method = "POST">
+                        <input type="hidden" name = "email" value=<?php echo $cinema->getId() ?>>
+                        <button type=submit> Modificar </button>
+                      </form>
                     </td>
-                 
                   </tr>
                 <?php
-
               }
             ?>                          
           </tbody>
-        </table></form> 
+        </table> 
       </div>
     </div>
     <!-- / main body -->

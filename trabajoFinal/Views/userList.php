@@ -59,7 +59,6 @@ include_once(VIEWS_PATH.'login.php');
     <!-- main body -->
     <div class="content"> 
       <div class="scrollable">
-      <form action="<?php echo FRONT_ROOT."Login/receiveAction"?>" method="POST">
         <table style="text-align:center;">
           <thead class="bgColor">
             <tr>
@@ -82,21 +81,26 @@ include_once(VIEWS_PATH.'login.php');
                     <td class="border"><?php echo $user->getRole() ?></td>
                     <td class="border"><?php echo $user->getName() ?></td>
                     <td class="border"><?php echo $user->getLastName() ?></td>
-		    <td class="border"><?php echo $user->getDni() ?></td>
+		                <td class="border"><?php echo $user->getDni() ?></td>
                     <td class="border">
-                    <input type="submit" name = "email" value="<?php echo $user->getEmail() ?>" formaction=<?php echo FRONT_ROOT.'Login/UpdateRoleDB'?>>
+                      <form action=<?php echo FRONT_ROOT.'Login/UpdateRoleDB'?> method = "POST">
+                        <input type="hidden" name = "email" value=<?php echo $user->getEmail() ?>>
+                        <button type=submit> Modificar </button>
+                      </form>
                     </td>
                     <td class="border">
-                    <input type="submit" name = "email" value="<?php echo $user->getEmail() ?>" formaction=<?php echo FRONT_ROOT.'Login/RemoveDB'?>>
+                      <form action=<?php echo FRONT_ROOT.'Login/RemoveDB'?> method = "POST">
+                        <input type="hidden" name = "email" value=<?php echo $user->getEmail()?>>
+                        <button type=submit> Eliminar </button>
+                      </form>
                     </td>
-                 
-                  </tr>
+                 </tr>
                 <?php
 
               }
             ?>                          
           </tbody>
-        </table></form> 
+        </table> 
       </div>
     </div>
     <!-- / main body -->

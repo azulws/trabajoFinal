@@ -33,7 +33,7 @@ class MovieController{
 
     public function listMovieApi(){
         $pageNumber = 1;
-        $lista = $this->movieList->getAllMovies(5);
+        $lista = $this->movieList->getAllMovies(2);
         include_once(VIEWS_PATH.'movieListApi.php');
     }
     
