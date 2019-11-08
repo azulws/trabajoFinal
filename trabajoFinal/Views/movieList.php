@@ -8,6 +8,8 @@ if($lista!=false){
          '<p> Points: '.$item->getPoints().'</p>'.
          '<p> Description: '.$item->getDescription().'</p>'.
          '<p> Duracion: '.$item->getRuntime().'</p>'.
+         echo '<form action="'.FRONT_ROOT.'Buyout/Buy">
+         <button>Comprar</button></form>'.
          '</div>';
     }
 }else{
