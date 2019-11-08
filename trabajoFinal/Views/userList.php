@@ -77,7 +77,7 @@ include_once(VIEWS_PATH.'login.php');
               foreach($lista as $user)
               {
                 ?>
-                  <tr>
+                  <tr class="bgColor">
                     <td class="border"><?php echo $user->getEmail() ?></td>
                     <td class="border"><?php echo $user->getRole() ?></td>
                     <td class="border"><?php echo $user->getName() ?></td>

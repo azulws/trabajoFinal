@@ -45,7 +45,7 @@
             $user->setName($v['userName']);
             $user->setLastName($v['last_name']);
             $user->setDni($v['dni']);
-            $user->setRol($v['role_id']);
+            $user->setRole($v['role_id']);
             array_push($userList,$user);
         }
         if(count($userList)>0)
@@ -130,7 +130,7 @@
             $user->setName($result[0]->getName());
             $user->setLastName($result[0]->getLastName());
             $user->setDni($result[0]->getDni());
-            $user->setRol($result[0]->getRole());
+            $user->setRole($result[0]->getRole());
             return $user;
         }else
             return false;

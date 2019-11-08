@@ -88,7 +88,7 @@
     }
     public function Update($cinema){
 
-      $sql = "UPDATE cinemas SET ticket_value = :ticket_value, capacity = :capacity, addres = :addres, cinema_name = :cinema_name WHERE cinema_id = :cinema_id";
+      $sql = "UPDATE cinemas SET ticket_value = :ticket_value, capacity = :capacity, address = :address, cinema_name = :cinema_name WHERE cinema_id = :cinema_id";
       $parameters['cinema_name'] = $cinema->getName();
       $parameters['ticket_value'] = $cinema->getTicketValue();
       $parameters['capacity'] = $cinema->getCapacity();

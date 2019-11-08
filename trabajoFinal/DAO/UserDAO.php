@@ -22,7 +22,7 @@
                      $user->setName($content["name"]);
                      $user->setLastname($content["lastname"]);
                      $user->setDni($content["dni"]);
-                     $user->setRol($content["role"]);
+                     $user->setRole($content["role"]);
                      array_push($this->userList, $user);
                  }
              }

@@ -10,6 +10,7 @@
                 <p> Capacidad: </p>
                 <input type="number" name="capacity" value="<?php echo $cinema->getCapacity();?>" placeholder="capacity total" required class="form-control" min="10"> 
             <br>
+                <p> Id: <input type="number" readonly name="id" value=<?php echo $cinema->getId()?>> </p>
                 <button type="submit">Actualizar</button>
     </form>
 

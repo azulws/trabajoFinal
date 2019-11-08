@@ -72,7 +72,7 @@ class LoginController{
         $usuario->setName($name);
         $usuario->setLastname($lastname);
         $usuario->setDni($dni);
-        $usuario->setRol($role);
+        $usuario->setRole($role);
 
         $this->userDAO->Add($usuario);
         $this->Index();
@@ -86,7 +86,7 @@ class LoginController{
         $usuario->setName($name);
         $usuario->setLastname($lastname);
         $usuario->setDni($dni);
-        $usuario->setRol(2);    //role tiene que ser 1 o 2 ya que son los unicos valores cargados
+        $usuario->setRole(2);    //role tiene que ser 1 o 2 ya que son los unicos valores cargados
 
         $this->userDBDAO->Add($usuario);
 
