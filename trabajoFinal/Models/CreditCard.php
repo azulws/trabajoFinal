@@ -3,6 +3,7 @@
 
     class CreditCard{
         private $id;
+        private $number;
         private $description;
         private $user;
         private $securityCode;
@@ -14,6 +15,14 @@
 
         public function setId($id){
             $this->id=$id;
+        }
+
+        public function getNumber(){
+            return $this->number;
+        }
+
+        public function setNumber($number){
+            $this->number=$number;
         }
 
         public function getDescription(){
