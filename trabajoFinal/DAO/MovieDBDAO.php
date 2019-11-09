@@ -49,6 +49,7 @@
             $movie->setPoints($v['points']);
             $movie->setMovieId($v['movie_id']);
             $movie->setRuntime($v['runtime']);
+            $this->genresByMoviesDBDAO->readGenresByMovie($movie);
             array_push($movieList,$movie);
         }
         if(count($movieList)>0)
@@ -80,11 +81,13 @@
         $parameters['movie_description'] = $movie->getDescription();
         $parameters['movie_id'] = $movie->getMovieId();
         $parameters['runtime'] = $movie->getRuntime();
-        
+
         try
         {
-                $this->connection = Connection::getInstance();
-                return $this->connection->ExecuteNonQuery($sql, $parameters);
+                $this->connection = Connection::getInstance();     
+                $this->connection->ExecuteNonQuery($sql, $parameters);
+                $this->genresByMoviesDBDAO->writeAll($movie);
+                return true;
         }
         catch(PDOException $e)
         {

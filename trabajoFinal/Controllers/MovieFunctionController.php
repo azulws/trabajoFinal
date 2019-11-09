@@ -43,8 +43,9 @@
             $this->ShowAddView();
         }
 
-        public function showMovieFunctionListDB(){
+        public function showMovieFunctionListDB($message =''){
             $lista = $this->movieFunctionDBDAO->readAll();
+            if($lista==false) $message = "No hay funciones cargadas en la base de datos";
             include_once(VIEWS_PATH."showFunctionList.php");
         }
 

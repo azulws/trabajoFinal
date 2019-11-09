@@ -47,7 +47,6 @@
             $cinema->setId($v['cinema_id']);
             array_push($cinemaList,$cinema);
         }
-        echo count($cinemaList);
         if(count($cinemaList)>0)
             return $cinemaList;
         else
