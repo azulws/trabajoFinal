@@ -4,22 +4,25 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
+    use DAO\GenreDBDAO as GenreDBDAO;
     use Models\Genre as Genre;
 
     class GenresByMoviesDBDAO
     {
          
          private $connection;
+         private $genreDBDAO;
 
          public function __construct()
          {
             $this->connection = null;
+            $this->genreDBDAO = new GenreDBDAO();
          }
 
     public function writeAll($movie){
-        foreach($movie->getGenres() as $genreId){
-           if($this->read($movie->getMovieId(),$genreId)==false)
-               $this->Add($movie,$genreId);
+        foreach($movie->getGenres() as $genre){
+           if($this->read($movie->getMovieId(),$genre->getId())==false)
+               $this->Add($movie,$genre);
         }
     }
 
@@ -68,6 +71,38 @@
         }else
             return false;
     }
+
+    public function readGenresByMovie($movie){
+        $sql = "SELECT * FROM genresByMovies where movie_id = :movie_id";
+        $parameters['movie_id'] = $movie->getMovieId();
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if(!empty($resultSet))
+        {
+            $movie->setGenres($this->mapearGenre($resultSet));  
+        }
+    }
+
+    protected function mapearGenre($value) {
+
+        $genreList = array();
+        foreach($value as $v){
+            $Genre = new Genre();
+            $Genre = $this->genreDBDAO->read($v['genre_id']);
+            array_push($genreList,$Genre);
+        }
+        if(count($genreList)>0)
+            return $genreList;
+        else
+            return false;
+     }
 }
       
 ?>

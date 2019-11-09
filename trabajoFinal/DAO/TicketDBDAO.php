@@ -6,17 +6,19 @@
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
     use Models\Ticket as Ticket;
-    //use Models\MovieFunction as MovieFunction;
-    //use DAO\MovieFunctionDBDAO as MovieFunctionDBDAO;
+    use Models\MovieFunction as MovieFunction;
+    use DAO\MovieFunctionDBDAO as MovieFunctionDBDAO;
 
     class TicketDBDAO{
         {
          
         private $connection;
+        private $movieFunctionDBDAO;
 
         public function __construct()
         {
             $this->connection = null;
+            $this->movieFunctionDBDAO= new MovieFunctionDBDAO();
         }
 
         public function readAll(){
@@ -44,6 +46,8 @@
                $ticket = new Ticket();
                $ticket->setId($v['ticket_id']);
                $ticket->setQr($v['qr']);
+               $movieFunction = $this->movieFunctionDBDAO->read($v['movieFunction_id']);
+               $ticket->setMovieFunction($movieFunction);
                array_push($ticketList,$ticket);
            }
            if(count($ticketList)>0)
@@ -54,9 +58,10 @@
    
        public function Add($ticket){
    
-           $sql = "INSERT INTO tickets (qr) VALUES (:qr)";
+           $sql = "INSERT INTO tickets (qr,movieFunction_id) VALUES (:qr,:movieFunction_id)";
    
            $parameters['qr'] = $ticket->getQr();
+           $parameters['movieFunction_id'] = $ticket->getMovieFunction()->getMovieFunctionId();
    
            try
            {
@@ -100,6 +105,8 @@
                $result = $this->mapear($resultSet);
                $ticket = new Ticket();
                $ticket->setQr($result[0]->getQr());
+               $movieFunction = $this->movieFunctionDBDAO->read($result[0]->getMovieFunctionId());
+               $ticket->setMovieFunction($movieFunction);
                return $ticket;
            }else
                return false;

@@ -2,7 +2,7 @@
     namespace Controllers;
 
     use Models\Buyout as Buyout;
-    use Models\MovieFunction as MovieFunction;
+    //use Models\MovieFunction as MovieFunction;
     use DAO\BuyoutDBDAO as BuyoutDBDAO;
 
     class BuyoutController
