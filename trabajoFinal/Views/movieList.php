@@ -48,4 +48,8 @@ if($lista!=false){
 }else{
     echo "<p>NO HAY PELICULAS</p>";
 }
+<<<<<<< HEAD
 ?> */
+=======
+?>
+>>>>>>> ec762f25b9be0c489475f76d3639b4ca203df7fd

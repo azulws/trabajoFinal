@@ -4,7 +4,7 @@
     class Buyout{
         private $id; //numberBuyout
         private $discount;
-        private $date;
+        private $buyDate;
         private $total;
         private $ticket;
         private $user;
@@ -22,11 +22,11 @@
         public function setDiscount($discount){
             $this->discount=$discount;
         }
-        public function getDate(){
-            return $this->date;
+        public function getBuyDate(){
+            return $this->buyDate;
         }
-        public function setDate($date){
-            $this->date=$date;
+        public function setBuyDate($buyDate){
+            $this->buyDate=$buyDate;
         }
         public function getTotal(){
             return $this->total;
