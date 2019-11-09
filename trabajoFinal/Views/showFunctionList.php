@@ -10,6 +10,9 @@ if($message!=""){
   <main class="hoc container clear"> 
     <!-- main body -->
     <div class="content"> 
+    <form method = "POST" action = <?php echo FRONT_ROOT."MovieFunction/showAddView" ?>>
+        <button id="buttons" class="btn btn-danger float-right" type="submit">+ Función</button>
+      </form>
       <div class="scrollable">
       <form action="<?php echo FRONT_ROOT."MovieFunction/removeDB"?>" method="POST">
         <table style="text-align:center;">
