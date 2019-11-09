@@ -53,6 +53,7 @@ class LoginController{
                     break;
             }
         }
+        $message="";
         include_once(VIEWS_PATH.'login.php');
     }
 
@@ -75,7 +76,7 @@ class LoginController{
         $usuario->setRole($role);
 
         $this->userDAO->Add($usuario);
-        $this->Index();
+        $this->Index("El usuario se creó con éxito");
     }
 
     public function createUserDB($name, $lastname, $email, $password, $dni)
