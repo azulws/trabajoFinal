@@ -1,10 +1,8 @@
 
    <div class="container">        
    <div class="row justify-content-center"> 
+   <h2 class="form-register-title">Registro de usuario</h2>
    <form class="form-register " method="POST" action="<?php echo FRONT_ROOT.'Login/createUserDB';?>">
-    
-     <h2 class="form-register-title">Registro de usuario</h2>
-
      <ul class="form-register-ul "> 
         <li class="form-register-li">
             <input class="form-register-input" type="text" name="name" placeholder="Name" required>
