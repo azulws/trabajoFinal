@@ -4,13 +4,13 @@
      <form class="form-nav-log" method="POST" action=<?php echo FRONT_ROOT.'Login/log';?>>
           <ul class="nav justify-content-center ml-auto">
                <li class="nav-item"  >
-                    <input class="inputs" class ="type="email" placeholder="Email" name="user_email" required>
+                    <input class ="inputs" type="email" placeholder="Email" name="user_email" required>
                </li>
                <li class="nav-item" >
-                    <input class="inputs" type="password" placeholder="Password" name="password" required>
+                    <input  type="inputs" type="password" placeholder="Password" name="password" required>
                </li>
                <li class="nav-item" >
-                    <button class=" buttons btn btn-danger float-right" type="submit">Ingresar</a>
+                    <button class="buttons btn btn-danger float-right" type="submit">Ingresar</a>
                </li>
           </ul>
      </form>

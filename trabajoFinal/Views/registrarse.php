@@ -5,7 +5,7 @@
     
      <h2 class="form-register-title">Registro de usuario</h2>
 
-     <ul class="form-register-ul bg-primary"> 
+     <ul class="form-register-ul "> 
         <li class="form-register-li">
             <input class="form-register-input" type="text" name="name" placeholder="Name" required>
         </li>
