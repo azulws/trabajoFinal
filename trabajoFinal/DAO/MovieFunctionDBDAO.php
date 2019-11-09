@@ -157,10 +157,10 @@
         }
     }
 
-    public function read ($movieFunction)
+    public function read ($movieFunctionId)
     {
         $sql = "SELECT * FROM movieFunctions where movieFunction_id = :movieFunction_id";
-        $parameters['movieFunction_id'] = $movieFunction->getMovieFunctionId();
+        $parameters['movieFunction_id'] = $movieFunctionId;
         try
         {
             $this->connection = Connection::getInstance();

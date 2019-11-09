@@ -6,17 +6,19 @@
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
     use Models\CreditCard as CreditCard;
-    //use Models\User as User;
-    //use DAO\UserDBDAO as User;
+    use Models\User as User;
+    use DAO\UserDBDAO as User;
 
     class CreditCardDBDAO{
         {
          
         private $connection;
+        private $userDBDAO;
 
         public function __construct()
         {
             $this->connection = null;
+            $this->userDBDAO = new UserDBDAO();
         }
 
         public function readAll(){
@@ -44,6 +46,7 @@
                $creditCard = new CreditCard();
                $creditCard->setId($v['creditCard_id']);
                $creditCard->setCreditCardDescription($v['creditCard_description']);
+               $user = $this->userDBDAO->read($v['user_email']);
                $creditCard->setUser($user);
                array_push($creditCardList,$creditCard);
            }
@@ -55,10 +58,10 @@
    
        public function Add($creditCard){
    
-           $sql = "INSERT INTO creditCards (creditCard_description,user_id) VALUES (:creditCard_description,:user_id)";
+           $sql = "INSERT INTO creditCards (creditCard_description,user_email) VALUES (:creditCard_description,:user_email)";
    
            $parameters['creditCard_description'] = $creditCard->getCreditCardDescription();
-           $parameters['user_id'] = $creditCard->getUser();
+           $parameters['user_email'] = $creditCard->getUser()->getEmail();
    
            try
            {
@@ -102,7 +105,8 @@
                $result = $this->mapear($resultSet);
                $creditCard = new CreditCard();
                $creditCard->setCreditCardDescription($result[0]->getCreditCardDescription());
-               $creditCard->setUser($result[0]->getUser());
+               $user = $this->userDBDAO->read($result[0]->getEmail());
+               $creditCard->setUser($user);
                return $creditCard;
            }else
                return false;

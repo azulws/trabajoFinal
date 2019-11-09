@@ -6,21 +6,26 @@
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
     use Models\Buyout as Buyout;
-    //use Models\User as User;
-    //use DAO\UserDBDAO as UserDBDAO;
-    //use Models\CreditCard as CreditCard;
-    //use DAO\CreditCardDBDAO as CreditCardDBDAO;
-    //use Models\Ticket as Ticket;
-    //use DAO\TicketDBDAO as TicketDBDAO;
+    use Models\User as User;
+    use DAO\UserDBDAO as UserDBDAO;
+    use Models\CreditCard as CreditCard;
+    use DAO\CreditCardDBDAO as CreditCardDBDAO;
+    use Models\Ticket as Ticket;
+    use DAO\TicketDBDAO as TicketDBDAO;
 
     class BuyoutDBDAO{
-        {
          
         private $connection;
+        private $userDBDAO;
+        private $creditCardDBDAO;
+        private $ticketDBDAO;
 
         public function __construct()
         {
             $this->connection = null;
+            $this->userDBDAO = new UserDBDAO();
+            $this->creditCardDBDAO = new CreditCardDBDAO();
+            $this->ticketDBDAO = new TicketDBDAO();
         }
 
         public function readAll(){
@@ -50,8 +55,11 @@
                $buyout->setDiscound($v['discound']);
                $buyout->setBuyDate($v['buy_date']);
                $buyout->setTotal($v['total']);
+               $ticket = $this->ticketDBDAO->read($v['ticket_id']);
                $buyout->setTicket($ticket);
+               $user = $this->userDBDAO->read($v['user_email']);
                $buyout->setUser($user);
+               $creditCard = $this->creditCardDBDAO->read($v['creditCard_id']);
                $buyout->setCreditCard($creditCard);
                array_push($buyoutList,$buyout);
            }
@@ -63,15 +71,15 @@
    
        public function Add($buyout){
    
-           $sql = "INSERT INTO buyouts (discound,buy_date,total,ticket_id,user_id,creditCard_id) 
-           VALUES (:discound, :buy_date, :total, :ticket_id, :user_id, :creditCard_id)";
+           $sql = "INSERT INTO buyouts (discound,buy_date,total,ticket_id,user_email,creditCard_id) 
+           VALUES (:discound, :buy_date, :total, :ticket_id, :user_email, :creditCard_id)";
    
            $parameters['discound'] = $buyout->getDiscound();
            $parameters['buy_date'] = $buyout->getBuyDate();
            $parameters['total'] = $buyout->getTotal();
-           $parameters['ticket_id'] = $buyout->getTicket();
-           $parameters['user_id'] = $buyout->getUser();
-           $parameters['creditCard_id'] = $buyout->getCreditCard();
+           $parameters['ticket_id'] = $buyout->getTicket()->getId();
+           $parameters['user_email'] = $buyout->getUser()->getEmail();
+           $parameters['creditCard_id'] = $buyout->getCreditCard()->getId();
    
            try
            {
@@ -117,9 +125,12 @@
                $buyout->setDiscound($result[0]->getDiscound());
                $buyout->setBuyDate($result[0]->getBuyDate());
                $buyout->setTotal($result[0]->getTotal());
-               $buyout->setTicket($result[0]->getTicket());
-               $buyout->setUser($result[0]->getUser());
-               $buyout->setCreditCard($result[0]->getCreditCard());
+               $ticket = $this->ticketDBDAO->read($result[0]->getId());
+               $buyout->setTicket($ticket);
+               $user = $this->userDBDAO->read($result[0]->getEmail());
+               $buyout->setUser($user);
+               $creditCard = $this->creditCardDBDAO->read($result[0]->getCreditCardId());
+               $buyout->setCreditCard($creditCard);
                return $buyout;
            }else
                return false;
