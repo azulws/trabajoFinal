@@ -47,16 +47,16 @@
             $this->ShowAddView();
         }
 
-        public function Remove($name) //TODO cambiar a $cinema
+        public function Remove($name)
         {
             $this->cinemaDAO->Remove($name);
 
             $this->showcinemaList();
         }
 
-        public function RemoveDB($name)
+        public function RemoveDB($id)
         {
-            $this->cinemaDBDAO->Remove($name);
+            $this->cinemaDBDAO->Remove($id);
 
             $this->showcinemaListDB();
         }
@@ -70,8 +70,8 @@
             $lista = $this->cinemaDBDAO->readAll();
             include_once(VIEWS_PATH."cinemalist.php");
         }
-        public function ShowUpdateCinema($name){
-            $cinema=$this->cinemaDBDAO->read($name);
+        public function ShowUpdateCinema($id){
+            $cinema=$this->cinemaDBDAO->readById($id);
             include_once(VIEWS_PATH."cinemaUpdate.php");
         }
         public function ShowMovieFunctions(){
@@ -79,9 +79,16 @@
             include_once(VIEWS_PATH."movieFuctionList.php");
         }
 
-        public function UpdateDB($name,$ticket_value,$capacity)
+        public function UpdateDB($name,$address,$ticket_value,$capacity,$id)
         {
-            $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
+            $cinema = new Cinema();
+            $cinema->setName($name);
+            $cinema->setAddress($address);
+            $cinema->setTicketValue($ticket_value);
+            $cinema->setCapacity($capacity);
+            $cinema->setId($id);
+
+            $this->cinemaDBDAO->Update($cinema);
 
             $this->showcinemaListDB();
         }

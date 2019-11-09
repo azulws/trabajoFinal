@@ -18,7 +18,7 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM users ORDER BY role_id";
         try
         {
             $this->connection = Connection::getInstance();
@@ -45,7 +45,7 @@
             $user->setName($v['userName']);
             $user->setLastName($v['last_name']);
             $user->setDni($v['dni']);
-            $user->setRol($v['role_id']);
+            $user->setRole($v['role_id']);
             array_push($userList,$user);
         }
         if(count($userList)>0)
@@ -55,7 +55,6 @@
      }
 
     public function Add($user){
-        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
 
         $sql = "INSERT INTO users (email,pass,userName,last_name,dni,role_id) 
         VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";
@@ -131,7 +130,7 @@
             $user->setName($result[0]->getName());
             $user->setLastName($result[0]->getLastName());
             $user->setDni($result[0]->getDni());
-            $user->setRol($result[0]->getRole());
+            $user->setRole($result[0]->getRole());
             return $user;
         }else
             return false;

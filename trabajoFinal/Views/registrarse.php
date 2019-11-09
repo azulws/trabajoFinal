@@ -15,7 +15,7 @@
          </div>
     </form>
 <?php
-echo "<form class='login' action='".FRONT_ROOT."Home/Index' method='POST'>
+echo "<form class='login' action='".FRONT_ROOT."Login/Index' method='POST'>
         <button type='submit' name='action'>Volver</button>
     </form>";
 ?>

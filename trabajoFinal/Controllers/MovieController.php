@@ -5,9 +5,9 @@
     use DAO\MovieDBDAO as MovieDBDAO;
 
 class MovieController{
-    private $movieList; //TODO cambiar nombre a movieDAO
-    private $pageNumber;
+    private $movieList;
     private $movieDBDAO;
+    private $pageNumber;
 
     public function __construct(){
             $this->movieList = new MovieDAO();
@@ -18,16 +18,23 @@ class MovieController{
         $lista = $this->movieList->getMovies($pageNumber);
         include_once(VIEWS_PATH.'movieList.php');
     }
-    public function nextPage(){
-        $pageNumber++;
-        $lista = $this->movieList->getMovies($pageNumber);
-        include_once(VIEWS_PATH.'movieList.php');
-    }
     public function moviesToDB(){
         $pageNumber = 1;
         $movies=$this->movieList->getMovies($pageNumber);
         $this->movieDBDAO->writeAll($movies);
         include_once(VIEWS_PATH.'admin.php');
+    }
+
+    public function listMovieAdmin(){
+        $pageNumber = 1;
+        $lista = $this->movieList->getMoviesByPage($pageNumber);
+        include_once(VIEWS_PATH.'movieListAdmin.php');
+    }
+
+    public function listMovieApi(){
+        $pageNumber = 1;
+        $lista = $this->movieList->getAllMovies(2);
+        include_once(VIEWS_PATH.'movieListApi.php');
     }
     
 }
