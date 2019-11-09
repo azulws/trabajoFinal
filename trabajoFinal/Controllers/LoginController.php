@@ -53,6 +53,7 @@ class LoginController{
                     break;
             }
         }
+        $message="";
         include_once(VIEWS_PATH.'login.php');
     }
 
@@ -75,7 +76,7 @@ class LoginController{
         $usuario->setRole($role);
 
         $this->userDAO->Add($usuario);
-        $this->Index();
+        $this->Index("El usuario se creó con éxito");
     }
 
     public function createUserDB($name, $lastname, $email, $password, $dni)
@@ -93,39 +94,44 @@ class LoginController{
         $this->Index();
     }
 
-    public function showUserList(){
+    public function showUserList()
+    {
+        include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->userDAO->GetAll();
         include_once(VIEWS_PATH."userList.php");
     }
 
-    public function showUserListDB(){
+    public function showUserListDB()
+    {
+        include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->userDBDAO->readAll();
         include_once(VIEWS_PATH."userList.php");
     }
 
     public function Remove($email) //TODO cambiar a $user
     {
+        include_once(VIEWS_PATH."validate-session.php");
         $this->userDAO->Remove($email);
-
         $this->showUserList();
     }
 
     public function RemoveDB($email)
     {
+        include_once(VIEWS_PATH."validate-session.php");
         $this->userDBDAO->Remove($email);
-
         $this->showUserListDB();
     }
 
     public function UpdateRoleDB($email) //TODO corregir problema
     {
+        include_once(VIEWS_PATH."validate-session.php");
         $this->userDBDAO->UpdateRole($email);
-
         $this->showUserListDB();
     }
 
     public function logout()
     {   
+        include_once(VIEWS_PATH."validate-session.php");
         session_destroy();
         header("location:../index.php");
     }

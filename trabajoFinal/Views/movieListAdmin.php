@@ -1,11 +1,3 @@
-<?php
-include_once(VIEWS_PATH.'login.php');
-if($message!=""){
-     echo '<script type="text/javascript">';
-     echo ' alert("'.$message.'")'; 
-     echo '</script>';
-   }
-?>
 
 <main class="py-5">
      <section id="listado" class="mb-5">

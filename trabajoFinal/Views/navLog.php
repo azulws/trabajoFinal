@@ -1,27 +1,27 @@
-<div id= "nav">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary d-flex justify-content-end">
+<div class= "nav-log">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-primary d-flex justify-content-end">
      <p> <?php $message ?> </p>
-     <form id="form-nav-log" method="POST" action=<?php echo FRONT_ROOT.'Login/log';?>>
+     <form class="form-nav-log" method="POST" action=<?php echo FRONT_ROOT.'Login/log';?>>
           <ul class="nav justify-content-center ml-auto">
-               <li class="nav-item" id="nav-item" >
-                    <input id="inputs" class ="type="email" placeholder="Email" name="user_email" required>
+               <li class="nav-item"  >
+                    <input class ="nav-log-input" type="email" placeholder="Email" name="user_email" required>
                </li>
-               <li class="nav-item" id="nav-item">
-                    <input id="inputs" type="password" placeholder="Password" name="password" required>
+               <li class="nav-item" >
+                    <input  class="nav-log-input" type="password" placeholder="Password" name="password" required>
                </li>
-               <li class="nav-item"id="nav-item" >
-                    <button id="buttons" class="btn btn-danger float-right" type="submit">Ingresar</a>
+               <li class="nav-item" >
+                    <button class="nav-log-button btn btn-danger float-right" type="submit">Ingresar</a>
                </li>
           </ul>
      </form>
-     <form id="form-nav-log" action=<?php echo FRONT_ROOT.'Login/register'?>>
+     <form class="form-nav-log" action=<?php echo FRONT_ROOT.'Login/register'?>>
         <ul class="nav justify-content-center ml-auto">
-              <li class="nav-item"id="nav-item" >
-                   <button id="buttons" class="btn btn-danger float-right" type="submit">Registrarse</button>
+              <li class="nav-item" >
+                   <button class=" nav-log-button btn btn-danger float-right" type="submit">Registrarse</button>
               </li>
        </ul>
      </form>
-</nav>
-<div id="nav">
+ </nav>
+</div>
 
     

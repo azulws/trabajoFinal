@@ -45,9 +45,11 @@
            foreach($value as $v){
                $creditCard = new CreditCard();
                $creditCard->setId($v['creditCard_id']);
-               $creditCard->setCreditCardDescription($v['creditCard_description']);
+               $creditCard->setDescription($v['creditCard_description']);
                $user = $this->userDBDAO->read($v['user_email']);
                $creditCard->setUser($user);
+               $creditCard->setSecurityCode($v['security_code']);
+               $creditCard->setExpirationDate($v['expiration_date']);
                array_push($creditCardList,$creditCard);
            }
            if(count($creditCardList)>0)
@@ -58,20 +60,22 @@
    
        public function Add($creditCard){
    
-           $sql = "INSERT INTO creditCards (creditCard_description,user_email) VALUES (:creditCard_description,:user_email)";
-   
-           $parameters['creditCard_description'] = $creditCard->getCreditCardDescription();
-           $parameters['user_email'] = $creditCard->getUser()->getEmail();
-   
-           try
-           {
-                   $this->connection = Connection::getInstance();
-                   return $this->connection->ExecuteNonQuery($sql, $parameters);
-           }
-           catch(PDOException $e)
-           {
-               echo $e;
-           }
+            $sql = "INSERT INTO creditCards (creditCard_description,user_email,security_code,expiration_date)
+                VALUES (:creditCard_description,:user_email,:security_code,expiration_date)";
+    
+            $parameters['creditCard_description'] = $creditCard->getDescription();
+            $parameters['user_email'] = $creditCard->getUser()->getEmail();
+            $parameters['security_code'] = $creditCard->getSegurityCode();
+            $parameters['expiration_date'] = $creditCard->getExpirationDate();
+            try
+            {
+                    $this->connection = Connection::getInstance();
+                    return $this->connection->ExecuteNonQuery($sql, $parameters);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
        }
    
        public function Remove($id){
@@ -104,9 +108,11 @@
            {
                $result = $this->mapear($resultSet);
                $creditCard = new CreditCard();
-               $creditCard->setCreditCardDescription($result[0]->getCreditCardDescription());
+               $creditCard->setDescription($result[0]->getDescription());
                $user = $this->userDBDAO->read($result[0]->getEmail());
                $creditCard->setUser($user);
+               $creditCard->setSecurityCode($result[0]->getSecurityCode());
+               $creditCard->setExpirationDate($result[0]->getExpirationDate());
                return $creditCard;
            }else
                return false;

@@ -3,7 +3,7 @@
     echo'<div class ="container" >
     <div class="row">';
     foreach($lista as $item){
-     echo '<div class="col-lg-4 col-md-6 mb-4" id="showMovies">
+     echo '<div class="col-lg-4 col-md-6 mb-4" class="showMovies">
            <div class="card h-100" >
            <img class="rounded float-center"
                 srcset="https://image.tmdb.org/t/p/w500'.$item->getPoster().', 300w"
