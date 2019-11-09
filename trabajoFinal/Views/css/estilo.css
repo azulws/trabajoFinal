@@ -12,6 +12,20 @@ fieldset {
     text-align: center;
     position:bottom;
 }
+.box {
+    background-image: url("../img/cinema.jpg");
+    background-repeat: repeat;
+    background-size: contain;
+  }
+#showMovies{
+         margin: 0px 0px 0px 0px;
+         margin-top: 24px;
+         margin-bottom: 24px;
+         margin-left: 0;
+         margin-right: 0;
+         padding-bottom: 5px;
+}
+
 
 /*
 button {
