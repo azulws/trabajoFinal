@@ -1,6 +1,6 @@
 <?php
  if($lista!=false){
-    echo'<div class = "container" >
+    echo'<div class ="container" >
     <div class="row">';
     foreach($lista as $item){
      echo '<div class="col-lg-4 col-md-6 mb-4" class="showMovies">

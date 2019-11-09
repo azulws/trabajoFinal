@@ -25,7 +25,11 @@ fieldset {
          margin-right: 0;
          padding-bottom: 5px;
 }
-.buttons{
+.nav-log{
+    margin-bottom: 50px;
+    box-sizing: content-box;
+}
+.nav-log-button{
     padding: 4px 10px 4px 10px;
     color: #FFF;
     background-color: #4bc970;
@@ -47,11 +51,11 @@ fieldset {
     padding-bottom:5px;
     padding-right:5px;
 }
-.buttons:hover{
+.nav-log-button:hover{
     background-color:coral;
 }
 
-.inputs{
+.nav-log-input{
     padding:  4px 10px 4px 10px;
     color:#FFF;
     background-color:#FFF;
@@ -84,25 +88,24 @@ fieldset {
 .form-nav-log.ul.li{
     float: center;
 }
-.form-nav-log,ul{
+.form-nav-log-ul{
     display: block;
 }
-#nav{
-        box-sizing: border-box;
-}
+
 .form-register-title{
     font-size: 50px;
     text-align: center;
     font-style: normal;
     height: 5px;
-    margin-bottom: 70px;
+    padding-top: 50px;
+    margin-bottom: 100px;
 }
 .form-register{
     box-sizing:border-box;
     background-image: none;
     display: inline-table;
     width: 100%;
-    margin-top: 140px;
+    margin-top: 40px;
     margin-right: 40px;
     margin-bottom: 40px;
     margin-left: 10px;
@@ -160,10 +163,11 @@ fieldset {
     font-style: normal;
     border-radius: 5px;
     float: center;
-    margin-top: 3px;
-    margin-right: 3px;
-    margin-bottom: 3px;
-    margin-left: 3px;
+    padding-top:5px;
+    padding-left: 5px;
+    padding-bottom:5px;
+    padding-right:5px;
+    margin-left:2px;
     display: center;
     width: 100%;
     box-shadow:  #4bc970;
