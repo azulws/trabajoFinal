@@ -7,7 +7,7 @@
                     <input class ="inputs" type="email" placeholder="Email" name="user_email" required>
                </li>
                <li class="nav-item" >
-                    <input  type="inputs" type="password" placeholder="Password" name="password" required>
+                    <input  class="inputs" type="password" placeholder="Password" name="password" required>
                </li>
                <li class="nav-item" >
                     <button class="buttons btn btn-danger float-right" type="submit">Ingresar</a>
