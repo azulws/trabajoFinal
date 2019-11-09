@@ -3,8 +3,10 @@
 
     class CreditCard{
         private $id;
-        private $creditCardDescription;
+        private $description;
         private $user;
+        private $securityCode;
+        private $expirationDate;
 
         public function getId(){
             return $this->id;
@@ -14,12 +16,12 @@
             $this->id=$id;
         }
 
-        public function getCreditCardDescription(){
-            return $this->creditCardDescription;
+        public function getDescription(){
+            return $this->description;
         }
 
-        public function setCreditCardDescription($creditCardDescription){
-            $this->creditCardDescription=$creditCardDescription;
+        public function setDescription($description){
+            $this->=$description;
         }
 
         public function getUser(){
@@ -28,5 +30,21 @@
 
         public function setuserUser($user){
             $this->user=$user;
+        }
+
+        public function getSecurityCode(){
+            return $this->securityCode;
+        }
+
+        public function setSecurityCode($securityCode){
+            $this->securityCode=$securityCode;
+        }
+
+        public function getExpirationDate(){
+            return $this->expirationDate;
+        }
+
+        public function setexpirationDate($expirationDate){
+            $this->expirationDate=$expirationDate;
         }
     }
