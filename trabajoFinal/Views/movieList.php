@@ -28,28 +28,3 @@
 }else{
     echo "<p>NO HAY PELICULAS</p>";
 }
-
-/*
-if($lista!=false){
-    $a=0;
-    foreach($lista as $item){
-    echo '<div class="intento">'.
-         '<p class="titleMovie">'.$item->getTitle().'</p>'.
-         '<img src="https://image.tmdb.org/t/p/w500'.$item->getPoster().'">'.
-         '<p> Estreno: '.$item->getReleaseDate().'</p>'.
-         '<p> Points: '.$item->getPoints().'</p>'.
-         '<p> Declass= scription: '.$item->getDescription().'</p>'.
-         '<p> Duracion: '.$item->getRuntime().'</p>'.
-         '<form action="'.FRONT_ROOT.'Buyout/Buy">.
-         <button>Comprar</button></form>'.
-         '</div>';
-     $a++;
-    }
-}else{
-    echo "<p>NO HAY PELICULAS</p>";
-}
-<<<<<<< HEAD
-?> */
-=======
-?>
->>>>>>> ec762f25b9be0c489475f76d3639b4ca203df7fd
