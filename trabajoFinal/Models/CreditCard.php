@@ -3,7 +3,7 @@
 
     class CreditCard{
         private $id;
-        private $creditCard;
+        private $creditCardDescription;
         private $user;
 
         public function getId(){
@@ -14,12 +14,12 @@
             $this->id=$id;
         }
 
-        public function getCreditCard(){
-            return $this->creditCard;
+        public function getCreditCardDescription(){
+            return $this->creditCardDescription;
         }
 
-        public function setCreditCard($creditCard){
-            $this->creditCard=$creditCard;
+        public function setCreditCardDescription($creditCardDescription){
+            $this->creditCardDescription=$creditCardDescription;
         }
 
         public function getUser(){
