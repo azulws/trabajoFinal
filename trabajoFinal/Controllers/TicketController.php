@@ -32,12 +32,14 @@
 
         public function RemoveDB($id)
         {
+            include_once(VIEWS_PATH."validate-session.php");
             $this->ticketDBDAO->Remove($id);
-
             $this->showTicketListByUserDB();
         }
 
-        public function showTicketListByUserDB(){
+        public function showTicketListByUserDB()
+        {
+            include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->ticketDBDAO->readAll();
             //include_once(VIEWS_PATH."ticketListByUser.php");
         }
