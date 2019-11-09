@@ -1,5 +1,10 @@
 <?php
 include_once(VIEWS_PATH.'login.php');
+if($message!=""){
+  echo '<script type="text/javascript">';
+  echo ' alert("'.$message.'")'; 
+  echo '</script>';
+}
 ?>
 <div class="wrapper row4">
   <main class="hoc container clear"> 
@@ -20,7 +25,7 @@ include_once(VIEWS_PATH.'login.php');
           </thead>
           <tbody class="bgColor">
             <?php
-              foreach($lista as $item)
+              if($lista!=false) foreach($lista as $item)
               {
                 ?>
                   <tr>

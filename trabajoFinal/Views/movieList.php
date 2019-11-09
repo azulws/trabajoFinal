@@ -1,5 +1,4 @@
 <?php
-
  if($lista!=false){
     echo'<div class ="container" >
     <div class="row">';
@@ -26,5 +25,5 @@
     echo'</div>
          </div>';
 }else{
-    echo "<p>NO HAY PELICULAS</p>";
+    echo "<h2>No hay funciones cargadas en cartelera</h2>";
 }
