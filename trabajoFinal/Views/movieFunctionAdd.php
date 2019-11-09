@@ -1,3 +1,11 @@
+<?php
+include_once(VIEWS_PATH.'login.php');
+if($message!=""){
+  echo '<script type="text/javascript">';
+  echo ' alert("'.$message.'")'; 
+  echo '</script>';
+}
+?>
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."MovieFunction/validateFunctionByDate";?>>
 		<div align="center">
      		<h2>Alta de funcion </h2>

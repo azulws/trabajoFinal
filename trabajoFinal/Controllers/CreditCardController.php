@@ -2,8 +2,7 @@
     namespace Controllers;
 
     use Models\CreditCard as CreditCard;
-    use Models\User as User;
-    use DAO\BuyoutDBDAO as BuyoutDBDAO;
+    use DAO\UserDBDAO as UserDBDAO;
 
     class CreditCardController
     {
@@ -12,22 +11,18 @@
         public function __construct()
         {
             $this->creditCardDBDAO = new CreditCardDBDAO();
+            $this->userDBDAO = new UserDBDAO();
         }
 
-        public function ShowCreditCardView()
-        {
-            //require_once(VIEWS_PATH."creditCard.php");
-        }
-
-        /*public function AddDB($creditCardDescription, $user)
+        /*public function AddDB($description, $user, $segurityCode, $expirationDate)
         {
             $creditCard = new CreditCard();
-            $creditCard->setCreditCardDescription($creditCardDescription);
-            $creditCard->setUser($user);
-            
+            $creditCard->setDescription($description);
+            $u = $this->userDBDAO->read($user);
+            $creditCard->setUser($u);
+            $creditCard->setSecurityCode($segurityCode);
+            $creditCard->setExpirationDate($expirationDate);
             $this->creditCardDBDAO->Add($creditCard);
-
-            $this->ShowCreditCardView();
         }*/
 
         public function RemoveDB($id)
@@ -36,11 +31,15 @@
             $this->creditCardDBDAO->Remove($id);
             $this->showBuyoutListDB();
         }
+<<<<<<< HEAD
 
         public function showBuyoutListDB(){
             include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->buyoutDBDAO->readAll();
             //include_once(VIEWS_PATH."buyoutList.php");
         }
+=======
+        
+>>>>>>> 38e8dca1eadb1e38e903155c8e70584d41466f6e
     }
 ?>

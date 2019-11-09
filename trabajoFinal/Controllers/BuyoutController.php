@@ -2,16 +2,24 @@
     namespace Controllers;
 
     use Models\Buyout as Buyout;
-    //use Models\MovieFunction as MovieFunction;
     use DAO\BuyoutDBDAO as BuyoutDBDAO;
-
+    use DAO\TicketDBDAO as TicketDBDAO;
+    use DAO\CreditCardDBDAO as CreditCardDBDAO;
+    use DAO\UserDBDAO as UserDBDAO;
+    
     class BuyoutController
     {
         private $buyoutDBDAO;
+        private $ticketDBDAO;
+        private $userDBDAO;
+        private $creditCardDBDAO;
 
         public function __construct()
         {
             $this->buyoutDBDAO = new BuyoutDBDAO();
+            $this->ticketDBDAO = new TicketDBDAO();
+            $this->userDBDAO = new UserDBDAO();
+            $this->creditCardDBDAO = new CreditCardDBDAO();
         }
 
         public function ShowBuyoutView()
@@ -19,7 +27,7 @@
             //require_once(VIEWS_PATH."buyoutAdd.php");
         }
 
-        /*public function AddDB($discount, $buy_date, $total, $ticket, $user, $creditCard)
+        /*public function Add($discount, $buy_date, $total, $ticket, $user, $creditCard)
         {
             $buyout = new Buyout();
             $buyout->setDiscount($discount);
