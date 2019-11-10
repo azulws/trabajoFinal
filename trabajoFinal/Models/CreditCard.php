@@ -30,14 +30,14 @@
         }
 
         public function setDescription($description){
-            $this->=$description;
+            $this->description=$description;
         }
 
         public function getUser(){
             return $this->user;
         }
 
-        public function setuserUser($user){
+        public function setUser($user){
             $this->user=$user;
         }
 
@@ -53,7 +53,7 @@
             return $this->expirationDate;
         }
 
-        public function setexpirationDate($expirationDate){
+        public function setExpirationDate($expirationDate){
             $this->expirationDate=$expirationDate;
         }
     }

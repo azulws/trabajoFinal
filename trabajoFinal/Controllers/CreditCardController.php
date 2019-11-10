@@ -3,6 +3,7 @@
 
     use Models\CreditCard as CreditCard;
     use DAO\UserDBDAO as UserDBDAO;
+    use DAO\CreditCardDBDAO as CreditCardDBDAO;
 
     class CreditCardController
     {
@@ -19,6 +20,7 @@
         }
 
         public function showCreditCardList($message=""){
+            $lista = $this->creditCardDBDAO->readAll();
             require_once(VIEWS_PATH."creditCardList.php");
         }
         public function add($number, $description, $user, $segurityCode, $expirationDate)
@@ -32,13 +34,14 @@
             $creditCard->setExpirationDate($expirationDate);
 
             $this->creditCardDBDAO->Add($creditCard);
+            $this->showCreditCardList();
         }
 
         public function removeDB($id)
         {
             $this->creditCardDBDAO->Remove($id);
 
-            $this->showCreditCardListDB();
+            $this->showCreditCardList();
         }
         
 

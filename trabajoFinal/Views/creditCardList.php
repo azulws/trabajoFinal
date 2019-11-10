@@ -14,7 +14,7 @@ if($message!=""){
         <button id="buttons" class="btn btn-danger float-right" type="submit">+ Tarjeta</button>
       </form>
       <div class="scrollable">
-      <form action="<?php echo FRONT_ROOT."MovieFunction/removeDB"?>" method="POST">
+      <form action="<?php echo FRONT_ROOT."CreditCard/removeDB"?>" method="POST">
         <table style="text-align:center;">
           <thead class="bgColor">
             <tr>
@@ -34,6 +34,7 @@ if($message!=""){
                     <td class="border"><?php echo $item->getNumber() ?></td>
                     <td class="border"><?php echo $item->getExpirationDate() ?></td>
                     <td class="border"><?php echo $item->getSecurityCode() ?></td>
+                    <td>
                     <button type="submit" name="id" class="btn" value="<?php echo $item->getId() ?>"> Eliminar </button>
                     </td>
                   </tr>

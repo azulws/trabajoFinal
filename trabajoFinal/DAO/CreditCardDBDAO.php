@@ -7,10 +7,9 @@
     use DAO\QueryType as QueryType;
     use Models\CreditCard as CreditCard;
     use Models\User as User;
-    use DAO\UserDBDAO as User;
+    use DAO\UserDBDAO as UserDBDAO;
 
     class CreditCardDBDAO{
-        {
          
         private $connection;
         private $userDBDAO;
@@ -62,12 +61,12 @@
        public function Add($creditCard){
    
             $sql = "INSERT INTO creditCards (numberCard,creditCard_description,user_email,security_code,expiration_date)
-                VALUES (:numberCard,:creditCard_description,:user_email,:security_code,expiration_date)";
+                VALUES (:numberCard,:creditCard_description,:user_email,:security_code,:expiration_date)";
     
             $parameters['numberCard'] = $creditCard->getNumber();
             $parameters['creditCard_description'] = $creditCard->getDescription();
             $parameters['user_email'] = $creditCard->getUser()->getEmail();
-            $parameters['security_code'] = $creditCard->getSegurityCode();
+            $parameters['security_code'] = $creditCard->getSecurityCode();
             $parameters['expiration_date'] = $creditCard->getExpirationDate();
             try
             {
