@@ -21,6 +21,7 @@ class LoginController{
 
         public function Index($message = "")
         {
+            echo $message;
             $movieFunctionDBDAO = new MovieFunctionDBDAO();
             $movieDBDAO = new MovieDBDAO();
             $moviesArray = $movieFunctionDBDAO->readAllMovies();
@@ -54,7 +55,9 @@ class LoginController{
                     include_once(VIEWS_PATH."userHome.php");
                     break;
                 case 0:
+                    echo $message;
                     $this->index("Usuario y/o Contraseña incorrectos"); 
+                    $message = null;
                     break;
             }
         }

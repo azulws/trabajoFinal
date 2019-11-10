@@ -104,7 +104,7 @@ class MovieDAO{
           $movie->setPoints($v->vote_average);
           $movie->setDescription($v->overview);
           $movie->setPoster($v->poster_path);
-          $movie->setMovieId($v->id);
+          $movie->setId($v->id);
           //$responseArrayD= $this->getDetails($v->id);
           /*foreach($responseArrayD as $key=>$value){
             if($key=="runtime"){

@@ -17,16 +17,26 @@ fieldset {
     background-repeat: repeat;
     background-size: contain;
   }
+  /*-------------------------------------------------------------------------------------------------------------
+  SHOW MOVIES VIEW 
+  */
+
 .showMovies{
          margin: 0px 0px 0px 0px;
-         margin-top: 24px;
+         margin-top: 100px;
          margin-bottom: 24px;
          margin-left: 0;
          margin-right: 0;
+         padding-top:20px;
          padding-bottom: 5px;
+         
 }
+/*-----------------------------------------------------------------------------------------------------------------
+NAVIGATION HOME (ANONIMOS)
+*/
+
 .nav-log{
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     box-sizing: content-box;
     display: block;
 }
@@ -102,6 +112,10 @@ fieldset {
     padding: 0px 0px 0px 0px;
     
 }
+
+/*-------------------------------------------------------------------------------------------------------------------
+AMINISTRATOR NAVIGATION BAR
+*/
 
 .form-register-title{
     font-size: 50px;
@@ -203,6 +217,9 @@ fieldset {
         
     background-color: coral;
 }
+/*-------------------------------------------------------------------------------------------------------------------
+INHERIT 
+*/
 
 * {
     -moz-box-sizing: border-box;
@@ -210,6 +227,7 @@ fieldset {
     box-sizing: border-box;
   }
  
+
 
 .email,.password{
     margin-bottom: 5%;
