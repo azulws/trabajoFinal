@@ -7,10 +7,9 @@
     use DAO\QueryType as QueryType;
     use Models\CreditCard as CreditCard;
     use Models\User as User;
-    use DAO\UserDBDAO as User;
+    use DAO\UserDBDAO as UserDBDAO;
 
-    class CreditCardDBDAO
-        {
+    class CreditCardDBDAO{
          
         private $connection;
         private $userDBDAO;
@@ -45,6 +44,7 @@
            foreach($value as $v){
                $creditCard = new CreditCard();
                $creditCard->setId($v['creditCard_id']);
+               $creditCard->setNumber($v['numberCard']);
                $creditCard->setDescription($v['creditCard_description']);
                $user = $this->userDBDAO->read($v['user_email']);
                $creditCard->setUser($user);
@@ -60,12 +60,13 @@
    
        public function Add($creditCard){
    
-            $sql = "INSERT INTO creditCards (creditCard_description,user_email,security_code,expiration_date)
-                VALUES (:creditCard_description,:user_email,:security_code,expiration_date)";
+            $sql = "INSERT INTO creditCards (numberCard,creditCard_description,user_email,security_code,expiration_date)
+                VALUES (:numberCard,:creditCard_description,:user_email,:security_code,:expiration_date)";
     
+            $parameters['numberCard'] = $creditCard->getNumber();
             $parameters['creditCard_description'] = $creditCard->getDescription();
             $parameters['user_email'] = $creditCard->getUser()->getEmail();
-            $parameters['security_code'] = $creditCard->getSegurityCode();
+            $parameters['security_code'] = $creditCard->getSecurityCode();
             $parameters['expiration_date'] = $creditCard->getExpirationDate();
             try
             {
@@ -108,6 +109,7 @@
            {
                $result = $this->mapear($resultSet);
                $creditCard = new CreditCard();
+               $creditCard->setNumber($result[0]->getNumber());
                $creditCard->setDescription($result[0]->getDescription());
                $user = $this->userDBDAO->read($result[0]->getEmail());
                $creditCard->setUser($user);

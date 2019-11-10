@@ -77,6 +77,7 @@ include_once(VIEWS_PATH.'login.php');
             <?php
               foreach($lista as $user)
               {
+                if($user->getEmail()!="admin@admin.com"){
                 ?>
                   <tr class="bgColor">
                     <td class="border"><?php echo $user->getEmail() ?></td>
@@ -98,7 +99,7 @@ include_once(VIEWS_PATH.'login.php');
                     </td>
                  </tr>
                 <?php
-
+                }
               }
             ?>                          
           </tbody>

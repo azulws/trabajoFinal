@@ -3,6 +3,7 @@
 
     class CreditCard{
         private $id;
+        private $number;
         private $description;
         private $user;
         private $securityCode;
@@ -16,19 +17,27 @@
             $this->id=$id;
         }
 
+        public function getNumber(){
+            return $this->number;
+        }
+
+        public function setNumber($number){
+            $this->number=$number;
+        }
+
         public function getDescription(){
             return $this->description;
         }
 
         public function setDescription($description){
-            $this->=$description;
+            $this->description=$description;
         }
 
         public function getUser(){
             return $this->user;
         }
 
-        public function setuserUser($user){
+        public function setUser($user){
             $this->user=$user;
         }
 
@@ -44,7 +53,7 @@
             return $this->expirationDate;
         }
 
-        public function setexpirationDate($expirationDate){
+        public function setExpirationDate($expirationDate){
             $this->expirationDate=$expirationDate;
         }
     }

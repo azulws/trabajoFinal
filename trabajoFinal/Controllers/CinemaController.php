@@ -37,7 +37,6 @@
 
         public function AddDB($name, $address, $capacity, $ticketValue)
         {
-            include_once(VIEWS_PATH."validate-session.php");
             $cinema = new Cinema();
             $cinema->setName($name);
             $cinema->setAddress($address);
@@ -57,48 +56,41 @@
 
         public function Remove($name)
         {
-            include_once(VIEWS_PATH."validate-session.php");
             $this->cinemaDAO->Remove($name);
+
             $this->showcinemaList();
         }
 
         public function RemoveDB($id)
         {
-            include_once(VIEWS_PATH."validate-session.php");
             $this->cinemaDBDAO->Remove($id);
+
             $this->showcinemaListDB();
         }
 
-        public function showcinemaList()
-        {
-            include_once(VIEWS_PATH."validate-session.php");
+        public function showcinemaList(){
             $lista = $this->cinemaDAO->GetAll();
             include_once(VIEWS_PATH."cinemalist.php");
         }
 
-        public function showcinemaListDB()
-        {
+        public function showcinemaListDB($message=""){
             $lista = $this->cinemaDBDAO->readAll();
+            if($lista==false){
+                $message = "No hay cines cargados en la base de datos";
+            }
             include_once(VIEWS_PATH."cinemalist.php");
         }
-
-
-        public function ShowUpdateCinema($id)
-        {
-            include_once(VIEWS_PATH."validate-session.php");
+        public function ShowUpdateCinema($id){
             $cinema=$this->cinemaDBDAO->readById($id);
             include_once(VIEWS_PATH."cinemaUpdate.php");
         }
-
         public function ShowMovieFunctions(){
-            include_once(VIEWS_PATH."validate-session.php");
             //TODO $lista = $this->movieFunctionDBDAO->GetAll();;
            // include_once(VIEWS_PATH."movieList.php");
         }
 
         public function UpdateDB($name,$address,$ticket_value,$capacity,$id)
         {
-            include_once(VIEWS_PATH."validate-session.php");
             $cinema = new Cinema();
             $cinema->setName($name);
             $cinema->setAddress($address);

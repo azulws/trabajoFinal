@@ -36,7 +36,7 @@ include_once(VIEWS_PATH.'login.php');
                     <td class="border">
                       <form action=<?php echo FRONT_ROOT.'Cinema/RemoveDB'?> method = "POST">
                         <input type="hidden" name = "email" value=<?php echo $cinema->getId() ?>>
-                        <button type=submit> Modificar </button>
+                        <button type=submit> Eliminar </button>
                       </form>
                     </td>
                   </tr>
