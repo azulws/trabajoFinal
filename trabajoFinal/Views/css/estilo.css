@@ -59,10 +59,10 @@ fieldset {
 .nav-log-button:hover{
     background-color:coral;
 }
-
 .nav-log-input{
     padding:  4px 10px 4px 10px;
-    color:inherit;
+    color:#000000 ;
+    background-color:#FFF;
     font-size: 18px;
     text-align: center;
     font-style: normal;
