@@ -56,9 +56,11 @@ class LoginController{
                     include_once(VIEWS_PATH."userHome.php");
                     break;
                 case 0:
-                    $message="Usuario y/o Contraseñia incorrectos";
-                    $this->Index($message);
-                    break;
+                    do { 
+                        $this->Index($message);
+                        }while($message="Usuario y/o Contraseñia incorrectos");                   
+                        $this->Index($message);
+                        break;
             }
         }
     }

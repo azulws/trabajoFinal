@@ -26,7 +26,7 @@
      <div class="alert alert-danger nav-login-alert">.
       <strong><?php echo $message;?></strong>
     </div>
-  <?php } } ?>
+  <?php } } sleep(5); $message=''; ?>
     
 
  
