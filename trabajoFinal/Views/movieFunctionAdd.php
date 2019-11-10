@@ -1,3 +1,4 @@
+
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."MovieFunction/validateFunctionByDate";?>>
 		<div align="center">
      		<h2>Alta de funcion </h2>
@@ -19,6 +20,6 @@
     </form>
 </div>
 <?php
-echo '<form action="'.FRONT_ROOT.'Login/homeAdmin">
+echo '<form action="'.FRONT_ROOT.'Login/Index">
 <button>Volver</button></form>';
 ?>

@@ -1,13 +1,14 @@
 <?php 
         namespace Models;
         use DateTime;
-        class MovieFunction{
+        class MovieFunction
+        {
 
             private $movieFunctionId;
             private $startDateTime;
-            private $cinema; //object cinema
-            private $movie; // object movie
-           
+            private $cinema;
+            private $movie;
+
             public function __construct()
              {
             
@@ -48,26 +49,15 @@
                  $this->cinema=$cinema;
              }
             
-             public function setMovie(Movie $movie)
+             public function setMovie($movie)
              {
                  $this->movie=$movie;
-             }  
-             /* esto agregado ahora
-             public function setEndDateTime(Movie $movie){ 
-                (int) $minutes = (int) $movie->getRuntime(); //poner en un variable externa 15 minutos
-                $this->endDateTime = date('Y-m-d H:i:s', strtotime('+'.$minutes.'minutes',strtotime($this->getStartDateTime()))) ;// capaz que falta :m
-                
-            }
-              public function getEndDateTime(){
+             }
 
-                  return $this->endDateTime;
-              }
-              */
-              public function getEndDateTime()
-              {
-                (int) $minutes = (int) $this->getMovie()->getRuntime(); //poner en un variable externa 15 minutos
-                return date('Y-m-d H:i:s', strtotime('+'.$minutes.'minutes',strtotime($this->getStartDateTime()))) ;// capaz que falta :m
-               }
-
+             public function getEndDateTime()
+             {
+                $minutes = $this->getMovie()->getRuntime();
+                return date('Y-m-d H:i:s', strtotime('+'.$minutes.'minutes',strtotime($this->getStartDateTime())));
+             }
 
         }

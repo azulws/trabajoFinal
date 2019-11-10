@@ -49,8 +49,9 @@
             $movie->setPoster($v['poster']);
             $movie->setDescription($v['movie_description']);
             $movie->setPoints($v['points']);
-            $movie->setMovieId($v['movie_id']);
+            $movie->setId($v['movie_id']);
             $movie->setRuntime($v['runtime']);
+            $this->genresByMoviesDBDAO->readGenresByMovie($movie);
             array_push($movieList,$movie);
         }
         if(count($movieList)>0)
@@ -80,47 +81,22 @@
         $parameters['points'] = $movie->getPoints();
         $parameters['poster'] = $movie->getPoster();
         $parameters['movie_description'] = $movie->getDescription();
-        $parameters['movie_id'] = $movie->getMovieId();
+        $parameters['movie_id'] = $movie->getId();
         $parameters['runtime'] = $movie->getRuntime();
-        
+
         try
         {
-                $this->connection = Connection::getInstance();
-                return $this->connection->ExecuteNonQuery($sql, $parameters);
+                $this->connection = Connection::getInstance();     
+                $this->connection->ExecuteNonQuery($sql, $parameters);
+                $this->genresByMoviesDBDAO->writeAll($movie);
+                return true;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
     }
-/*
-    public function Remove($title){
-        $sql = "DELETE FROM $this->tablename WHERE title = :title";
-        $parameters['title'] = $title;
-        
-        try{
-            $this->connection = Connection::getInstance();
-            return $this->connection->ExecuteNonQuery($sql, $parameters);
-        }
-        catch(PDOException $e){
-            echo $e;
-        }
-    }
-    public function Update($title,$release_date,$movie_description){
 
-      $sql = "UPDATE $this->tablename SET release_date = :release_date, movie_description = :movie_description WHERE title = :title";
-      $parameters['title'] = $title;
-      $parameters['release_date'] = $release_date;
-      $parameters['movie_description'] = $movie_description;
-
-      try{
-        $this->connection = Connection::getInstance();
-        return $this->connection->ExecuteNonQuery($sql, $parameters);
-      }
-      catch(PDOException $e){
-        echo $e;
-      }
-    }*/
     public function read ($id)
     {
         $sql = "SELECT * FROM $this->tablename where movie_id = :movie_id";
@@ -138,7 +114,7 @@
                 $movie->setPoints($result[0]->getPoints());
                 $movie->setPoster($result[0]->getposter());
                 $movie->setDescription($result[0]->getDescription());
-                $movie->setMovieId($result[0]->getMovieId());
+                $movie->setId($result[0]->getId());
                 $movie->setRuntime($result[0]->getRuntime());
     
                 return $movie;

@@ -8,12 +8,14 @@
         private $genreDAO;
         private $genreDBDAO;
 
-        public function __construct(){
+        public function __construct()
+        {
             $this->genreDAO = new GenreDAO();
             $this->genreDBDAO = new GenreDBDAO();
         }
 
-        public function genresToDB(){
+        public function genresToDB()
+        {
             include_once(VIEWS_PATH."validate-session.php");
             $genres=$this->genreDAO->getGenres();
             $this->genreDBDAO->writeAll($genres);

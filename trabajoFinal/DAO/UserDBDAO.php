@@ -56,8 +56,7 @@
             return false;
      }
 
-    public function Add( User $user){
-        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
+    public function Add($user){
 
         $sql = "INSERT INTO $this->tablename (email,pass,userName,last_name,dni,role_id) 
         VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";
@@ -130,14 +129,18 @@
                 $user->setDni($result[0]->getDni());
                 $user->setRole($result[0]->getRole());
                 return $user;
-            }else
-                return false;
+                if(!empty($resultSet))
+                {
+                    return $user;
+                }else
+                    return false;
+            }
+            
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-       
+      
     }
-
 }

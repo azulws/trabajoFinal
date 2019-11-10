@@ -4,11 +4,12 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
+    use DAO\CinemaDBDAO as CinemaDBDAO;
+    use DAO\MovieDBDAO as MovieDBDAO;
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
     use Models\MovieFunction as MovieFunction;
-    use DAO\CinemaDBDAO as CinemaDBDAO;
-    use DAO\MovieDBDAO as MovieDBDAO;
+    
 
     class MovieFunctionDBDAO
     {
@@ -16,15 +17,13 @@
       private $connection;
       private $cinemaDBDAO;
       private $movieDBDAO;
-
-      private $tablename = "movieFunctions";
+      private $tablename="movieFunctions";
 
         public function __construct()
          {
             $this->connection = null;
             $this->cinemaDBDAO = new CinemaDBDAO();
             $this->movieDBDAO = new MovieDBDAO();
-
          }
 
          
@@ -49,7 +48,7 @@
 
     public function readAllMovies()
     {
-        $sql = "SELECT movie_id FROM $this->tablename GROUP BY movie_id";
+        $sql = "SELECT movie_id FROM movieFunctions GROUP BY movie_id";
         try
         {
             $this->connection = Connection::getInstance();
@@ -66,11 +65,11 @@
         
     }
     
-    public function readAllMoviesByGenres($genreId)
+    public function readAllMoviesByGenres($genre)
     {
         $sql = "SELECT m.movie_id FROM $this->tablename as m JOIN genresByMovies as gbm 
         on m.movie_id = gbm.movie_id WHERE gbm.genre_id = :genreId GROUP BY m.movie_id";
-        $parameters['genreId'] = $genreId;
+        $parameters['genreId'] = $genre->getId();
 
         try
         {
@@ -115,9 +114,11 @@
         foreach($value as $v)
         {
             $movieFunction = new MovieFunction();
-            $movieFunction->setMovieFunctionId($v['movieFunction_id']);
-            $movieFunction->setCinema($this->cinemaDBDAO->read($v['cinema_id']));
-            $movieFunction->setMovie($this->movieDBDAO->read($v['movie_id']));
+            $movieFunction->setMovieFunctionId($v["movieFunction_id"]);
+            $cinema = $this->cinemaDBDAO->read($v['cinema_id']);
+            $movieFunction->setCinema($cinema);
+            $movie = $this->movieDBDAO->read($v['movie_id']);
+            $movieFunction->setMovie($movie);
             $movieFunction->setStartDateTime($v['start_datetime']);
             array_push($movieFunctionList,$movieFunction);
         }
@@ -127,17 +128,15 @@
             return false;
      }
 
-      public function Add(MovieFunction $movieFunction) // movieFunction is an object
+      public function Add($movieFunction)
        {
-        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con name (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
-
-        $sql = "INSERT INTO $this->tablename (start_datetime,cinema_id,movie_id)
+        $sql = "INSERT INTO movieFunctions (start_datetime,cinema_id,movie_id)
         VALUES (:start_datetime,:cinema_id,:movie_id)";
 
-
+         var_dump($movieFunction);
         $parameters['start_datetime'] = $movieFunction->getStartDateTime();
-        $parameters['cinema'] = $movieFunction->getCinema();
-        $parameters['movie'] = $movieFunction->getMovie();
+        $parameters['cinema_id'] = $movieFunction->getCinema()->getId();
+        $parameters['movie_id'] = $movieFunction->getMovie()->getId();
 
         try
         {
@@ -150,7 +149,7 @@
         }
     }
 
-    public function Remove($movieFunctionId)  
+    public function Remove($movieFunctionId) 
     {
         $sql = "DELETE FROM $this->tablename WHERE  movieFunction_id = :movieFunction_id";
         $parameters['movieFunction_id'] = $movieFunctionId;
@@ -164,10 +163,10 @@
         }
     }
 
-    public function read ($movieFunction_id)
+    public function read ($movieFunctionId)
     {
-        $sql = "SELECT * FROM $this->tablename  where movieFunction_id = :movieFunction_id";
-        $parameters['movieFunction_id'] = $movieFunction_id;
+        $sql = "SELECT * FROM movieFunctions where movieFunction_id = :movieFunction_id";
+        $parameters['movieFunction_id'] = $movieFunctionId;
         try
         {
             $this->connection = Connection::getInstance();
@@ -209,7 +208,6 @@
         {
             echo $e;
         }
-       
     }
     public function validateMovieFunctionDate($cinema_id,$startDateTime)
     {

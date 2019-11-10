@@ -24,14 +24,22 @@
             $this->genreDBDAO = new GenreDBDAO();
         }
       
+
         public function index($message=''){
             $this->showMovieFunctionListDB();
         }
-        public function showAddView(){
+    
+
+        public function showAddView()
+        {
             include_once(VIEWS_PATH."validate-session.php");
             $cinemas = $this->cinemaDBDAO->readAll();
             $movies = $this->movieDBDAO->readAll();
             require_once(VIEWS_PATH.'movieFunctionAdd.php');
+        }
+
+        public function showAddViewTime($message = "",$cineId,$movId,$d,$response){
+            require_once(VIEWS_PATH.'movieFunctionAddTime.php');
         }
 
         public function Add($cinemaId,$movieId,$dateTime)
@@ -52,6 +60,7 @@
         public function showMovieFunctionListDB(){
             include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->movieFunctionDBDAO->readAll();
+            if($lista==false) $message = "No hay funciones cargadas en la base de datos";
             include_once(VIEWS_PATH."showFunctionList.php");
         }
 
@@ -85,7 +94,7 @@
             $lista = array();
             if($moviesArray!=false){
                 foreach($moviesArray as $array=>$v){
-                array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+                    array_push($lista,$this->movieDBDAO->read($v['movie_id']));
                 }
             }
             include_once(VIEWS_PATH."movieList.php");
@@ -99,41 +108,34 @@
             $d=$date;
             if($response==false){
                 $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
-                include_once(VIEWS_PATH."movieFunctionAddTime.php");
+                $this->showAddViewTime("",$cineId,$movId,$d,$response);
             }else{
-                if($cinemaId == $response[0]->getCinemaId()){
+                if($cinemaId == $response[0]->getCinema()->getId()){
                     //aca entro si la peli ya se esta dando ese dia en el cine
                     $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
-                    include_once(VIEWS_PATH."movieFunctionAddTime.php");
+                    $this->showAddViewTime("",$cineId,$movId,$d,$response);
                 }else{
-                    $message = "La pelicula esta siendo usada por otro cine ese dia";
-                    
+                    $this->showAddView("La pelicula está siendo usada por otro cine este mismo dia. Por favor elija otro");
                 }
             }
         }                                                                                          
         
-        public function validateFunctionByTime($cinemaId,$movieId,$date,$time){
+        public function validateFunctionByTime($cinemaId,$movieId,$date,$time)
+        {
             include_once(VIEWS_PATH."validate-session.php");
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
-            $cinema= new Cinema();
-            $cinema=$this->cinemaDBDAO->read($cinemaId);
-            print_r($cinema);
-            $newFunction->setCinema( $cinema);
-            echo"llego aca"; echo '<br>';
-            $movie = new Movie();
-            $movie= $this->movieDBDAO->read($movieId);
-            print_r($movie);
-            echo '<br>';
+            $cinema = $this->cinemaDBDAO->read($cinemaId);
+            $newFunction->setCinema($cinema);
+            $movie = $this->movieDBDAO->read($movieId);
             $newFunction->setMovie($movie);
-                                    
             $newFunction->setStartDateTime($combinedDT);
-            echo"llego aca";echo '<br>';
-
             $notOverlap = false;
+            var_dump($response);
             if($response != false){
                 foreach($response as $function){
+                   
                     $notOverlap = $this->notOverlapFunctions($function,$newFunction);
                     if($notOverlap==false){
                         break;
@@ -141,33 +143,33 @@
                 }
                 
                 if($notOverlap==true){
-                    $this->Add($cinema,$movie,$combinedDT);
+                    
+                    $this->Add($cinemaId,$movieId,$combinedDT);
                 }else{
-                    $message = 'Se superponen las fechas';
                     $cineId=$cinemaId;
                     $movId=$movieId;
                     $d=$date;
-                    include_once(VIEWS_PATH.'movieFunctionAddTime.php');
+                    $this->showAddViewTime($message = "Se superponen las fechas",$cineId,$movId,$d,$response);
                 }
             }
             else{
-                $this->Add($cinema,$movie,$combinedDT);
+                
+                $this->Add($cinemaId,$movieId,$combinedDT);
             }
         }
 
-        public function notOverlapFunctions($functionA, $functionB){ //true si se solapan, false si no
+        public function notOverlapFunctions($functionA, $functionB)
+        { //true si se solapan, false si no
             //setup
             include_once(VIEWS_PATH."validate-session.php");
             $startDateA = new DateTime($functionA->getStartDateTime());
-            $movieA = $this->movieDBDAO->read($functionA->getMovieId());
             $finishDateA = new DateTime($functionA->getStartDateTime());
-            $finishDateA->modify('+'.$movieA->getRuntime().' minute');
+            $finishDateA->modify('+'.$functionA->getMovie()->getRuntime().' minute');
             $finishDateA->modify('+15 minute');
 
             $startDateB = new DateTime($functionB->getStartDateTime());
-            $movieB = $this->movieDBDAO->read($functionB->getMovieId());
             $finishDateB = new DateTime($functionB->getStartDateTime());
-            $finishDateB->modify('+'.$movieB->getRuntime().' minute');
+            $finishDateB->modify('+'.$functionA->getMovie()->getRuntime().' minute');
             $finishDateB->modify('+15 minute');
 
             //validation
@@ -189,7 +191,6 @@
         {
             include_once(VIEWS_PATH."validate-session.php");
             $this->movieFunctionDBDAO->Remove($movieFunctionId);
-
             $this->showMovieFunctionListDB();
         }
 

@@ -1,7 +1,14 @@
 <?php namespace DAO;
 use Models\Movie as Movie;
+use DAO\GenreDBDAO as GenreDBDAO;
+
 class MovieDAO{
-  private $movieList = array();
+  private $movieList;
+  private $genreDBDAO;
+
+  public function __construct(){
+    $this->genreDBDAO = new GenreDBDAO();
+  }
 
   private function getNowPlayingPage($pageNumber){
     $curl = curl_init();
@@ -56,13 +63,37 @@ class MovieDAO{
     }
   }
 
+  public function getMovieById($id){
+    $response = $this->getDetails($id);
+    $movie = new Movie(); 
+    $movie->setTitle($response->title);
+    $movie->setReleaseDate($response->release_date);
+    $movie->setPoints($response->vote_average);
+    $movie->setDescription($response->overview);
+    $movie->setPoster($response->poster_path);
+    $movie->setMovieId($response->id);
+    foreach($response as $key=>$value){
+        if($key=="runtime"){
+            $movie->setRuntime($value);
+            if($value==null){
+                $movie->setRuntime(120);
+            }
+        }
+    }
+    $genres_array=array();
+    $responseGenreArray = $response->genres;
+    foreach($responseGenreArray as $genre){
+      $new = $this->genreDBDAO->read($genre->id);
+      array_push($genres_array,$new);
+    } 
+    $movie->setGenres($genres_array);
+    return $movie;
+  }
 
-  public function getMovies($pageNumber){
-    $responseArrayNP= $this->getNowPlayingPage($pageNumber);
+  public function getMoviesByPage($page){
+    $movieList = array();
+    $responseArrayNP= $this->getNowPlayingPage($page);
     foreach($responseArrayNP as $key=>$value){ //entro al array, las key son los campos del json, incluyendo el array
-      if($key=="page"){
-      echo 'Pagina: '.$value;
-      }
       if($key=="results"){ //actuo si el valor de la key es el campo del json llamado results(el arreglo de movie)
         foreach($value as $k=>$v){ //value es el array de movie
           //k es la posicion dentro del arreglo, cada posicion contiene una movie
@@ -74,20 +105,26 @@ class MovieDAO{
           $movie->setDescription($v->overview);
           $movie->setPoster($v->poster_path);
           $movie->setMovieId($v->id);
-          $responseArrayD= $this->getDetails($v->id);
-          foreach($responseArrayD as $key=>$value){
+          //$responseArrayD= $this->getDetails($v->id);
+          /*foreach($responseArrayD as $key=>$value){
             if($key=="runtime"){
                 $movie->setRuntime($value);
                 if($value==null){
                    $movie->setRuntime(120);
                 }
             }
+          }*/
+          $genres_array=array();
+          $responseGenreArray = $v->genre_ids;
+          foreach($responseGenreArray as $genre){
+            $new = $this->genreDBDAO->read($genre);
+            array_push($genres_array,$new);
           }
-          $movie->setGenres($v->genre_ids);
-          array_push($this->movieList, $movie);
+          $movie->setGenres($genres_array);
+          array_push($movieList, $movie);
         }
       }
     }
-    return $this->movieList;
+    return $movieList;
   }
 }

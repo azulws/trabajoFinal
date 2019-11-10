@@ -17,37 +17,24 @@ class LoginController{
         $this->userDAO = new UserDAO();
         $this->userDBDAO = new UserDBDAO();
         $this->movieFunctionController = new MovieFunctionController();
-    }
-    public function Index($message = "")
-        {
-            include_once(VIEWS_PATH."home.php");
-        }   
+    } 
 
-/*
-    public function log(){
-        $register = $this->userDBDAO->read($_POST['user_mail']);
-        if($register!=null){
-            if($_POST['user_mail']==$register->getEmail() && $_POST['user_password']==$register->getPassword()){
-                $_SESSION["logged"]=$register;               
-                var_dump($_SESSION['logged']);
-                if($register->getRole()=="1")
-                { //Rol==1 administrador
-                    require_once(VIEWS_PATH."admin.php");// View administrador
+        public function Index($message = "")
+        {
+            $movieFunctionDBDAO = new MovieFunctionDBDAO();
+            $movieDBDAO = new MovieDBDAO();
+            $moviesArray = $movieFunctionDBDAO->readAllMovies();
+            $lista = array();
+            if($moviesArray!=false){
+                foreach($moviesArray as $array=>$v){
+                array_push($lista,$movieDBDAO->read($v['movie_id']));
                 }
-                else
-                {                
-                   
-                }
-                 include_once(VIEWS_PATH.'home.php');
-                }        
-            }elseif($_POST["user_password"]!=$register->getPassword()){
-                require_once(VIEWS_PATH.'home.php');
-            }else{
-            require_once(VIEWS_PATH.'home.php');
             }
-        }     
-    }
-*/
+            include_once(VIEWS_PATH.'login.php');
+        }
+
+    
+
     public function log($user_mail='', $password='')
         {
             $role = 0;
@@ -60,7 +47,7 @@ class LoginController{
             switch($role){
                 case 1:
                     include_once(VIEWS_PATH."validate-session.php");
-                    include_once(VIEWS_PATH."admin.php");
+                    include_once(VIEWS_PATH."navAdmin.php");
                     break;
                 case 2:
                     include_once(VIEWS_PATH."validate-session.php");
@@ -137,11 +124,6 @@ class LoginController{
         require_once(VIEWS_PATH."admin.php");
     }
 
-    public function home(){
-       
-        require_once(VIEWS_PATH."home.php");
-    }
-
     public function createUser($name, $lastname, $email, $password, $dni, $role)
     {   
         include_once(VIEWS_PATH."validate-session.php");
@@ -154,7 +136,7 @@ class LoginController{
         $usuario->setRole($role);
 
         $this->userDAO->Add($usuario);
-        include_once(VIEWS_PATH.'home.php');
+        $this->Index("El usuario se creó con éxito");
     }
 
     public function createUserDB($name, $lastname, $email, $password, $dni)
@@ -170,65 +152,51 @@ class LoginController{
 
         $this->userDBDAO->Add($usuario);
 
-        include_once(VIEWS_PATH.'home.php');
+        $this->Index();
     }
 
-    public function showUserList(){
+    public function showUserList()
+    {
         include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->userDAO->GetAll();
-        include_once(VIEWS_PATH."userlist.php");
+        include_once(VIEWS_PATH."userList.php");
     }
 
-    public function showUserListDB(){
+    public function showUserListDB()
+    {
         include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->userDBDAO->readAll();
         include_once(VIEWS_PATH."userList.php");
     }
 
-    public function Remove($id) //TODO cambiar a $user
-    {   
+    public function Remove($email) //TODO cambiar a $user
+    {
         include_once(VIEWS_PATH."validate-session.php");
-        $this->userDAO->Remove($id);
+        $this->userDAO->Remove($email);
         $this->showUserList();
     }
 
-    public function RemoveDB($id)
-    {   
+    public function RemoveDB($email)
+    {
         include_once(VIEWS_PATH."validate-session.php");
-        $this->userDBDAO->Remove($id);
+        $this->userDBDAO->Remove($email);
         $this->showUserListDB();
     }
 
     public function UpdateRoleDB($id) //TODO corregir problema
     {
         include_once(VIEWS_PATH."validate-session.php");
-        $this->userDBDAO->UpdateRole($id);
+        $this->userDBDAO->UpdateRole($email);
         $this->showUserListDB();
     }
+
     public function logout()
     {   
+        include_once(VIEWS_PATH."validate-session.php");
         session_destroy();
         header("location:../index.php");
     }
-    public function showHomeMovieFunctions()
-        {
-             $movieFunctionDBDAO = new MovieFunctionDBDAO();
-             $movieDBDAO = new MovieDBDAO();
-             $moviesArray = $movieFunctionDBDAO->readAllMovies();
-             $lista = array();
-             if($moviesArray!=false)
-            {
-               foreach($moviesArray as $array=>$v)
-               {
-                  array_push($lista,$movieDBDAO->read($v['movie_id']));
-                   
-               }
-             }
-             
-             include_once(VIEWS_PATH."movieList.php");
-        }     
 
-    
-   
+
     
 }

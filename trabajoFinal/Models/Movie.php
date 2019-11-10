@@ -51,11 +51,11 @@ class Movie {
         return $this->poster;
     }
 
-    public function setMovieId($movieId){
+    public function setId($movieId){
         $this->movieId = $movieId;
     }
 
-    public function getMovieId(){
+    public function getId(){
         return $this->movieId;
     }
 
@@ -75,27 +75,4 @@ class Movie {
         return $this->genres;
     }
 
-    public function echoToString(){
-        return "Title: ".$this->getTitle()
-        ." - Estreno: ".$this->getReleaseDate()
-        ."\nPoints: ".$this->getPoints()
-        ."\nDescription: ".$this->getDescription();
-    
-    }
-
 }
-/*
- [popularity] => 695.215 [vote_count] => 1838 [video] => 
- [poster_path] => /udDclJoHjfjb8Ekgsd4FDteOkCU.jpg
- [id] => 475557 
- [adult] =>[backdrop_path] => /n6bUvigpRFqSwmPp1m2YADdbRBc.jpg 
- [original_langua ge] => en 
- [original_title] => Joker
-  [genre_ids]  => Array ( [0] => 80 [1] => 18 [2] => 53 )
-   [title] =>  Joker 
-   [vote_average] => 8.7 
-   [overview  ] => During the 1980s, a failed stand-up comedia
- n is driven insane and turns to a life
-  of crime and chaos in Gotham City while becoming an infamo
- us psychopathic crime figure. 
- [release_date] => 2019-10-04 )*/

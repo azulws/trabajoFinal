@@ -4,68 +4,37 @@
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
+    use DAO\GenreDBDAO as GenreDBDAO;
     use Models\Genre as Genre;
 
     class GenresByMoviesDBDAO
     {
          
          private $connection;
+         private $genreDBDAO;
          private $tablename = "genresByMovies";
 
          public function __construct()
          {
             $this->connection = null;
+            $this->genreDBDAO = new GenreDBDAO();
          }
 
-         /*
-      public function readAll(){
-        $sql = "SELECT * FROM $this->tablename;
-        try
-        {
-            $this->connection = Connection::getInstance();
-            $resultSet = $this->connection->execute($sql);
-        }
-        catch(PDOException $e)
-        {
-            echo $e;
-        }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
-    }  
-
-    protected function mapear($value) {
-
-        $genreList = array();
-        foreach($value as $v){
-            $Genre = new Genre();
-            $Genre->setId($v['genre_id']);
-            $Genre->setDescription($v['genre_description']);
-            array_push($genreList,$Genre);
-        }
-        if(count($genreList)>0)
-            return $genreList;
-        else
-            return false;
-     }
-*/
     public function writeAll($movie){
-        foreach($movie->getGenres() as $genreId){
-           if($this->read($movie->getMovieId(),$genreId)==false)
-               $this->Add($movie,$genreId);
+        foreach($movie->getGenres() as $genre){
+           if($this->read($movie->getId(),$genre->getId())==false)
+               $this->Add($movie,$genre);
         }
     }
 
 
-    public function Add(Movie $movie,$genreId){
-        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
+    public function Add($movie,$genre){
 
         $sql = "INSERT INTO $this->tablename (genre_id,movie_id) 
         VALUES (:genre_id, :movie_id)";
 
-        $parameters['genre_id'] = $genreId;
-        $parameters['movie_id'] = $movie->getMovieId();
+        $parameters['genre_id'] = $genre->getId();
+        $parameters['movie_id'] = $movie->getId();
         
         try
         {
@@ -77,34 +46,6 @@
             echo $e;
         }
     }
-/*
-    public function Remove($title){
-        $sql = "DELETE FROM $this->tablename WHERE title = :title";
-        $parameters['title'] = $title;
-        
-        try{
-            $this->connection = Connection::getInstance();
-            return $this->connection->ExecuteNonQuery($sql, $parameters);
-        }
-        catch(PDOException $e){
-            echo $e;
-        }
-    }
-    public function Update($title,$release_date,$movie_description){
-
-      $sql = "UPDATE $this->tablename SET release_date = :release_date, movie_description = :movie_description WHERE title = :title";
-      $parameters['title'] = $title;
-      $parameters['release_date'] = $release_date;
-      $parameters['movie_description'] = $movie_description;
-
-      try{
-        $this->connection = Connection::getInstance();
-        return $this->connection->ExecuteNonQuery($sql, $parameters);
-      }
-      catch(PDOException $e){
-        echo $e;
-      }
-    }*/
     
     public function read ($movie_id,$genre_id)
     {
@@ -131,6 +72,38 @@
         }
         
     }
+
+    public function readGenresByMovie($movie){
+        $sql = "SELECT * FROM $this->tablename where movie_id = :movie_id";
+        $parameters['movie_id'] = $movie->getId();
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if(!empty($resultSet))
+        {
+            $movie->setGenres($this->mapearGenre($resultSet));  
+        }
+    }
+
+    protected function mapearGenre($value) {
+
+        $genreList = array();
+        foreach($value as $v){
+            $Genre = new Genre();
+            $Genre = $this->genreDBDAO->read($v['genre_id']);
+            array_push($genreList,$Genre);
+        }
+        if(count($genreList)>0)
+            return $genreList;
+        else
+            return false;
+     }
 }
       
 ?>

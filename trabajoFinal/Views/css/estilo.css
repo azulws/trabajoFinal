@@ -12,46 +12,184 @@ fieldset {
     text-align: center;
     position:bottom;
 }
-
-form {
-    max-width: 600px;
-    margin: 10px auto;
-    padding: 10px 10px;
-    background: #f4f7f8;
-    border-radius: 10px;
-    border: 5px solid rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin-top: 200px;
+.box {
+    background-image: url("../img/cinema.jpg");
+    background-repeat: repeat;
+    background-size: contain;
+  }
+.showMovies{
+         margin: 0px 0px 0px 0px;
+         margin-top: 24px;
+         margin-bottom: 24px;
+         margin-left: 0;
+         margin-right: 0;
+         padding-bottom: 5px;
 }
-
-button {
-    padding: 19px 39px 18px 39px;
+.nav-log{
+    margin-bottom: 50px;
+    box-sizing: content-box;
+    display: block;
+}
+.nav-nav{
+    display: inline-table;
+    box-sizing: content-box;
+}
+.nav-log-button{
+    padding: 4px 10px 4px 10px;
     color: #FFF;
     background-color: #4bc970;
+    border-color: #4bc970; 
     font-size: 18px;
     text-align: center;
     font-style: normal;
     border-radius: 5px;
-    width: 49.5%;
-    border: 1px solid #3ac162;
-    border-width: 1px 1px 3px;
-    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    float: right;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: 150;
+    border-color: #4bc970;
+    padding-top:5px;
+    padding-left: 5px;
+    padding-bottom:5px;
+    padding-right:5px;
+}
+.nav-log-button:hover{
+    background-color:coral;
 }
 
-.intento {
-
-    color: #FFF;
-    background-image: url("../img/fondo2.jpg");
+.nav-log-input{
+    padding:  4px 10px 4px 10px;
+    color:#FFF;
+    background-color:#FFF;
+    background-color: #FFF;
     font-size: 18px;
     text-align: center;
     font-style: normal;
     border-radius: 5px;
-    width: 49.5%;
-    border: 1px solid #111111;
+    border: 1px solid #FFF;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
-    position: relative;
-    left: 25%;
+    float: right;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: 250;
+}
+.form-nav-log{
+    float: right;
+    display: inline-table;
+    box-sizing: content-box;
+    position: none;
+    float: right;
+    margin-right: 50px;
+}
+.form-nav-log-ul-li{
+
+    list-style-type: none;
+    display: inline-table;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    box-sizing: content-box;
+
+}
+.form-nav-log-ul{
+    display: inline;
+    list-style-type: none;
+    float: right;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.form-register-title{
+    font-size: 50px;
+    text-align: center;
+    font-style: normal;
+    height: 5px;
+    padding-top: 50px;
+    margin-bottom: 100px;
+}
+.form-register{
+    box-sizing:border-box;
+    background-image: none;
+    display: inline-table;
+    width: 50%;
+    margin-top: 40px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    margin-left: 10px;
+    padding: 0cm;
+}
+
+.form-register-li{
+        box-sizing: content-box;
+        list-style-type: none;
+        width: 300;
+        display: inline-table;
+        z-index: auto;
+        position: static;
+        float:none;
+        width: 100%;
+        padding: 0;  
+       
+}
+
+.form-register-ul{
+    width: 300;
+    display: inline-table;
+    padding: 20px 20px 20px 20px;
+    }
+
+.form-register-input{
+    padding:  4px 10px 4px 10px;
+    color: #000000 ;
+    background-color:#FFF;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    float: center;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: 100%;
+    display: center;
+
+}
+
+.form-register-buttons{
+    padding: 4px 10px 4px 10px;
+    color: #FFF;
+    background-color: #4bc970;
+    border-color:#4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    float: center;
+    padding-top:5px;
+    padding-left: 5px;
+    padding-bottom:5px;
+    padding-right:5px;
+    margin-left:2px;
+    display: center;
+    width: 100%;
+    box-shadow:  #4bc970;
+}
+.form-register-buttons:hover{
+        
+    background-color: coral;
 }
 
 * {
@@ -59,6 +197,7 @@ button {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+ 
 
 .email,.password{
     margin-bottom: 5%;
@@ -71,4 +210,13 @@ button {
 .titleMovie{
     font-size: 50px;
     text-align: center;
+}
+
+.bgColor{
+    background-color: #d9dfc1;
+
+}
+
+.border{
+    border: 1px solid #000000;
 }

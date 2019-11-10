@@ -36,7 +36,7 @@
         }
 
         public function AddDB($name, $address, $capacity, $ticketValue)
-        {   
+        {
             include_once(VIEWS_PATH."validate-session.php");
             $cinema = new Cinema();
             $cinema->setName($name);
@@ -55,10 +55,10 @@
                  
         }
 
-        public function Remove($id) //TODO cambiar a $cinema
+        public function Remove($name)
         {
             include_once(VIEWS_PATH."validate-session.php");
-            $this->cinemaDAO->Remove($id);
+            $this->cinemaDAO->Remove($name);
             $this->showcinemaList();
         }
 
@@ -70,7 +70,7 @@
         }
 
         public function showcinemaList()
-        {   
+        {
             include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->cinemaDAO->GetAll();
             include_once(VIEWS_PATH."cinemalist.php");
@@ -78,27 +78,36 @@
 
         public function showcinemaListDB()
         {
-            include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->cinemaDBDAO->readAll();
             include_once(VIEWS_PATH."cinemalist.php");
         }
+
+
         public function ShowUpdateCinema($id)
         {
             include_once(VIEWS_PATH."validate-session.php");
-            $cinema=$this->cinemaDBDAO->read($id);
+            $cinema=$this->cinemaDBDAO->readById($id);
             include_once(VIEWS_PATH."cinemaUpdate.php");
         }
-        public function ShowMovieFunctions()
-        {
-              include_once(VIEWS_PATH."validate-session.php");
+
+        public function ShowMovieFunctions(){
+            include_once(VIEWS_PATH."validate-session.php");
             //TODO $lista = $this->movieFunctionDBDAO->GetAll();;
            // include_once(VIEWS_PATH."movieList.php");
         }
 
-        public function UpdateDB($name,$ticket_value,$capacity)
+        public function UpdateDB($name,$address,$ticket_value,$capacity,$id)
         {
             include_once(VIEWS_PATH."validate-session.php");
-            $this->cinemaDBDAO->Update($name,$ticket_value,$capacity);
+            $cinema = new Cinema();
+            $cinema->setName($name);
+            $cinema->setAddress($address);
+            $cinema->setTicketValue($ticket_value);
+            $cinema->setCapacity($capacity);
+            $cinema->setId($id);
+
+            $this->cinemaDBDAO->Update($cinema);
+
             $this->showcinemaListDB();
         }
     } 
