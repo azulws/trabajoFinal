@@ -21,7 +21,7 @@ class LoginController{
 
         public function Index($message = "")
         {
-            echo $message;
+            
             $movieFunctionDBDAO = new MovieFunctionDBDAO();
             $movieDBDAO = new MovieDBDAO();
             $moviesArray = $movieFunctionDBDAO->readAllMovies();
@@ -31,6 +31,7 @@ class LoginController{
                 array_push($lista,$movieDBDAO->read($v['movie_id']));
                 }
             }
+            
             include_once(VIEWS_PATH.'login.php');
         }
 
@@ -38,7 +39,7 @@ class LoginController{
 
     public function log($user_mail='', $password='')
         {
-            $role = 0;
+            $role=0;
             if($user_mail){
                 $user = $this->userDBDAO->read($user_mail);   
                 if($user!= false && ($user->getPassword() === $password)){
@@ -55,9 +56,8 @@ class LoginController{
                     include_once(VIEWS_PATH."userHome.php");
                     break;
                 case 0:
-                    echo $message;
-                    $this->index("Usuario y/o Contraseña incorrectos"); 
-                    $message = null;
+                    $message="Usuario y/o Contraseñia incorrectos";
+                    $this->Index($message);
                     break;
             }
         }

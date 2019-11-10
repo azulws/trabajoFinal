@@ -34,7 +34,12 @@ fieldset {
 /*-----------------------------------------------------------------------------------------------------------------
 NAVIGATION HOME (ANONIMOS)
 */
-
+.nav-login-alert{
+    margin: 0px 0px 0px;
+    margin-top: 73px;
+    width:100%;
+    align-items: center;
+}
 .nav-log{
     margin-bottom: 100px;
     box-sizing: content-box;

@@ -1,4 +1,4 @@
-
+<?php if(!isset($_SESSION['logged'])){?>
       <nav class=" nav-log navbar nav-nav navbar-expand-lg navbar-dark bg-primary d-flex justify-content-end fixed-top">
      <p> <?php $message ?> </p>
      <form class="form-nav-log" method="POST" action="<?php echo FRONT_ROOT.'Login/log';?>">
@@ -21,4 +21,12 @@
               </li>
        </ul>
      </form>
- </nav>
+ </nav><?php
+ if($message == "Usuario y/o Contrasenia incorrectos"){ ?>
+     <div class="alert alert-danger nav-login-alert">.
+      <strong><?php echo $message;?></strong>
+    </div>
+  <?php } } ?>
+    
+
+ 
