@@ -101,10 +101,13 @@ class LoginController{
         include_once(VIEWS_PATH."userList.php");
     }
 
-    public function showUserListDB()
+    public function showUserListDB($message="")
     {
         include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->userDBDAO->readAll();
+        if($lista==false){
+            $message = "No hay usuarios cargados en la base de datos";
+        }
         include_once(VIEWS_PATH."userList.php");
     }
 

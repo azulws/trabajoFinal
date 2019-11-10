@@ -66,8 +66,11 @@
             include_once(VIEWS_PATH."cinemalist.php");
         }
 
-        public function showcinemaListDB(){
+        public function showcinemaListDB($message=""){
             $lista = $this->cinemaDBDAO->readAll();
+            if($lista==false){
+                $message = "No hay cines cargados en la base de datos";
+            }
             include_once(VIEWS_PATH."cinemalist.php");
         }
         public function ShowUpdateCinema($id){
