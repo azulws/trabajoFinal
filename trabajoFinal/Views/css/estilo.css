@@ -114,37 +114,52 @@ fieldset {
     font-style: normal;
     height: 5px;
     padding-top: 50px;
-    margin-bottom: 100px;
+    padding-bottom: 50px;
+    margin-bottom: 10px;
+    display: block;
+}
+.register{
+    display: block;
+    box-sizing: content-box;
 }
 .form-register{
     box-sizing:border-box;
     background-image: none;
-    display: inline-table;
-    width: 50%;
-    margin-top: 40px;
+    display: block;
+    margin-top: 100px;
     margin-right: 40px;
     margin-bottom: 40px;
-    margin-left: 10px;
-    padding: 0cm;
+    margin-left: 40px;
+    padding: 10 px 10px 10px 10px;
+    float: center;
+    width: 50%;
 }
 
 .form-register-li{
         box-sizing: content-box;
         list-style-type: none;
-        width: 300;
-        display: inline-table;
+        display: block;
         z-index: auto;
-        position: static;
-        float:none;
+        position: center;
+        float:center;
         width: 100%;
-        padding: 0;  
+        padding: 0; 
+        display: contents; 
        
 }
 
 .form-register-ul{
-    width: 300;
-    display: inline-table;
+    box-sizing: content-box;
+    width: 250;
+    display: block;
     padding: 20px 20px 20px 20px;
+    float: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    z-index: auto;
+    position: center;
     }
 
 .form-register-input{
@@ -164,7 +179,9 @@ fieldset {
     margin-bottom: 3px;
     margin-left: 3px;
     width: 100%;
-    display: center;
+    display: block;
+    float: center;
+
 
 }
 
