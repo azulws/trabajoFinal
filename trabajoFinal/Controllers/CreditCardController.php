@@ -3,6 +3,7 @@
 
     use Models\CreditCard as CreditCard;
     use DAO\UserDBDAO as UserDBDAO;
+    use DAO\CreditCardDBDAO as CreditCardDBDAO;
 
     class CreditCardController
     {
@@ -14,32 +15,35 @@
             $this->userDBDAO = new UserDBDAO();
         }
 
-        /*public function AddDB($description, $user, $segurityCode, $expirationDate)
+        public function showViewAdd($message=""){
+            require_once(VIEWS_PATH."creditCardAdd.php");
+        }
+
+        public function showCreditCardList($message=""){
+            $lista = $this->creditCardDBDAO->readAll();
+            require_once(VIEWS_PATH."creditCardList.php");
+        }
+        public function add($number, $description, $user, $segurityCode, $expirationDate)
         {
             $creditCard = new CreditCard();
+            $creditCard->setNumber($number);
             $creditCard->setDescription($description);
             $u = $this->userDBDAO->read($user);
             $creditCard->setUser($u);
             $creditCard->setSecurityCode($segurityCode);
             $creditCard->setExpirationDate($expirationDate);
+
             $this->creditCardDBDAO->Add($creditCard);
-        }*/
+            $this->showCreditCardList();
+        }
 
-        public function RemoveDB($id)
-        {   
-            include_once(VIEWS_PATH."validate-session.php");
+        public function removeDB($id)
+        {
             $this->creditCardDBDAO->Remove($id);
-            $this->showBuyoutListDB();
-        }
-<<<<<<< HEAD
 
-        public function showBuyoutListDB(){
-            include_once(VIEWS_PATH."validate-session.php");
-            $lista = $this->buyoutDBDAO->readAll();
-            //include_once(VIEWS_PATH."buyoutList.php");
+            $this->showCreditCardList();
         }
-=======
         
->>>>>>> 38e8dca1eadb1e38e903155c8e70584d41466f6e
+
     }
 ?>
