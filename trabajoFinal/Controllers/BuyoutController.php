@@ -44,12 +44,14 @@
 
         public function RemoveDB($id)
         {
+            include_once(VIEWS_PATH."validate-session.php");
             $this->buyoutDBDAO->Remove($id);
-
             $this->showBuyoutListDB();
         }
 
-        public function showBuyoutListDB(){
+        public function showBuyoutListDB()
+        {
+            include_once(VIEWS_PATH."validate-session.php");
             $lista = $this->buyoutDBDAO->readAll();
             //include_once(VIEWS_PATH."buyoutList.php");
         }
