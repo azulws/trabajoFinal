@@ -36,16 +36,19 @@
 
         public function Add($cinemaId,$movieId,$dateTime)
         {
+
             $movieFunction = new MovieFunction();
             $movieFunction->setStartDateTime($dateTime);
-            $cinema = $this->cinemaDBDAO->readById($cinemaId);
+            $cinema= new Cinema();
+            $cinema=$this->cinemaDBDAO->read($cinemaId);
             $movieFunction->setCinema($cinema);
+            $movie = new Movie();
             $movie = $this->movieDBDAO->read($movieId);
-            $movieFunction->setMovie($movie);
+            $movieFunction->setMovie($movie);            
             $this->movieFunctionDBDAO->Add($movieFunction);
-
-            $this->ShowAddView("La función fue cargada con exito!");
+            $this->ShowAddView();
         }
+
 
         public function showMovieFunctionListDB($message =''){
             $lista = $this->movieFunctionDBDAO->readAll();
@@ -108,21 +111,24 @@
             $response = $this->movieFunctionDBDAO->validateMovieFunctionDate($cinemaId,$date);
             $combinedDT = date('Y-m-d H:i:s', strtotime("$date $time"));
             $newFunction = new MovieFunction();
-
-            $cinema = $this->cinemaDBDAO->readById($cinemaId);
+            $cinema = $this->cinemaDBDAO->read($cinemaId);
             $newFunction->setCinema($cinema);
             $movie = $this->movieDBDAO->read($movieId);
             $newFunction->setMovie($movie);
             $newFunction->setStartDateTime($combinedDT);
             $notOverlap = false;
+            var_dump($response);
             if($response != false){
                 foreach($response as $function){
+                   
                     $notOverlap = $this->notOverlapFunctions($function,$newFunction);
                     if($notOverlap==false){
                         break;
                     }
                 }
+                
                 if($notOverlap==true){
+                    
                     $this->Add($cinemaId,$movieId,$combinedDT);
                 }else{
                     $cineId=$cinemaId;
@@ -132,6 +138,7 @@
                 }
             }
             else{
+                
                 $this->Add($cinemaId,$movieId,$combinedDT);
             }
         }
@@ -169,7 +176,17 @@
 
             $this->showMovieFunctionListDB();
         }
-                                                                                                                               
- }
+
+        //chicos la unica manera que consegui de mostrar 
+        public function showMovieFunctionsByCinema($cinema_id)
+        {  
+             include_once(VIEWS_PATH."validate-session.php");
+            $id = (int) $cinema_id;echo "<br>";
+            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id); 
+            include_once(VIEWS_PATH."showFunctionList.php");                                                                           
+ 
+        }
+        
+    }
     
 ?> 

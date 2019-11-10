@@ -19,6 +19,7 @@
         private $userDBDAO;
         private $creditCardDBDAO;
         private $ticketDBDAO;
+        private $tablename = "buyouts";
 
         public function __construct()
         {
@@ -29,20 +30,21 @@
         }
 
         public function readAll(){
-        $sql = "SELECT * FROM buyouts ORDER BY buyout_id";
+        $sql = "SELECT * FROM $this->tablename ORDER BY buyout_id";
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+        else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-            return $this->mapear($resultSet);
-        else 
-            return false;
+        
        }  
    
        protected function mapear($value) {
@@ -71,7 +73,7 @@
    
        public function Add($buyout){
    
-           $sql = "INSERT INTO buyouts (discound,buy_date,total,ticket_id,user_email,creditCard_id) 
+           $sql = "INSERT INTO $this->tablename (discound,buy_date,total,ticket_id,user_email,creditCard_id) 
            VALUES (:discound, :buy_date, :total, :ticket_id, :user_email, :creditCard_id)";
    
            $parameters['discound'] = $buyout->getDiscound();
@@ -93,7 +95,7 @@
        }
    
        public function Remove($id){
-           $sql = "DELETE FROM buyouts WHERE buyout_id = :id";
+           $sql = "DELETE FROM $this->tablename WHERE buyout_id = :id";
            $parameters['id'] = $id;
            
            try{
@@ -107,7 +109,7 @@
    
        public function read ($id)
        {
-           $sql = "SELECT * FROM buyouts where buyout_id = :id";
+           $sql = "SELECT * FROM $this->tablename where buyout_id = :id";
            $parameters['id'] = $id;
            try
            {

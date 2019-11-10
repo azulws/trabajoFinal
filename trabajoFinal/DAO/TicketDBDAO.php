@@ -9,11 +9,12 @@
     use Models\MovieFunction as MovieFunction;
     use DAO\MovieFunctionDBDAO as MovieFunctionDBDAO;
 
-    class TicketDBDAO{
+    class TicketDBDAO
         {
          
         private $connection;
         private $movieFunctionDBDAO;
+        private $tablename = "tickets";
 
         public function __construct()
         {
@@ -22,20 +23,21 @@
         }
 
         public function readAll(){
-        $sql = "SELECT * FROM tickets ORDER BY ticket_id";
+        $sql = "SELECT * FROM $this->tablename ORDER BY ticket_id";
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+        else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-            return $this->mapear($resultSet);
-        else 
-            return false;
+       
        }  
    
        protected function mapear($value) {
@@ -58,7 +60,7 @@
    
        public function Add($ticket){
    
-           $sql = "INSERT INTO tickets (qr,movieFunction_id) VALUES (:qr,:movieFunction_id)";
+           $sql = "INSERT INTO $this->tablename (qr,movieFunction_id) VALUES (:qr,:movieFunction_id)";
    
            $parameters['qr'] = $ticket->getQr();
            $parameters['movieFunction_id'] = $ticket->getMovieFunction()->getMovieFunctionId();
@@ -75,7 +77,7 @@
        }
    
        public function Remove($id){
-           $sql = "DELETE FROM tickets WHERE ticket_id = :id";
+           $sql = "DELETE FROM $this->tablename WHERE ticket_id = :id";
            $parameters['id'] = $id;
            
            try{
@@ -89,27 +91,28 @@
    
        public function read ($id)
        {
-           $sql = "SELECT * FROM tickets where ticket_id = :id";
+           $sql = "SELECT * FROM $this->tablename tickets where ticket_id = :id";
            $parameters['id'] = $id;
            try
            {
                $this->connection = Connection::getInstance();
                $resultSet = $this->connection->execute($sql, $parameters);
+               if(!empty($resultSet))
+               {
+                   $result = $this->mapear($resultSet);
+                   $ticket = new Ticket();
+                   $ticket->setQr($result[0]->getQr());
+                   $movieFunction = $this->movieFunctionDBDAO->read($result[0]->getMovieFunctionId());
+                   $ticket->setMovieFunction($movieFunction);
+                   return $ticket;
+               }else
+                   return false;
            }
            catch(PDOException $e)
            {
                echo $e;
            }
-           if(!empty($resultSet))
-           {
-               $result = $this->mapear($resultSet);
-               $ticket = new Ticket();
-               $ticket->setQr($result[0]->getQr());
-               $movieFunction = $this->movieFunctionDBDAO->read($result[0]->getMovieFunctionId());
-               $ticket->setMovieFunction($movieFunction);
-               return $ticket;
-           }else
-               return false;
+          
        }
 
    }

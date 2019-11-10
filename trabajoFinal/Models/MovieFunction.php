@@ -1,6 +1,8 @@
 <?php 
         namespace Models;
-        class MovieFunction{
+        use DateTime;
+        class MovieFunction
+        {
 
             private $movieFunctionId;
             private $startDateTime;
@@ -42,7 +44,7 @@
                  $this->startDateTime=$startDateTime;
              }
             
-             public function setCinema($cinema)
+             public function setCinema(Cinema $cinema)
              {
                  $this->cinema=$cinema;
              }

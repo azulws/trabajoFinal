@@ -1,6 +1,8 @@
 <?php
     namespace Models;
-    class User{
+    class User
+    {
+
     private $email;
     private $password;
     private $name;
@@ -9,7 +11,8 @@
     private $role;
     private $userId;
     
-    public function __contruct(){
+    public function __contruct()
+    {
         
     }
     

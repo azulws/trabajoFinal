@@ -10,7 +10,7 @@
     {
          
          private $connection;
-
+         private $tablename = "genres";
          public function __construct()
          {
             $this->connection = null;
@@ -18,20 +18,21 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM genres";
+        $sql = "SELECT * FROM $this->tablename";
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+        else 
+           return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     protected function mapear($value) {
@@ -59,7 +60,7 @@
 
     public function Add($Genre){
 
-        $sql = "INSERT INTO genres (genre_id,genre_description) 
+        $sql = "INSERT INTO $this->tablename (genre_id,genre_description) 
         VALUES (:genre_id, :genre_description)";
 
         $parameters['genre_id'] = $Genre->getId();
@@ -78,27 +79,27 @@
 
     public function read ($id)
     {
-        $sql = "SELECT * FROM genres where genre_id = :genre_id";
+        $sql = "SELECT * FROM $this->tablename where genre_id = :genre_id";
         $parameters['genre_id'] = $id;
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+             {
+                $result = $this->mapear($resultSet);
+                $Genre = new Genre();
+                $Genre->setId($result[0]->getId());
+                $Genre->setDescription($result[0]->getDescription());
+                return $Genre;   
+        }else
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $Genre = new Genre();
-            $Genre->setId($result[0]->getId());
-            $Genre->setDescription($result[0]->getDescription());
-            return $Genre;
-            
-        }else
-            return false;
+        
     }
 }
       

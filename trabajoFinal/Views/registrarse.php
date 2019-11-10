@@ -1,9 +1,10 @@
 
-   <div class="container">        
+   <div class="container">
+   <h2 class="form-register-title">Registro de usuario</h2>        
    <div class="row justify-content-center"> 
-   <h2 class="form-register-title">Registro de usuario</h2>
-   <form class="form-register " method="POST" action="<?php echo FRONT_ROOT.'Login/createUserDB';?>">
-     <ul class="form-register-ul "> 
+   
+   <form class="form-register" method="POST" action="<?php echo FRONT_ROOT.'Login/createUserDB';?>">
+     <ul class="form-register-ul"> 
         <li class="form-register-li">
             <input class="form-register-input" type="text" name="name" placeholder="Name" required>
         </li>
@@ -23,9 +24,7 @@
             <button class="form-register-buttons btn btn-danger" type="submit" name="register">Registrarse</button>
         </li>
         </ul>
-        </form> 
-    </div>
-    <div class="row justify-content-center">
+    </form> 
     <form class="form-register" action="<?php echo FRONT_ROOT.'Login/Index';?>" method='POST'>
      <ul class="form-register-ul">
          <li class="form-register-li">
@@ -35,4 +34,4 @@
     </form>
     </div>
    </div>
-
+   

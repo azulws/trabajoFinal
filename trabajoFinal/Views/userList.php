@@ -7,6 +7,7 @@
 	foreach($lista as $user){
                 if($user->getRole()==2){
                 echo '<dl>'.
+                        '<dt> id: '.$user->getId().'<dt>'.
                         '<dt> email: '.$user->getEmail().'<dt>'.
                         '<dd> name: '.$user->getName().'</dd>'.
                         '<dd> lastname: '.$user->getLastName().'</dd>'.
@@ -29,6 +30,7 @@
         foreach($lista as $user){
         if($user->getRole()==1){
                 echo '<dl>'.
+                        '<dt> Id: '.$user->getId().'<dt>'.
                         '<dt> email: '.$user->getEmail().'<dt>'.
                         '<dd> name: '.$user->getName().'</dd>'.
                         '<dd> lastname: '.$user->getLastName().'</dd>'.

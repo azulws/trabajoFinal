@@ -3,7 +3,7 @@
 
     use DAO\CinemaDAO as cinemaDAO;
     use DAO\CinemaDBDAO as cinemaDBDAO;
-    use Models\Cinema as cinema;
+    use Models\Cinema as Cinema;
 
     class cinemaController
     {
@@ -17,12 +17,13 @@
         }
 
         public function ShowAddView()
-        {
+        {   include_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."cinemaAdd.php");
         }
 
         public function Add($name, $address, $capacity, $ticketValue)
-        {
+        {   
+            include_once(VIEWS_PATH."validate-session.php");
             $cinema = new Cinema();
             $cinema->setName($name);
             $cinema->setAddress($address);
@@ -41,10 +42,16 @@
             $cinema->setAddress($address);
             $cinema->setCapacity($capacity);
             $cinema->setTicketValue($ticketValue);
-
-            $this->cinemaDBDAO->Add($cinema);
-
-            $this->ShowAddView();
+            $result=$this->cinemaDBDAO->Add($cinema); 
+           
+            if($result==null)
+            {
+                include_once(VIEWS_PATH."errorEnConexionDb");
+            }else
+             {
+                $this->ShowAddView();
+             }
+                 
         }
 
         public function Remove($name)
@@ -79,7 +86,7 @@
         }
         public function ShowMovieFunctions(){
             //TODO $lista = $this->movieFunctionDBDAO->GetAll();;
-            include_once(VIEWS_PATH."movieFuctionList.php");
+           // include_once(VIEWS_PATH."movieList.php");
         }
 
         public function UpdateDB($name,$address,$ticket_value,$capacity,$id)

@@ -10,6 +10,7 @@
     {
          
          private $connection;
+         private $tablename = "users";
 
          public function __construct()
          {
@@ -18,20 +19,21 @@
 
          
       public function readAll(){
-        $sql = "SELECT * FROM users ORDER BY role_id";
+        $sql = "SELECT * FROM $this->tablename" ;
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if (!empty($resultSet))
-           return $this->mapear($resultSet);
-        else 
-           return false;
+        
     }  
 
     protected function mapear($value) {
@@ -56,7 +58,7 @@
 
     public function Add($user){
 
-        $sql = "INSERT INTO users (email,pass,userName,last_name,dni,role_id) 
+        $sql = "INSERT INTO $this->tablename (email,pass,userName,last_name,dni,role_id) 
         VALUES (:email,:pass,:userName,:last_name,:dni,:role_id)";
 
         $parameters['email'] = $user->getEmail();
@@ -77,9 +79,9 @@
         }
     }
 
-    public function Remove($email){
-        $sql = "DELETE FROM users WHERE email = :email";
-        $parameters['email'] = $email;
+    public function Remove($id){
+        $sql = "DELETE FROM $this->tablename WHERE user_id = :user_id";
+        $parameters['email'] = $id;
         
         try{
             $this->connection = Connection::getInstance();
@@ -90,15 +92,15 @@
         }
     }
     
-    public function UpdateRole($email){
-        $user=$this->read($email);
+    public function UpdateRole($id){
+        $user=$this->read($id);
         if($user->getRole()==2){
-            $sql = "UPDATE users SET role_id = 1 WHERE email = :email";
+            $sql = "UPDATE $this->tablename SET role_id = 1 WHERE user_id = :user_id";
             
         }else{
-            $sql = "UPDATE users SET role_id = 2 WHERE email = :email";
+            $sql = "UPDATE $this->tablename SET role_id = 2 WHERE user_id = :user_id";
         }
-        $parameters['email'] = $email;
+        $parameters['email'] = $id;
         try{
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql, $parameters);
@@ -110,30 +112,35 @@
 
     public function read ($email)
     {
-        $sql = "SELECT * FROM users where email = :email";
+        $sql = "SELECT * FROM $this->tablename  where email = :email";
         $parameters['email'] = $email;
         try
         {
             $this->connection = Connection::getInstance();
             $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                $result = $this->mapear($resultSet);
+                $user = new User();
+                $user->setEmail($result[0]->getEmail());
+                $user->setPassword($result[0]->getPassword());
+                $user->setName($result[0]->getName());
+                $user->setLastName($result[0]->getLastName());
+                $user->setDni($result[0]->getDni());
+                $user->setRole($result[0]->getRole());
+                return $user;
+                if(!empty($resultSet))
+                {
+                    return $user;
+                }else
+                    return false;
+            }
+            
         }
         catch(PDOException $e)
         {
             echo $e;
         }
-        if(!empty($resultSet))
-        {
-            $result = $this->mapear($resultSet);
-            $user = new User();
-            $user->setEmail($result[0]->getEmail());
-            $user->setPassword($result[0]->getPassword());
-            $user->setName($result[0]->getName());
-            $user->setLastName($result[0]->getLastName());
-            $user->setDni($result[0]->getDni());
-            $user->setRole($result[0]->getRole());
-            return $user;
-        }else
-            return false;
+      
     }
-
 }

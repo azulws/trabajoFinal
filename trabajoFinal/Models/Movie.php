@@ -51,11 +51,11 @@ class Movie {
         return $this->poster;
     }
 
-    public function setMovieId($movieId){
+    public function setId($movieId){
         $this->movieId = $movieId;
     }
 
-    public function getMovieId(){
+    public function getId(){
         return $this->movieId;
     }
 
