@@ -110,28 +110,24 @@ class LoginController{
 
     public function Remove($email) //TODO cambiar a $user
     {
-        include_once(VIEWS_PATH."validate-session.php");
         $this->userDAO->Remove($email);
         $this->showUserList();
     }
 
     public function RemoveDB($email)
     {
-        include_once(VIEWS_PATH."validate-session.php");
         $this->userDBDAO->Remove($email);
         $this->showUserListDB();
     }
 
     public function UpdateRoleDB($email) //TODO corregir problema
     {
-        include_once(VIEWS_PATH."validate-session.php");
         $this->userDBDAO->UpdateRole($email);
         $this->showUserListDB();
     }
 
     public function logout()
     {   
-        include_once(VIEWS_PATH."validate-session.php");
         session_destroy();
         header("location:../index.php");
     }
