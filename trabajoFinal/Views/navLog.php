@@ -22,7 +22,7 @@
        </ul>
      </form>
  </nav><?php
- if($message == "Usuario y/o Contrasenia incorrectos"){ ?>
+ if($message == "Usuario y/o Contraseñia incorrectos"){ ?>
      <div class="alert alert-danger nav-login-alert">.
       <strong><?php echo $message;?></strong>
     </div>
