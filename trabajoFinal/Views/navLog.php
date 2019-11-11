@@ -1,33 +1,27 @@
-<?php if(!isset($_SESSION['logged'])){?>
-      <nav class=" nav-log navbar nav-nav navbar-expand-lg navbar-dark bg-primary d-flex justify-content-end fixed-top">
+<div class= "nav-log">
+ <nav class="navbar nav-nav navbar-expand-lg navbar-dark bg-primary d-flex justify-content-end">
      <p> <?php $message ?> </p>
      <form class="form-nav-log" method="POST" action="<?php echo FRONT_ROOT.'Login/log';?>">
-          <ul class="nav-log-ul">
-               <li class="nav-log-li">
+          <ul class="form-nav-log-ul">
+               <li class="form-nav-log-ul-li"  >
                     <input class ="nav-log-input" type="email" placeholder="Email" name="user_email" required>
                </li>
-               <li class="nav-log-li" >
+               <li class="form-nav-log-ul-li" >
                     <input  class="nav-log-input" type="password" placeholder="Password" name="password" required>
                </li>
-               <li class="nav-log-li" >
+               <li class="form-nav-log-ul-li" >
                     <button class="nav-log-button btn btn-danger float-right" type="submit">Ingresar</a>
                </li>
           </ul>
      </form>
      <form class="form-nav-log" action="<?php echo FRONT_ROOT.'Login/register'?>" method="post">
-        <ul class="nav-log-ul">
-              <li class="nav-log-li" >
+        <ul class="form-nav-log-ul ">
+              <li class="form-nav-log-ul-li" >
                    <button class=" nav-log-button btn btn-danger float-right" type="submit">Registrarse</button>
               </li>
        </ul>
      </form>
- </nav><?php
- if($message == "Usuario y/o Contraseñia incorrectos"){ ?>
-    <div class="alert alert-danger alert-dismissible nav-login-alert fade show">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Warning! </strong><?php echo $message;?>
-  </div>
-  <?php } } ?>
-    
+ </nav>
+</div>
 
- 
+    

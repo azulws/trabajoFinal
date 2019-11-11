@@ -21,24 +21,23 @@ class LoginController{
 
         public function Index($message = "")
         {
-           //$this->showMovieList();
-           $movieFunctionDBDAO = new MovieFunctionDBDAO();
-           $movieDBDAO = new MovieDBDAO();
-           $moviesArray = $movieFunctionDBDAO->readAllMovies();
-           $lista = array();
-           if($moviesArray!=false){
-               foreach($moviesArray as $array=>$v){
-               array_push($lista,$movieDBDAO->read($v['movie_id']));
-               }
-           }
-           include_once(VIEWS_PATH.'login.php');
+            $movieFunctionDBDAO = new MovieFunctionDBDAO();
+            $movieDBDAO = new MovieDBDAO();
+            $moviesArray = $movieFunctionDBDAO->readAllMovies();
+            $lista = array();
+            if($moviesArray!=false){
+                foreach($moviesArray as $array=>$v){
+                array_push($lista,$movieDBDAO->read($v['movie_id']));
+                }
+            }
+            include_once(VIEWS_PATH.'login.php');
         }
 
     
 
     public function log($user_mail='', $password='')
         {
-            $role=0;
+            $role = 0;
             if($user_mail){
                 $user = $this->userDBDAO->read($user_mail);   
                 if($user!= false && ($user->getPassword() === $password)){
@@ -48,84 +47,21 @@ class LoginController{
             switch($role){
                 case 1:
                     include_once(VIEWS_PATH."validate-session.php");
-                    include_once(VIEWS_PATH."navAdmin.php");
+                    $this->Index();
                     break;
                 case 2:
                     include_once(VIEWS_PATH."validate-session.php");
-                    include_once(VIEWS_PATH."navUser.php");
-                    $this->showMovieList();
-                    
+                    $this->Index();
                     break;
                 case 0:
-                        $message="Usuario y/o Contraseñia incorrectos";
-                        $this->Index($message);
-                        break;
+                    $this->index("Usuario y/o Contraseña incorrectos"); 
+                    break;
             }
         }
     }
 
-
-/*
-    public function log($user_mail='', $password='')
-        {   
-            if($user_mail){
-                $user = $this->userDBDAO->read($user_mail);   
-                $role= $user->getRole();
-            }else{
-                $role=0;
-            }             
-                switch($role){
-                 case 1:
-                       if(($user != null) && ($user->getPassword() === $password)){
-                       $_SESSION["logged"] = $user;
-                       include_once(VIEWS_PATH."validate-session.php");
-                       include_once(VIEWS_PATH."admin.php");
-                       //$this->ShowAddView();
-                        }else
-                            $rol=5;            
-                       break;
-                 case 2: 
-                       if(($user != null) && ($user->getPassword() === $password)){
-                       $_SESSION["logged"] = $user;
-                       include_once(VIEWS_PATH."validate-session.php");
-                       include_once(VIEWS_PATH."header.php");
-                       include_once(VIEWS_PATH."userHome.php");
-                        }else 
-                         $rol=5;
-                      break;
-                case 3: 
-                        if(($user != null) && ($user->getPassword() === $password)){
-                        $_SESSION["logged"] = $user;
-                        include_once(VIEWS_PATH."validate-session.php");
-                        //puedo ser super admin
-                        include_once(VIEWS_PATH."header.php");
-                        include_once(VIEWS_PATH."admin.php");
-                        }else 
-                        $rol=5;
-                        break;
-                case 4: 
-                        //borrado logico o inahbilito a este usuario.
-                         $this->index("usuario inhabilitado o eliminado");
-                        break;
-                case 5:
-                        $this->index("Usuario y/o Contraseña incorrectos"); 
-                        //header("location:../index.php");                            
-                        break;
-                case 0:
-                        //$this->index("Anonimo"); 
-                        header("location:../index.php");
-                        break;          
-
-            }
-        }
-*/
     public function register(){
         require_once(VIEWS_PATH."registrarse.php");
-    }
-
-    public function homeAdmin(){
-        include_once(VIEWS_PATH."validate-session.php");
-        require_once(VIEWS_PATH."admin.php");
     }
 
     public function createUser($name, $lastname, $email, $password, $dni, $role)
@@ -190,7 +126,7 @@ class LoginController{
 
     public function UpdateRoleDB($id) //TODO corregir problema
     {
-        $this->userDBDAO->UpdateRole($id);
+        $this->userDBDAO->UpdateRole($email);
         $this->showUserListDB();
     }
 
@@ -200,20 +136,4 @@ class LoginController{
         header("location:../index.php");
     }
 
-    public function showMovieList()
-    {
-        $movieFunctionDBDAO = new MovieFunctionDBDAO();
-        $movieDBDAO = new MovieDBDAO();
-        $moviesArray = $movieFunctionDBDAO->readAllMovies();
-        $lista = array();
-        if($moviesArray!=false){
-            foreach($moviesArray as $array=>$v){
-            array_push($lista,$movieDBDAO->read($v['movie_id']));
-            }
-        }
-        include_once(VIEWS_PATH."movieList.php");
-    }
-
-
-    
 }

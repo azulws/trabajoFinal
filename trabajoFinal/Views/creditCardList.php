@@ -22,11 +22,12 @@ if($message!=""){
               <th style="width: 40%;">Numero</th>
               <th style="width: 10%;">Fecha de expiracion</th>
               <th style="width: 10%;">Codigo de seguridad</th>
+              <th></th>
             </tr>
           </thead>
           <tbody class="bgColor">
             <?php
-              if($lista!=false) foreach($lista as $item)
+              if($tarjetas!=false) foreach($tarjetas as $item)
               {
                 ?>
                   <tr>

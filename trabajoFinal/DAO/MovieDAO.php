@@ -71,7 +71,7 @@ class MovieDAO{
     $movie->setPoints($response->vote_average);
     $movie->setDescription($response->overview);
     $movie->setPoster($response->poster_path);
-    $movie->setMovieId($response->id);
+    $movie->setId($response->id);
     foreach($response as $key=>$value){
         if($key=="runtime"){
             $movie->setRuntime($value);

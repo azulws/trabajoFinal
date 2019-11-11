@@ -27,7 +27,7 @@ if($message!=""){
                                    <td><?php echo $movie->getDescription() ?></td>
                                    <td><?php foreach ($movie->getGenres() as $genre) echo $genre->getDescription()." \n";?></td>
                                    <td><?php echo '<img src="https://image.tmdb.org/t/p/w500'.$movie->getPoster().'" width="250" height="357">' ?></td>
-                                   <td><button type="submit" name="id" value="<?php echo $movie->getMovieId()?>"> Agregar </button></td>
+                                   <td><button type="submit" name="id" value="<?php echo $movie->getId()?>"> Agregar </button></td>
                               </tr>
                          <?php } ?>                        
                          </tbody>

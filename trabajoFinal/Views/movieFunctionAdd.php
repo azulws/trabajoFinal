@@ -11,7 +11,7 @@
 				echo "<br>";
 				echo "<select name = movieId>";
 				foreach($movies as $movie){
-					echo "<option value = ".$movie->getMovieId()."> ".$movie->getTitle()."</option>";
+					echo "<option value = ".$movie->getId()."> ".$movie->getTitle()."</option>";
 				}
 				echo "</select>";?>
 				<br>

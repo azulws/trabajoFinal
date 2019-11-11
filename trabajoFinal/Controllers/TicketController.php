@@ -14,21 +14,17 @@
             $this->ticketDBDAO = new TicketDBDAO();
         }
 
-        public function ShowTicketView()
-        {
-            //require_once(VIEWS_PATH."ticketDetails.php");
-        }
 
-        /*public function AddDB($qr, $movieFunction)
+        public function Add($movieFunction,$buyout)
         {
             $ticket = new Ticket();
-            $ticket->setQr($qr);
+            //Generar qr
+            $ticket->setQr("1234asd");
             $ticket->setMovieFunction($movieFunction);
+            $ticket->setBuyout($buyout);
             
-            $this->ticketDBDAO->Add($ticket;
-
-            $this->ShowTicketView();
-        }*/
+            $this->ticketDBDAO->Add($ticket);
+        }
 
         public function RemoveDB($id)
         {
@@ -37,9 +33,14 @@
             $this->showTicketListByUserDB();
         }
 
-        public function showTicketListByUserDB(){
-            $lista = $this->ticketDBDAO->readAll();
-            //include_once(VIEWS_PATH."ticketListByUser.php");
+        public function showTicketListByUser(){
+            $ticketsUser = $this->ticketDBDAO->readAllByUser($_SESSION['logged']);
+            include_once(VIEWS_PATH."ticketListByUser.php");
+        }
+
+        public function showSales($movieFunctionId){
+            $ticketList = $this->ticketDBDAO->readAllByMovieFunction($movieFunctionId);
+            include_once(VIEWS_PATH."buyoutList.php");
         }
     }
 ?>

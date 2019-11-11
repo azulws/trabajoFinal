@@ -4,8 +4,7 @@
     use Models\Movie as Movie;
     use DAO\MovieDBDAO as MovieDBDAO;
 
-class MovieController
-{
+class MovieController{
     private $movieList;
     private $movieDBDAO;
     private $pageNumber;
@@ -15,13 +14,11 @@ class MovieController
             $this->movieDBDAO = new MovieDBDAO();
     }
     public function listMovie(){
-        include_once(VIEWS_PATH."validate-session.php");
         $pageNumber = 1;
         $lista = $this->movieList->getMovies($pageNumber);
         include_once(VIEWS_PATH.'movieList.php');
     }
     public function moviesToDB(){
-        include_once(VIEWS_PATH."validate-session.php");
         $pageNumber = 1;
         $movies=$this->movieList->getMovies($pageNumber);
         $this->movieDBDAO->writeAll($movies);
@@ -29,7 +26,6 @@ class MovieController
     }
 
     public function listMovieAdmin($message = ""){
-        include_once(VIEWS_PATH."validate-session.php");
         $lista = $this->movieDBDAO->readAll();
         if($lista==false){
             $message = "No hay películas cargadas en la base de datos. Por favor, agregar desde la API";

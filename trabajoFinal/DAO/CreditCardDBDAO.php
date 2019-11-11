@@ -36,6 +36,25 @@
         else 
             return false;
        }  
+
+       public function readAllByUser($user){
+        $sql = "SELECT * FROM creditCards WHERE user_email = :user_email ORDER BY creditCard_id";
+        
+        $parameters['user_email'] = $user->getEmail();
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql,$parameters);
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        if (!empty($resultSet))
+            return $this->mapear($resultSet);
+        else 
+            return false;
+       }  
    
        protected function mapear($value) {
    
@@ -92,9 +111,38 @@
            }
        }
    
-       public function read ($id)
+       public function read ($number)
        {
-           $sql = "SELECT * FROM creditCards where creditCards_id = :id";
+           $sql = "SELECT * FROM creditCards where numberCard = :numberCard";
+           $parameters['numberCard'] = $number;
+           try
+           {
+               $this->connection = Connection::getInstance();
+               $resultSet = $this->connection->execute($sql, $parameters);
+           }
+           catch(PDOException $e)
+           {
+               echo $e;
+           }
+           if(!empty($resultSet))
+           {
+               $result = $this->mapear($resultSet);
+               $creditCard = new CreditCard();
+               $creditCard->setNumber($result[0]->getNumber());
+               $creditCard->setDescription($result[0]->getDescription());
+               $user = $this->userDBDAO->read($result[0]->getUser()->getEmail());
+               $creditCard->setUser($user);
+               $creditCard->setSecurityCode($result[0]->getSecurityCode());
+               $creditCard->setExpirationDate($result[0]->getExpirationDate());
+               $creditCard->setId($result[0]->getId());
+               return $creditCard;
+           }else
+               return false;
+       }
+
+       public function readById ($id)
+       {
+           $sql = "SELECT * FROM creditCards where creditCard_id = :id";
            $parameters['id'] = $id;
            try
            {
@@ -111,10 +159,11 @@
                $creditCard = new CreditCard();
                $creditCard->setNumber($result[0]->getNumber());
                $creditCard->setDescription($result[0]->getDescription());
-               $user = $this->userDBDAO->read($result[0]->getEmail());
+               $user = $this->userDBDAO->read($result[0]->getUser()->getEmail());
                $creditCard->setUser($user);
                $creditCard->setSecurityCode($result[0]->getSecurityCode());
                $creditCard->setExpirationDate($result[0]->getExpirationDate());
+               $creditCard->setId($result[0]->getId());
                return $creditCard;
            }else
                return false;

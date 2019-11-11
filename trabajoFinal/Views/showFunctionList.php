@@ -14,7 +14,6 @@ if($message!=""){
         <button id="buttons" class="btn btn-danger float-right" type="submit">+ Función</button>
       </form>
       <div class="scrollable">
-      <form action="<?php echo FRONT_ROOT."MovieFunction/removeDB"?>" method="POST">
         <table style="text-align:center;">
           <thead class="bgColor">
             <tr>
@@ -23,7 +22,8 @@ if($message!=""){
               <th style="width: 20%;">Cine</th>
               <th style="width: 30%;">Inicio - Fin</th>
               <th style="width: 10%;">Valor entrada</th>
-              <th style="width: 10%;">Acción</th>
+              <th style="width: 10%;">Eliminar</th>
+              <th style="width: 10%;">Ventas</th>
             </tr>
           </thead>
           <tbody class="bgColor">
@@ -38,14 +38,21 @@ if($message!=""){
                     <td class="border"><?php echo $item->getStartDateTime().' - '.date("H:i",strtotime($item->getEndDateTime($item->getMovie()))) ?></td>
 					          <td class="border"><?php echo '$ '.$item->getCinema()->getTicketValue() ?></td>
                     <td class="border">
+                    <form action="<?php echo FRONT_ROOT."MovieFunction/removeDB"?>" method="POST">
                       <button type="submit" name="id" class="btn" value="<?php echo $item->getMovieFunctionId() ?>"> Eliminar </button>
+                      </form>
+                    </td>
+                    <td class="border">
+                    <form action="<?php echo FRONT_ROOT."Ticket/showSales"?>" method="POST">
+                      <button type="submit" name="id" class="btn" value="<?php echo $item->getMovieFunctionId() ?>"> Ver Ventas </button>
+                      </form>
                     </td>
                   </tr>
                 <?php
               }
             ?>                          
           </tbody>
-        </table></form> 
+        </table> 
       </div>
     </div>
     <!-- / main body -->

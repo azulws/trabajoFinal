@@ -2,9 +2,10 @@
     namespace Models;
 
     class Ticket{
-        private $id; //numberTicket
+        private $id;
         private $qr;
         private $movieFunction;
+        private $buyout;
 
         public function getId(){
             return $this->id;
@@ -25,5 +26,12 @@
         }
         public function setMovieFunction($movieFunction){
             $this->movieFunction=$movieFunction;
+        }
+
+        public function getBuyout(){
+            return $this->buyout;
+        }
+        public function setBuyout($buyout){
+            $this->buyout=$buyout;
         }
     }

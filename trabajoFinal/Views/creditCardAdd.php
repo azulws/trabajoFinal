@@ -1,6 +1,6 @@
 <form method="POST" style="background-image:url('../Views/img/fondo1.jpg');padding: 2rem !important;" action=<?php echo FRONT_ROOT."CreditCard/add";?>>
 		<div align="center">
-     		<h2>Alta de cinema </h2>
+     		<h2>Alta de tarjeta</h2>
      			
 			<br>
 				<select name="description">
@@ -9,9 +9,11 @@
 				</select>
 				<input type="hidden" name="user" value="<?php echo $_SESSION['logged']->getEmail()?>">
 			<br><br>
-				<input type="number" name="number" placeholder="number" required min="100000000000" max="999999999999">
+				<input type="number" name="number1" placeholder="----" required min="1000" max="9999">-
+                <input type="number" name="number2" placeholder="----" required min="1000" max="9999">-
+                <input type="number" name="number3" placeholder="----" required min="1000" max="9999">
 			<br>
-     			<input type="number" name="segurityCode" value="segurityCode"placeholder="codigo de seguridad" required min="001" max="999">
+     			<input type="number" name="securityCode" value="securityCode"placeholder="codigo de seguridad" required min="001" max="999">
 			<br>
      			<input type="date" name="expirationDate" value="expirationDate" placeholder="fecha de expiracion" required min="<?php echo "20".date("y-m-d");?>">
 			<br>

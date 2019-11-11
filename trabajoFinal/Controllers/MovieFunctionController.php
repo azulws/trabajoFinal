@@ -117,7 +117,6 @@
             $newFunction->setMovie($movie);
             $newFunction->setStartDateTime($combinedDT);
             $notOverlap = false;
-            var_dump($response);
             if($response != false){
                 foreach($response as $function){
                    
@@ -180,20 +179,16 @@
         //chicos la unica manera que consegui de mostrar 
         public function showMovieFunctionsByCinema($cinema_id)
         {  
-             include_once(VIEWS_PATH."validate-session.php");
-            $id = (int) $cinema_id;echo "<br>";
-            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($id); 
-            include_once(VIEWS_PATH."showFunctionList.php");                                                                           
- 
-        }
-
-        public function showHomeMovieFunction()
-        {
-                include_once(VIEWS_PATH."validate-session.php");
-                include_once(VIEWS_PATH."navUser.php");
-                $this->listMovieFunctionListDB();
+            $lista = $this->movieFunctionDBDAO->readOrderByCinemaId($cinema_id); 
+            include_once(VIEWS_PATH."showFunctionList.php");
         }
         
+        public function showFunctionsByMovie($id)
+        {  
+            $lista = $this->movieFunctionDBDAO->readAllFunctionsByMovieId($id);
+            $movie = $this->movieDBDAO->read($id);
+            include_once(VIEWS_PATH."movieFunctionList.php");
+        }
     }
     
 ?> 

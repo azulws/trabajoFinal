@@ -6,7 +6,7 @@
         private $discount;
         private $buyDate;
         private $total;
-        private $ticket;
+        private $cantTicket;
         private $user;
         private $creditCard;
 
@@ -34,11 +34,11 @@
         public function setTotal($total){
             $this->total=$total;
         }
-        public function getTicket(){
-            return $this->ticket;
+        public function getCantTicket(){
+            return $this->cantTicket;
         }
-        public function setTicket($ticket){
-            $this->ticket=$ticket;
+        public function setCantTicket($cantTicket){
+            $this->cantTicket=$cantTicket;
         }
         public function getUser(){
             return $this->user;
