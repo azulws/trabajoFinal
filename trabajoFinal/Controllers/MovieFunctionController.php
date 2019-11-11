@@ -186,6 +186,13 @@
             include_once(VIEWS_PATH."showFunctionList.php");                                                                           
  
         }
+
+        public function showHomeMovieFunction()
+        {
+                include_once(VIEWS_PATH."validate-session.php");
+                include_once(VIEWS_PATH."navUser.php");
+                $this->listMovieFunctionListDB();
+        }
         
     }
     

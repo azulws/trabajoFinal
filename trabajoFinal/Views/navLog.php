@@ -23,10 +23,11 @@
      </form>
  </nav><?php
  if($message == "Usuario y/o Contraseñia incorrectos"){ ?>
-     <div class="alert alert-danger nav-login-alert">.
-      <strong><?php echo $message;?></strong>
-    </div>
-  <?php } } sleep(8); $message=''; ?>
+    <div class="alert alert-danger alert-dismissible nav-login-alert fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Warning! </strong><?php echo $message;?>
+  </div>
+  <?php } } ?>
     
 
  

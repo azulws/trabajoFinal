@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary d-flex justify-content-end">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary d-flex  fixed-top justify-content-end">
   <a class="navbar-brand">Bienvenido <?php echo $_SESSION['logged']->getName()?></a>
   <a class="navbar-brand" href="<?php echo FRONT_ROOT.'CreditCard/showCreditCardList'?>">Tarjetas</a>
 <a class="navbar-brand" href="<?php echo FRONT_ROOT.'Login/logout'?>">Desconectarse</a>

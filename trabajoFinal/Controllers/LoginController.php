@@ -21,18 +21,17 @@ class LoginController{
 
         public function Index($message = "")
         {
-            
-            $movieFunctionDBDAO = new MovieFunctionDBDAO();
-            $movieDBDAO = new MovieDBDAO();
-            $moviesArray = $movieFunctionDBDAO->readAllMovies();
-            $lista = array();
-            if($moviesArray!=false){
-                foreach($moviesArray as $array=>$v){
-                array_push($lista,$movieDBDAO->read($v['movie_id']));
-                }
-            }
-            
-            include_once(VIEWS_PATH.'login.php');
+           //$this->showMovieList();
+           $movieFunctionDBDAO = new MovieFunctionDBDAO();
+           $movieDBDAO = new MovieDBDAO();
+           $moviesArray = $movieFunctionDBDAO->readAllMovies();
+           $lista = array();
+           if($moviesArray!=false){
+               foreach($moviesArray as $array=>$v){
+               array_push($lista,$movieDBDAO->read($v['movie_id']));
+               }
+           }
+           include_once(VIEWS_PATH.'login.php');
         }
 
     
@@ -53,12 +52,12 @@ class LoginController{
                     break;
                 case 2:
                     include_once(VIEWS_PATH."validate-session.php");
-                    include_once(VIEWS_PATH."userHome.php");
+                    include_once(VIEWS_PATH."navUser.php");
+                    $this->showMovieList();
+                    
                     break;
                 case 0:
-                    do { 
-                        $this->Index($message);
-                        }while($message="Usuario y/o Contraseñia incorrectos");                   
+                        $message="Usuario y/o Contraseñia incorrectos";
                         $this->Index($message);
                         break;
             }
@@ -191,7 +190,7 @@ class LoginController{
 
     public function UpdateRoleDB($id) //TODO corregir problema
     {
-        $this->userDBDAO->UpdateRole($email);
+        $this->userDBDAO->UpdateRole($id);
         $this->showUserListDB();
     }
 
@@ -199,6 +198,20 @@ class LoginController{
     {   
         session_destroy();
         header("location:../index.php");
+    }
+
+    public function showMovieList()
+    {
+        $movieFunctionDBDAO = new MovieFunctionDBDAO();
+        $movieDBDAO = new MovieDBDAO();
+        $moviesArray = $movieFunctionDBDAO->readAllMovies();
+        $lista = array();
+        if($moviesArray!=false){
+            foreach($moviesArray as $array=>$v){
+            array_push($lista,$movieDBDAO->read($v['movie_id']));
+            }
+        }
+        include_once(VIEWS_PATH."movieList.php");
     }
 
 
