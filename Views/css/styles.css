@@ -1,0 +1,330 @@
+/*----------------------------------------------------------------------------------------------------------------
+BODY
+*/
+body{
+    text-align: center!important;
+    background-color: #BABABA;
+    position: relative;
+}
+
+
+/*-------------------------------------------------------------------------------------------------------------
+  SHOW MOVIES VIEW 
+*/
+.showMovies{
+         padding-top: 20px;
+         padding-bottom: 5px; 
+}
+.card{
+         background-color: #4C4D4D!important;
+         border:0px!important;
+         padding-top:10px;
+         padding-left:10px;
+         padding-right:10px;
+         border-radius: 20px !important;
+         color: #FFFF;
+         display: block;
+         text-align: center;
+}
+.text-muted {
+    color: #8BDFE3!important;
+    
+}
+.card p{
+    text-align: justify;
+}
+
+.genre{
+    background-color: #4C4D4D;
+    border-radius: 20px;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.select-genre{
+    background-color: #4C4D4D;
+    color: white;
+    border-color: #9B9B9B;
+    text-align-last:center;
+}
+
+.movieList-empty{
+    margin-top: 100px;
+    background-color:#4C4D4D;
+    color: white;
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 10px;
+    padding: 10px 0px 10px 0px;
+}
+
+.title-button{
+    color: #8BDFE3;
+    background-color: #4C4D4D;
+    border: none;
+    text-decoration: underline;
+    text-decoration-color: #5E9396;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------
+NAVIGATION HOME (ANONIMOS)
+*/
+.nav-login-alert{
+    margin: 0px 0px 0px;
+    margin-top: 73px;
+    width:100%;
+    align-items: center;
+}
+.nav-log{
+    margin-bottom: 50px;
+    box-sizing: content-box;
+    background-color: black;
+    display: block;
+}
+.nav-nav{
+    color: #5E9396;
+}
+.nav-log-button{
+    padding: 2px 10px 3px 10px;
+    color: black;
+    background-color: #8BDFE3;
+    border-color: #8BDFE3; 
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: 150;
+    height: 31px;
+}
+
+.nav-log-button:hover{
+    background-color:#5E9396;
+    border-color: #5E9396;
+    color: white;
+}
+.nav-log-input{
+    padding:  0px 12px 0px 12px;
+    color:#000000 ;
+    background-color:#FFF;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    float: right;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+}
+
+.form-nav-log{
+    display: inline-block;
+    box-sizing: content-box;
+    position: none;
+    margin-right: 10px;
+    }
+
+.nav-log-li{
+    list-style-type: none;
+    display: inline-block;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    box-sizing: content-box;
+    
+
+}
+.nav-log-ul{
+    display: inline;
+    list-style-type: none;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.nav-link{
+    color: #8BDFE3;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------
+ADMINISTRATOR NAVIGATION BAR
+*/
+
+.form-register-title{
+    font-size: 50px;
+    text-align: center;
+    font-style: normal;
+    height: 5px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 10px;
+    display: block;
+}
+.register{
+    display: block;
+    box-sizing: content-box;
+}
+.form-register{
+    box-sizing:border-box;
+    background-image: none;
+    display: block;
+    margin-top: 0px;
+    margin-right: 1px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 10px 10px 10px 10px;
+    float: center;
+    width: 50%;
+}
+
+.form-register-li{
+        box-sizing: content-box;
+        list-style-type: none;
+        display: block;
+        z-index: auto;
+        position: center;
+        float:center;
+        width: 100%;
+        padding: 0; 
+        display: contents; 
+       
+}
+
+.form-register-ul{
+    box-sizing: content-box;
+    width: 250;
+    display: block;
+    padding: 20px 20px 20px 20px;
+    float: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    z-index: auto;
+    position: center;
+    background-color: #4C4D4D;
+    border-radius: 10px;
+    }
+
+.form-register-input{
+    padding:  4px 10px 4px 10px;
+    color: #000000 ;
+    background-color:#FFF;
+    font-size: 18px;
+    font-style: normal;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    float: center;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 15px;
+    margin-left: 3px;
+    width: 100%;
+    display: block;
+    float: center;
+
+
+}
+
+.form-register-buttons{
+    padding: 4px 10px 4px 10px;
+    color: black;
+    background-color: #8BDFE3;
+    border-color: #8BDFE3; 
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: 150;
+}
+.form-register-buttons:hover{
+    background-color:#5E9396;
+    border-color: #5E9396;
+    color: white;
+}
+/*------------------------------------------------------------------------------------------------------------------
+NAV USER
+*/
+#nav-link {
+    display: inline !important;
+}
+/*-------------------------------------------------------------------------------------------------------------------
+INHERIT 
+*/
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+ 
+
+
+.email,.password{
+    margin-bottom: 5%;
+    padding-right: 10%;
+    padding-left: 10%;
+    border-radius:5px;
+    text-align: center;
+}
+
+.titleMovie{
+    font-size: 50px;
+    text-align: center;
+}
+
+.bgColor{
+    background-color: #4C4D4D;
+    color: white;
+    
+}
+
+.border{
+    border: 1px solid #000000;
+}
+
+.footer{
+    position: fixed;
+    bottom:0;
+    left:0;
+    text-align: center;
+    width: 100%;
+    background-color: grey;
+    
+}
+
+button{
+    padding: 4px 10px 4px 10px;
+    color: black;
+    background-color: #8BDFE3;
+    border-color: #8BDFE3; 
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    width: 150;
+}
+button:hover{
+    background-color:#5E9396;
+    border-color: #5E9396;
+    color: white;
+}

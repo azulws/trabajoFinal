@@ -1,0 +1,167 @@
+<?php
+    namespace DAO;
+    use DAO\Connection;
+    use \PDO as PDO;
+    use \Exception as Exception;
+    use DAO\QueryType as QueryType;
+    use Models\Movie as Movie;
+    use DAO\GenresByMoviesDBDAO as GenresByMoviesDBDAO;
+
+    class MovieDBDAO
+    {
+         
+         private $connection;
+         private $genresByMoviesDBDAO;
+         private $tablename = "movies";
+
+         public function __construct()
+         {
+            $this->connection = null;
+            $this->genresByMoviesDBDAO = new GenresByMoviesDBDAO();
+         }
+
+         
+      public function readAll(){
+        $sql = "SELECT * FROM $this->tablename ";
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+            else 
+            return false;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        
+    }  
+
+    protected function mapear($value) {
+
+        $movieList = array();
+        foreach($value as $v){
+            $movie = new Movie();
+            $movie->setTitle($v['title']);
+            $movie->setReleaseDate($v['release_date']);
+            $movie->setPoster($v['poster']);
+            $movie->setDescription($v['movie_description']);
+            $movie->setPoints($v['points']);
+            $movie->setId($v['movie_id']);
+            $movie->setRuntime($v['runtime']);
+            $this->genresByMoviesDBDAO->readGenresByMovie($movie);
+            array_push($movieList,$movie);
+        }
+        if(count($movieList)>0)
+            return $movieList;
+        else
+            return false;
+     }
+
+     public function writeAll($movieList){
+         foreach($movieList as $movie){
+            if($this->read($movie->getTitle())==false){
+                $this->Add($movie);
+                $this->genresByMoviesDBDAO->writeAll($movie);
+            }    
+         }
+     }
+
+
+    public function Add( Movie $movie){
+        // Guardo como string la consulta sql utilizando como value, marcadores de parámetros con title$title (:title$title) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada 
+
+        $sql = "INSERT INTO  $this->tablename (title,release_date,points,poster,movie_description,movie_id,runtime)
+        VALUES (:title, :release_date, :points,:poster, :movie_description, :movie_id, :runtime)";
+
+        $parameters['title'] = $movie->getTitle();
+        $parameters['release_date'] = $movie->getReleaseDate();
+        $parameters['points'] = $movie->getPoints();
+        $parameters['poster'] = $movie->getPoster();
+        $parameters['movie_description'] = $movie->getDescription();
+        $parameters['movie_id'] = $movie->getId();
+        $parameters['runtime'] = $movie->getRuntime();
+
+        try
+        {
+                $this->connection = Connection::getInstance();     
+                $this->connection->ExecuteNonQuery($sql, $parameters);
+                $this->genresByMoviesDBDAO->writeAll($movie);
+                return true;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+    }
+
+    public function read ($id)
+    {
+        $sql = "SELECT * FROM $this->tablename where movie_id = :movie_id";
+        $parameters['movie_id'] = $id;
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql, $parameters);
+            if(!empty($resultSet))
+            {
+                $result = $this->mapear($resultSet);
+                $movie = new Movie();
+                $movie->setTitle($result[0]->getTitle());
+                $movie->setReleaseDate($result[0]->getReleaseDate());
+                $movie->setPoints($result[0]->getPoints());
+                $movie->setPoster($result[0]->getposter());
+                $movie->setDescription($result[0]->getDescription());
+                $movie->setId($result[0]->getId());
+                $movie->setRuntime($result[0]->getRuntime());
+    
+                return $movie;
+                
+            }else
+                return false;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+       
+    }
+    public function readOrderByDate(){
+        $sql = "SELECT * FROM $this->tablename ORDER BY release_date DESC";
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql);
+            if (!empty($resultSet))
+            return $this->mapear($resultSet);
+             else 
+              return false;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+        
+    }
+
+    public function isEmpty(){
+        $sql = "SELECT * FROM $this->tablename ";
+        try
+        {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->ExecuteNonQuery($sql);
+            if (empty($resultSet))
+                return true;
+            else 
+                return false;
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+    }
+}
+      
+?>
