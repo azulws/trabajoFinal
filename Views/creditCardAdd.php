@@ -12,11 +12,11 @@ include_once(VIEWS_PATH.'login.php');
 				</select>
 				<input type="hidden" name="user" value="<?php echo $_SESSION['logged']->getEmail()?>">
 				<br><br>
-				<input class=""type="number" name="number1" placeholder="----" required min="1000" max="9999">-
-                <input class=""type="number" name="number2" placeholder="----" required min="1000" max="9999">-
-				<input class=""type="number" name="number3" placeholder="----" required min="1000" max="9999">
+				<input class=""type="text" name="number1" placeholder="----" required pattern="[0-9]{4}">-
+                <input class=""type="text" name="number2" placeholder="----" required pattern="[0-9]{4}">-
+				<input class=""type="text" name="number3" placeholder="----" required pattern="[0-9]{4}">
 				<br><br>
-     			<input style="width:268px"type="number" name="securityCode" value="securityCode"placeholder="codigo de seguridad" required min="100" max="999">
+     			<input style="width:268px"type="text" name="securityCode" value="securityCode"placeholder="codigo de seguridad" required pattern="[0-9]{4}">
 				<br><br>
 				 <input style="width:268px"type="date" name="expirationDate" value="expirationDate" placeholder="fecha de expiracion" required min="<?php echo "20".date("y-m-d");?>">
 				 <br><br>
