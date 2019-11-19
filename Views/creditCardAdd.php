@@ -12,12 +12,15 @@ include_once(VIEWS_PATH.'login.php');
 				</select>
 				<input type="hidden" name="user" value="<?php echo $_SESSION['logged']->getEmail()?>">
 				<br><br>
+				<p> Numero de tarjeta de crédito </p>
 				<input class=""type="text" name="number1" placeholder="----" required pattern="[0-9]{4}">-
                 <input class=""type="text" name="number2" placeholder="----" required pattern="[0-9]{4}">-
 				<input class=""type="text" name="number3" placeholder="----" required pattern="[0-9]{4}">
 				<br><br>
-     			<input style="width:268px"type="text" name="securityCode" value="securityCode"placeholder="codigo de seguridad" required pattern="[0-9]{3}">
+				<p> Código de seguridad </p>
+     			<input style="width:268px"type="text" name="securityCode" placeholder="---" required pattern="[0-9]{3}">
 				<br><br>
+				<p> Fecha de expiración </p>
 				 <input style="width:268px"type="date" name="expirationDate" value="expirationDate" placeholder="fecha de expiracion" required min="<?php echo "20".date("y-m-d");?>">
 				 <br><br>
 				 <button type="submit">Cargar</button>

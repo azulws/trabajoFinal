@@ -101,16 +101,21 @@
         }
 
         public function listMovieFunctionListByGenreDB($genreId){
-            $genre = $this->genreDBDAO->read($genreId);
-            $moviesArray = $this->movieFunctionDBDAO->readAllMoviesByGenres($genre);
-            $genres = $this->genreDBDAO->readAll();
-            $lista = array();
-            if($moviesArray!=false){
-                foreach($moviesArray as $array=>$v){
-                    array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+            if($genreId == 0){
+                $this->listMovieFunctionListDB();
+            }else{
+                $genre = $this->genreDBDAO->read($genreId);
+                $moviesArray = $this->movieFunctionDBDAO->readAllMoviesByGenres($genre);
+                $genres = $this->genreDBDAO->readAll();
+                $lista = array();
+                if($moviesArray!=false){
+                    foreach($moviesArray as $array=>$v){
+                        array_push($lista,$this->movieDBDAO->read($v['movie_id']));
+                    }
                 }
+                include_once(VIEWS_PATH."movieList.php");
             }
-            include_once(VIEWS_PATH."movieList.php");
+            
         }
         
         public function validateFunctionByDate($roomId,$movieId,$date){

@@ -6,6 +6,7 @@
     <form class="genre" method = "POST" action = <?php echo FRONT_ROOT."MovieFunction/listMovieFunctionListByGenreDB"?>>
     <h3> GENERO </h3>
      <select class="select-genre" name = "genreId">;
+          <option class="select-option-genre" value = 0> Todas </option>
          <?php foreach($genres as $genre){
                echo '<option class="select-option-genre" value = '.$genre->getId().'> '.$genre->getDescription().' </option>';
           } ?>
